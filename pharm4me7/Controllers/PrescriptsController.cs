@@ -51,6 +51,7 @@ namespace pharm4me7.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PrescriptId,PatientId,ItemId,Date,Disp,DispType,Sig,Sub,Refill")] Prescript prescript)
         {
+            prescript.Date = System.DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Prescripts.Add(prescript);

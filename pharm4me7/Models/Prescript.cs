@@ -25,7 +25,7 @@ namespace pharm4me7.Models
         [StringLength(4000)]
         public string Sig { get; set; }
 
-        [StringLength(3)]
+        [StringLength(256)]
         public string Sub { get; set; }
 
         public int? Refill { get; set; }
