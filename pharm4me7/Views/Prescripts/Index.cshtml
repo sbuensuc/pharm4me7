@@ -1,0 +1,81 @@
+﻿@model IEnumerable<pharm4me7.Models.Prescript>
+
+@{
+    ViewBag.Title = "Prescriptions";
+}
+
+<h2>Prescriptions</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Item
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Patient.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Unit Type
+        </th>
+        <th>
+            Details
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Refill)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Patient.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DispType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sig)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sub)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Refill)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PrescriptId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PrescriptId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PrescriptId })
+        </td>
+    </tr>
+}
+
+</table>

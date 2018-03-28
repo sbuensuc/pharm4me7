@@ -1,0 +1,156 @@
+﻿@model pharm4me7.Models.Patient
+
+@{
+    ViewBag.Title = "Patient Details";
+}
+
+<h2>Patient Details</h2>
+
+<div>
+    <h4>Patient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Patient ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PatientId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Healthcard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Healthcard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Birth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Birth)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PatientId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<h4>Prescriptions</h4>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Prescripts")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Item Name
+        </th>
+
+        <th>
+            Date Created
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Measurement
+        </th>
+        <th>
+            Details
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Refill
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Prescripts)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DispType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sig)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sub)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Refill)
+            </td>
+            <td>
+                @*@Html.ActionLink("Delete", "Delete", "Prescripts")*@
+                @*@Html.ActionLink("Delete", "Delete", "Prescripts", new { id = item.PrescriptId }, null)*@
+                @Html.ActionLink("Delete", "PrescriptDelete", new { id = item.PrescriptId })
+            </td>
+        </tr>
+    }
+
+</table>

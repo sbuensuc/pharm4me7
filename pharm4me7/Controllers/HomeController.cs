@@ -10,6 +10,7 @@ namespace pharm4me7.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Message = "Welcome to Pharm4me";
             return View();
         }
 
