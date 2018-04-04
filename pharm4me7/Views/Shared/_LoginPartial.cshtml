@@ -17,7 +17,7 @@
         {
             <li>@Html.ActionLink("Inventory", "Index", "Inventories")</li>
         }
-        @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
+        @if (User.IsInRole("Admin") || User.IsInRole("Doctor") || User.IsInRole("Manager"))
         {
             <li>@Html.ActionLink("Patients", "Index", "Patients")</li>
             <li>@Html.ActionLink("Prescriptions", "Index", "Prescripts")</li>

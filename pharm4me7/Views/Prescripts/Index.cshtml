@@ -7,7 +7,10 @@
 <h2>Prescriptions</h2>
 
 <p>
+@if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
+{
     @Html.ActionLink("Create New", "Create")
+}
 </p>
 <table class="table">
     <tr>
@@ -71,9 +74,12 @@
             @Html.DisplayFor(modelItem => item.Refill)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PrescriptId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PrescriptId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PrescriptId })
+            @Html.ActionLink("Edit", "Edit", new { id = item.PrescriptId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PrescriptId }) |
+            @if (User.IsInRole("Admin") || User.IsInRole("Doctor")) 
+            {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PrescriptId })
+            }
         </td>
     </tr>
 }
