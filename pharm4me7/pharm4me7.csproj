@@ -183,6 +183,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoriesController.cs" />
+    <Compile Include="Controllers\itemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\PrescriptsController.cs" />
@@ -193,10 +195,14 @@
     <Compile Include="Models\Clinic.cs" />
     <Compile Include="Models\ClinicContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Inventory.cs" />
     <Compile Include="Models\item.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\PatientPrescriptModel.cs" />
+    <Compile Include="Models\Pharmacist.cs" />
+    <Compile Include="Models\Pharmacy.cs" />
+    <Compile Include="Models\PharmacyContext.cs" />
     <Compile Include="Models\Prescript.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -280,6 +286,16 @@
     <Content Include="Views\Prescripts\Edit.cshtml" />
     <Content Include="Views\Prescripts\Index.cshtml" />
     <Content Include="Views\Patients\PrescriptDelete.cshtml" />
+    <Content Include="Views\Inventories\Create.cshtml" />
+    <Content Include="Views\Inventories\Delete.cshtml" />
+    <Content Include="Views\Inventories\Details.cshtml" />
+    <Content Include="Views\Inventories\Edit.cshtml" />
+    <Content Include="Views\Inventories\Index.cshtml" />
+    <Content Include="Views\items\Create.cshtml" />
+    <Content Include="Views\items\Delete.cshtml" />
+    <Content Include="Views\items\Details.cshtml" />
+    <Content Include="Views\items\Edit.cshtml" />
+    <Content Include="Views\items\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
