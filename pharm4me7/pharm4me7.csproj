@@ -221,6 +221,7 @@
     <Compile Include="Models\OrderContext.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\PatientPrescriptModel.cs" />
+    <Compile Include="Models\Pharm4MeContext.cs" />
     <Compile Include="Models\Pharmacist.cs" />
     <Compile Include="Models\Pharmacy.cs" />
     <Compile Include="Models\PharmacyContext.cs" />
@@ -333,6 +334,8 @@
     <Content Include="Views\POrderFills\Details.cshtml" />
     <Content Include="Views\POrderFills\Edit.cshtml" />
     <Content Include="Views\POrderFills\Index.cshtml" />
+    <Content Include="Views\POrderFills\PharmacyIndex.cshtml" />
+    <Content Include="Views\POrderFills\PharmacyCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

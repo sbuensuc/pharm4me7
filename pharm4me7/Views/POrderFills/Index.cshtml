@@ -12,52 +12,64 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Inventory.DispType)
+            Order#
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.POrder.Note)
+            Customer
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateFilled)
+            Prescription
         </th>
         <th>
+            OrderID
+        </th>
+        <th>
+            Date Filled
+        </th>
+        @*<th>
             @Html.DisplayNameFor(model => model.DatePicked)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Note)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PhamacistId)
+            FilledBy
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Ready)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Inventory.DispType)
+            @Html.DisplayFor(modelItem => item.POrderFillId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.POrder.Note)
+            @Html.DisplayFor(modelItem => item.POrder.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.POrder.Prescript.Patient.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POrder.Prescript.item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POrder.Prescript.item.Name) @Html.DisplayFor(modelItem => item.POrder.Prescript.Disp) @Html.DisplayFor(modelItem => item.POrder.Prescript.DispType)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateFilled)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.DatePicked)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Note)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PhamacistId)
+            @Html.DisplayFor(modelItem => item.Pharmacist.LastName), @Html.DisplayFor(modelItem => item.Pharmacist.FirstName)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Ready)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.POrderFillId }) |
             @Html.ActionLink("Details", "Details", new { id=item.POrderFillId }) |

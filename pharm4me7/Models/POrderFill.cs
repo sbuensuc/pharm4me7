@@ -26,7 +26,13 @@ namespace pharm4me7.Models
 
         public bool? Ready { get; set; }
 
+        public int? Pharmacist_PharmacistId { get; set; }
+
         public virtual Inventory Inventory { get; set; }
+
+        public virtual Pharmacist Pharmacist { get; set; }
+
+        public virtual Pharmacist Pharmacist1 { get; set; }
 
         public virtual POrder POrder { get; set; }
     }

@@ -1,0 +1,89 @@
+﻿@using pharm4me7.Models
+@model pharm4me7.Models.POrderFill
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Fill Order</h2>
+
+@{
+    var prod = (POrder)ViewData["porder"];
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.POrderId, "Order#", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.POrderId )
+                @Html.HiddenFor(model => Model.POrderId)
+                @Html.ValidationMessageFor(model => model.POrderId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <h3>@prod.Prescript.Patient.LastName,  @prod.Prescript.Patient.FirstName</h3>
+                <h4>@prod.Prescript.item.Name </h4>
+                <h5>@prod.Prescript.Disp @prod.Prescript.DispType</h5>
+                <h5>Note: @prod.Prescript.Sig</h5>
+                <h5>Brand: @prod.Prescript.Sub</h5>
+                <h5>
+                    Prescribed By:
+                    @if (prod.Prescript.Doctor != null)
+                    {
+                        @: Dr.@prod.Prescript.Doctor.LastName, @prod.Prescript.Doctor.FirstName
+                            }
+                </h5>
+                <h5>Clinic: @prod.Prescript.Patient.Clinic.Name - @prod.Prescript.Patient.Clinic.Phone </h5>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.InventoryId, "Inventory", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("InventoryId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.InventoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.Ready, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.CheckBox("Ready", Model.Ready.GetValueOrDefault())
+                    @Html.ValidationMessageFor(model => model.Ready, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div*@>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "PharmacyIndex")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

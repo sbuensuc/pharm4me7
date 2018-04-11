@@ -92,7 +92,7 @@
 
     @foreach (var item in Model)
     {
-        if (item.Accept == true)
+        if (item.Accept == true && item.Fill == false) 
         {
             <tr>
                 <td>
@@ -116,7 +116,35 @@
                     @Html.DisplayFor(modelItem => item.Note)
                 </td>
                 <td>
-                    @Html.ActionLink("Deny", "Edit", new { id = item.POrderId })
+                    PENDING @Html.ActionLink("Deny", "Edit", new { id = item.POrderId })
+                </td>
+            </tr>
+        }
+        if (item.Accept == true && item.Fill == true)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOrdered)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Sub)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Refill)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    PRESCRIPTION FILLED
                 </td>
             </tr>
         }

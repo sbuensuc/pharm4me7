@@ -8,6 +8,13 @@ namespace pharm4me7.Models
 
     public partial class Pharmacist
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Pharmacist()
+        {
+            POrderFills = new HashSet<POrderFill>();
+            POrderFills1 = new HashSet<POrderFill>();
+        }
+
         public int PharmacistId { get; set; }
 
         [Required]
@@ -23,6 +30,12 @@ namespace pharm4me7.Models
 
         public int? PharmacyId { get; set; }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<POrderFill> POrderFills { get; set; }
+
         public virtual Pharmacy Pharmacy { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<POrderFill> POrderFills1 { get; set; }
     }
 }

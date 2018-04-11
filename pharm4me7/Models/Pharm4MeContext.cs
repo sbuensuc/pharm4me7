@@ -5,10 +5,10 @@ namespace pharm4me7.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class OrderContext : DbContext
+    public partial class Pharm4MeContext : DbContext
     {
-        public OrderContext()
-            : base("name=OrderConnection")
+        public Pharm4MeContext()
+            : base("name=Pharm4MeConnection")
         {
         }
 
@@ -45,6 +45,16 @@ namespace pharm4me7.Models
                 .WithRequired(e => e.Patient)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Pharmacist>()
+                .HasMany(e => e.POrderFills)
+                .WithOptional(e => e.Pharmacist)
+                .HasForeignKey(e => e.Pharmacist_PharmacistId);
+
+            modelBuilder.Entity<Pharmacist>()
+                .HasMany(e => e.POrderFills1)
+                .WithOptional(e => e.Pharmacist1)
+                .HasForeignKey(e => e.PhamacistId);
+
             modelBuilder.Entity<Pharmacy>()
                 .HasMany(e => e.POrders)
                 .WithRequired(e => e.Pharmacy)
@@ -59,12 +69,6 @@ namespace pharm4me7.Models
                 .HasMany(e => e.POrders)
                 .WithRequired(e => e.Prescript)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Pharmacist>()
-                .HasMany(e => e.POrderFills)
-                .WithRequired(e => e.Pharmacist)
-                .WillCascadeOnDelete(false);
-
         }
     }
 }

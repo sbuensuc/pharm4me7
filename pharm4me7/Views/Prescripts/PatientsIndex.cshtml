@@ -44,7 +44,7 @@
                     {
                         @: REQUEST PENDING
                     }
-                    else if (i.Accept == true && i.Deny == false)
+                    else if (i.Accept == true && i.Deny == false && i.Fill == false)
                     {
                         @: ORDER IN PROGRESS
                     }
@@ -126,7 +126,7 @@
             @Html.DisplayFor(modelItem => item.Refill)
         </td>
         <td>
-            @if (item.Sent == false)
+            @if (item.Sent == false || item.Sent == null)
             {
                 <text>@Html.ActionLink("Order", "PorderCreate", new { id = item.PrescriptId })</text>
             }

@@ -1,0 +1,147 @@
+﻿@using pharm4me7.Models
+@model IEnumerable<pharm4me7.Models.POrderFill>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+@{
+    var prod = (IEnumerable<POrder>)ViewData["POrders"];
+}
+
+<h3>Pending Orders</h3>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Prescription
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Refills
+        </th>
+        <th>
+            Note
+        </th>
+        <th>
+            Status
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in prod)
+    {
+        if (item.Accept == true && item.Fill == false)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOrdered)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Sub)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Refill)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    PENDING
+                </td>
+                <td>
+                    @Html.ActionLink("Fill Order", "PharmacyCreate", new { id = item.POrderId })
+                </td>
+            </tr>
+        }
+        
+    }
+        </table>
+
+<h3>Filled Orders</h3>
+
+        <table class="table">
+            <tr>
+                <th>
+                    Order#
+                </th>
+                <th>
+                    Customer
+                </th>
+                <th>
+                    Prescription
+                </th>
+                <th>
+                    OrderID
+                </th>
+                <th>
+                    Date Filled
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.DatePicked)
+                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Note)
+                </th>
+                <th>
+                    FilledBy
+                </th>
+                @*<th>
+                        @Html.DisplayNameFor(model => model.Ready)
+                    </th>*@
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.POrderFillId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.POrder.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.POrder.Prescript.Patient.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.POrder.Prescript.item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.POrder.Prescript.item.Name) @Html.DisplayFor(modelItem => item.POrder.Prescript.Disp) @Html.DisplayFor(modelItem => item.POrder.Prescript.DispType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateFilled)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.DatePicked)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Note)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pharmacist1.LastName), @Html.DisplayFor(modelItem => item.Pharmacist1.FirstName)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.Ready)
+                        </td>*@
+                    
+                </tr>
+            }
+
+        </table>
