@@ -7,126 +7,119 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using pharm4me7.Models;
-using Microsoft.AspNet.Identity;
-
 
 namespace pharm4me7.Controllers
 {
-    public class InventoriesController : Controller
+    public class POrderFillsController : Controller
     {
-        private PharmacyContext db = new PharmacyContext();
-        
+        private ClinicContext db = new ClinicContext();
 
-
-        // GET: Inventories
+        // GET: POrderFills
         public ActionResult Index()
         {
-
-            var inventories = db.Inventories.Include(i => i.item).Include(i => i.Pharmacy);
-            return View(inventories.ToList());
-
-            
+            var pOrderFills = db.POrderFills.Include(p => p.Inventory).Include(p => p.POrder);
+            return View(pOrderFills.ToList());
         }
 
-        // GET: Inventories/Details/5
+        // GET: POrderFills/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inventory inventory = db.Inventories.Find(id);
-            if (inventory == null)
+            POrderFill pOrderFill = db.POrderFills.Find(id);
+            if (pOrderFill == null)
             {
                 return HttpNotFound();
             }
-            return View(inventory);
+            return View(pOrderFill);
         }
 
-        // GET: Inventories/Create
+        // GET: POrderFills/Create
         public ActionResult Create()
         {
-            ViewBag.ItemId = new SelectList(db.items, "ItemId", "Name");
-            ViewBag.PharmacyId = new SelectList(db.Pharmacies, "PharmacyId", "Name");
+            ViewBag.InventoryId = new SelectList(db.Inventories, "InventoryId", "DispType");
+            ViewBag.POrderId = new SelectList(db.POrders, "POrderId", "Note");
             return View();
         }
 
-        // POST: Inventories/Create
+        // POST: POrderFills/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "InventoryId,ItemId,Amount,DispType,Brand,PharmacyId")] Inventory inventory)
+        public ActionResult Create([Bind(Include = "POrderFillId,POrderId,InventoryId,DateFilled,DatePicked,Note,PhamacistId,Ready")] POrderFill pOrderFill)
         {
             if (ModelState.IsValid)
             {
-                db.Inventories.Add(inventory);
+                db.POrderFills.Add(pOrderFill);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ItemId = new SelectList(db.items, "ItemId", "Name", inventory.ItemId);
-            ViewBag.PharmacyId = new SelectList(db.Pharmacies, "PharmacyId", "Name", inventory.PharmacyId);
-            return View(inventory);
+            ViewBag.InventoryId = new SelectList(db.Inventories, "InventoryId", "DispType", pOrderFill.InventoryId);
+            ViewBag.POrderId = new SelectList(db.POrders, "POrderId", "Note", pOrderFill.POrderId);
+            return View(pOrderFill);
         }
 
-        // GET: Inventories/Edit/5
+        // GET: POrderFills/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inventory inventory = db.Inventories.Find(id);
-            if (inventory == null)
+            POrderFill pOrderFill = db.POrderFills.Find(id);
+            if (pOrderFill == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ItemId = new SelectList(db.items, "ItemId", "Name", inventory.ItemId);
-            ViewBag.PharmacyId = new SelectList(db.Pharmacies, "PharmacyId", "Name", inventory.PharmacyId);
-            return View(inventory);
+            ViewBag.InventoryId = new SelectList(db.Inventories, "InventoryId", "DispType", pOrderFill.InventoryId);
+            ViewBag.POrderId = new SelectList(db.POrders, "POrderId", "Note", pOrderFill.POrderId);
+            return View(pOrderFill);
         }
 
-        // POST: Inventories/Edit/5
+        // POST: POrderFills/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "InventoryId,ItemId,Amount,DispType,Brand,PharmacyId")] Inventory inventory)
+        public ActionResult Edit([Bind(Include = "POrderFillId,POrderId,InventoryId,DateFilled,DatePicked,Note,PhamacistId,Ready")] POrderFill pOrderFill)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(inventory).State = EntityState.Modified;
+                db.Entry(pOrderFill).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ItemId = new SelectList(db.items, "ItemId", "Name", inventory.ItemId);
-            ViewBag.PharmacyId = new SelectList(db.Pharmacies, "PharmacyId", "Name", inventory.PharmacyId);
-            return View(inventory);
+            ViewBag.InventoryId = new SelectList(db.Inventories, "InventoryId", "DispType", pOrderFill.InventoryId);
+            ViewBag.POrderId = new SelectList(db.POrders, "POrderId", "Note", pOrderFill.POrderId);
+            return View(pOrderFill);
         }
 
-        // GET: Inventories/Delete/5
+        // GET: POrderFills/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Inventory inventory = db.Inventories.Find(id);
-            if (inventory == null)
+            POrderFill pOrderFill = db.POrderFills.Find(id);
+            if (pOrderFill == null)
             {
                 return HttpNotFound();
             }
-            return View(inventory);
+            return View(pOrderFill);
         }
 
-        // POST: Inventories/Delete/5
+        // POST: POrderFills/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Inventory inventory = db.Inventories.Find(id);
-            db.Inventories.Remove(inventory);
+            POrderFill pOrderFill = db.POrderFills.Find(id);
+            db.POrderFills.Remove(pOrderFill);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

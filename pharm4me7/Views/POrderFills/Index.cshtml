@@ -1,0 +1,69 @@
+﻿@model IEnumerable<pharm4me7.Models.POrderFill>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Inventory.DispType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.POrder.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateFilled)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatePicked)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Note)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhamacistId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ready)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Inventory.DispType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POrder.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFilled)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DatePicked)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhamacistId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ready)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.POrderFillId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.POrderFillId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.POrderFillId })
+        </td>
+    </tr>
+}
+
+</table>

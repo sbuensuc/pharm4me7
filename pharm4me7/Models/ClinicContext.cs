@@ -29,5 +29,13 @@ namespace pharm4me7.Models
                 .WithRequired(e => e.Patient)
                 .WillCascadeOnDelete(false);
         }
+
+        public System.Data.Entity.DbSet<pharm4me7.Models.POrder> POrders { get; set; }
+
+        public System.Data.Entity.DbSet<pharm4me7.Models.Pharmacy> Pharmacies { get; set; }
+
+        public System.Data.Entity.DbSet<pharm4me7.Models.POrderFill> POrderFills { get; set; }
+
+        public System.Data.Entity.DbSet<pharm4me7.Models.Inventory> Inventories { get; set; }
     }
 }

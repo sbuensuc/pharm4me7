@@ -1,0 +1,74 @@
+﻿@model pharm4me7.Models.POrder
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>POrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Pharmacy.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Pharmacy.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prescript.DispType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prescript.DispType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOrdered)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOrdered)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fill)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deny)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deny)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accept)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accept)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.POrderId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,154 @@
+﻿@model IEnumerable<pharm4me7.Models.POrder>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Prescription Requests</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Prescription
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Refills
+        </th>
+        <th>
+            Note
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    if (item.Accept == false && item.Deny == false)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOrdered)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescript.Sub)
+        </td>
+        
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescript.Refill)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.ActionLink("Accept", "PharmacyIndex", new { id = item.POrderId }) |
+            @Html.ActionLink("Deny", "Edit", new { id = item.POrderId })
+        </td>
+    </tr>
+    }
+}
+
+</table>
+
+<h2>Archived Requests</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Prescription
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Refills
+        </th>
+        <th>
+            Note
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Accept == true)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOrdered)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Sub)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Refill)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    @Html.ActionLink("Deny", "Edit", new { id = item.POrderId })
+                </td>
+            </tr>
+        }
+        if (item.Deny == true)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOrdered)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Sub)
+                </td>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prescript.Refill)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    DENIED
+                </td>
+            </tr>
+        }
+    }
+
+</table>
+

@@ -1,0 +1,141 @@
+﻿@model IEnumerable<pharm4me7.Models.Prescript>
+
+@{
+    ViewBag.Title = "Prescriptions";
+}
+
+<h3>Orders</h3>
+
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        foreach (var i in item.POrders)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => i.PrescriptId)
+                </td>
+                <td>
+                    @if (i.DateOrdered.HasValue)
+                    {
+                        @i.DateOrdered.Value.ToString("MMM-dd-yyyy")
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => i.Pharmacy.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => i.Pharmacy.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => i.Prescript.item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => i.Prescript.Disp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => i.Prescript.DispType)
+                </td>
+                
+
+                <td>
+                    @if (i.Accept == false && i.Deny == false)
+                    {
+                        @: REQUEST PENDING
+                    }
+                    else if (i.Accept == true && i.Deny == false)
+                    {
+                        @: ORDER IN PROGRESS
+                    }
+                    else if (i.Accept == false && i.Deny == true)
+                    {
+                        @: ORDER CANCELLED
+                    }
+                    else if (i.Fill == true)
+                    {
+                        @: ORDER READY FOR PICK UP
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => i.Note)
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<h3>Prescriptions</h3>
+
+
+<table class="table">
+    @*<tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            Item
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Unit Type
+        </th>
+        <th>
+            Details
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Refill)
+        </th>
+        <th>Ordered</th>
+    </tr>*@
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrescriptId)
+        </td>
+        <td>
+            @if (item.Date.HasValue)
+            {
+                @item.Date.Value.ToString("MMM-dd-yyyy")
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sub)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DispType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sig)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Refill)
+        </td>
+        <td>
+            @if (item.Sent == false)
+            {
+                <text>@Html.ActionLink("Order", "PorderCreate", new { id = item.PrescriptId })</text>
+            }
+            @if (item.Sent == true)
+            {
+                @: Ordered
+            }
+        </td>
+    </tr>
+}
+
+</table>

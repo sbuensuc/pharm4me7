@@ -1,0 +1,59 @@
+﻿@using pharm4me7.Models
+@model pharm4me7.Models.POrder
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Deny Request</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.POrderId)
+        @Html.HiddenFor(model => model.PrescriptId)
+        @Html.HiddenFor(model => model.PharmacyId)
+        @Html.HiddenFor(model => model.DateOrdered)
+        @Html.HiddenFor(model => model.Fill)
+        @Html.HiddenFor(model => model.Deny)
+        @Html.HiddenFor(model => model.Accept)
+
+        
+            <div class="col-md-offset-2 col-md-10">
+                <h4> @Html.DisplayFor(model => model.Prescript.Patient.LastName), @Html.DisplayFor(model => model.Prescript.Patient.FirstName)</h4>
+                <h4> @Html.DisplayFor(model => model.Prescript.item.Name)</h4>
+                <h5>@Html.DisplayFor(model => model.Prescript.Disp) @Html.DisplayFor(model => model.Prescript.DispType)</h5>
+                <h5>Note: @Html.DisplayFor(model => model.Prescript.Sig)</h5>
+                <h5>Brand: @Html.DisplayFor(model => model.Prescript.Sub)</h5>
+            </div>
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Note, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Deny" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

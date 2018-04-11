@@ -1,0 +1,59 @@
+﻿@using pharm4me7.Models
+@model pharm4me7.Models.POrder
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@{
+    var prod = (Prescript)ViewData["Prescript"];
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>POrder</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PrescriptId, "Prescription", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.PrescriptId, new { @class = "form-control", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.PrescriptId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <h5>@prod.item.Name</h5>
+                <h5>@prod.Disp @prod.DispType</h5>
+                <h5>Note: @prod.Sig</h5>
+                <h5>Brand: @prod.Sub</h5>
+            </div>
+        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PharmacyId, "Choose a Location", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("PharmacyId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PharmacyId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

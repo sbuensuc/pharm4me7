@@ -6,26 +6,30 @@ namespace pharm4me7.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class item
+    public partial class Doctor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public item()
+        public Doctor()
         {
-            Inventories = new HashSet<Inventory>();
             Prescripts = new HashSet<Prescript>();
         }
 
-        public int ItemId { get; set; }
+        public int DoctorId { get; set; }
 
         [Required]
         [StringLength(256)]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
-        [StringLength(4000)]
-        public string Description { get; set; }
+        [Required]
+        [StringLength(256)]
+        public string LastName { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inventory> Inventories { get; set; }
+        [StringLength(256)]
+        public string Email { get; set; }
+
+        public int? ClinicId { get; set; }
+
+        public virtual Clinic Clinic { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Prescript> Prescripts { get; set; }

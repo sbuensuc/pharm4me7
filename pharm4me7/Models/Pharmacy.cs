@@ -14,6 +14,7 @@ namespace pharm4me7.Models
         {
             Inventories = new HashSet<Inventory>();
             Pharmacists = new HashSet<Pharmacist>();
+            POrders = new HashSet<POrder>();
         }
 
         public int PharmacyId { get; set; }
@@ -36,5 +37,8 @@ namespace pharm4me7.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pharmacist> Pharmacists { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<POrder> POrders { get; set; }
     }
 }

@@ -7,12 +7,15 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using pharm4me7.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace pharm4me7.Controllers
 {
     public class PrescriptsController : Controller
     {
         private ClinicContext db = new ClinicContext();
+        
 
         // GET: Prescripts
         public ActionResult Index()
@@ -20,6 +23,79 @@ namespace pharm4me7.Controllers
             var prescripts = db.Prescripts.Include(p => p.item).Include(p => p.Patient);
             return View(prescripts.ToList());
         }
+
+        public ActionResult PatientsIndex()
+        {
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+            int? value = currentUser.PatientId;
+            int currentPatient = value.Value;
+
+            var patient = db.Patients.Find(currentPatient);
+
+            
+
+
+            var prescripts = db.Prescripts.Include(p => p.item).Include(p => p.Patient).Where(p => p.PatientId == currentPatient);
+            return View(prescripts.ToList());
+        }
+
+        [ActionName("PorderCreate")]
+        public ActionResult Create(int? id)
+        {
+            Prescript prescript = db.Prescripts.Find(id);
+            POrder model = new POrder();
+
+            var pharmacies = db.Pharmacies.ToList();
+
+            IEnumerable<SelectListItem> selectList = from p in pharmacies
+                                                     select new SelectListItem
+                                                     {
+                                                         Value = p.PharmacyId.ToString(),
+                                                         Text = string.Format("{0} - {1}, {2}", p.Name, p.Address, p.City)
+                                                     };
+
+            //var pharmacies = db.Pharmacies
+            //.Select(s => new
+            //{
+            //    PharmacyID = s.PharmacyId,
+            //    Name = string.Format("{0} - {1}, {2}", s.Name, s.Address, s.City)
+            //})
+            //.ToList();
+            ViewData["Prescript"] = prescript;
+            ViewBag.PharmacyId = new SelectList(selectList, "Value", "Text");
+            model.PrescriptId = prescript.PrescriptId;
+            return View(model);
+        }
+
+        // POST: POrders/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [ActionName("PorderCreate")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "POrderId,PrescriptId,PharmacyId,DateOrdered,Note,Fill,Deny,Accept")] POrder pOrder)
+        {
+            pOrder.DateOrdered = System.DateTime.Now;
+            pOrder.Deny = false;
+            pOrder.Fill = false;
+            pOrder.Accept = false;
+            if (ModelState.IsValid)
+            {
+                var prectiptToUpdate = db.Prescripts.Find(pOrder.PrescriptId);
+                prectiptToUpdate.Sent = true;
+                db.Entry(prectiptToUpdate).State = EntityState.Modified;
+                db.POrders.Add(pOrder);
+                db.SaveChanges();
+                return RedirectToAction("PatientsIndex");
+            }
+
+            ViewBag.PharmacyId = new SelectList(db.Pharmacies, "PharmacyId", "Name", pOrder.PharmacyId);
+            ViewBag.PrescriptId = new SelectList(db.Prescripts, "PrescriptId", "DispType", pOrder.PrescriptId);
+            return View(pOrder);
+        }
+
+        
 
         // GET: Prescripts/Details/5
         public ActionResult Details(int? id)
@@ -42,6 +118,8 @@ namespace pharm4me7.Controllers
             ViewBag.ItemId = new SelectList(db.items, "ItemId", "Name");
             ViewBag.PatientId = new SelectList(db.Patients, "PatientId", "FirstName");
             return View();
+
+            
         }
 
         // POST: Prescripts/Create
@@ -90,6 +168,7 @@ namespace pharm4me7.Controllers
         {
             if (ModelState.IsValid)
             {
+                
                 db.Entry(prescript).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

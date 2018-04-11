@@ -1,0 +1,74 @@
+﻿@model pharm4me7.Models.POrderFill
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>POrderFill</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Inventory.DispType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inventory.DispType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POrder.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POrder.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateFilled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateFilled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatePicked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatePicked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhamacistId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhamacistId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ready)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ready)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.POrderFillId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,80 @@
+﻿@model pharm4me7.Models.POrderFill
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>POrderFill</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Inventory.DispType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Inventory.DispType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POrder.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POrder.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateFilled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateFilled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatePicked)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatePicked)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhamacistId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhamacistId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ready)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ready)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
