@@ -101,7 +101,9 @@ namespace pharm4me7.Controllers
                 }
             }
 
+            var patientPOrders = pOrders.Where(po => po.Prescript.PatientId == id).Distinct().ToList();
 
+            ViewData["pOrders"] = patientPOrders;
             ViewData["porderFills"] = pOrderFills.Distinct().ToList();
 
             //var prescripts = db.Prescripts.Include(p => p.item).Include(p => p.Patient);
