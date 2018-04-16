@@ -2,7 +2,7 @@
 @model IEnumerable<pharm4me7.Models.POrderFill>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Orders";
 }
 
 
@@ -68,7 +68,7 @@
                     PENDING
                 </td>
                 <td>
-                    @Html.ActionLink("Fill Order", "PharmacyCreate", new { id = item.POrderId })
+                    @Html.ActionLink("Fill Order", "PharmacyCreate", new { id = item.POrderId }, new { @class = "btn btn-primary" })
                 </td>
             </tr>
         }
@@ -140,7 +140,18 @@
                     @*<td>
                             @Html.DisplayFor(modelItem => item.Ready)
                         </td>*@
-                    
+                    @if (item.Ready == true)
+                    {
+                    <td>
+                        @Html.ActionLink("Waiting for Pickup", "PharmacyPickup", new { id = item.POrderFillId }, new { @class = "btn btn-primary" })
+                    </td>
+                    }
+                    else
+                    {
+                        <td>
+                            ITEM RETRIEVED 
+                        </td>
+                    }
                 </tr>
             }
 

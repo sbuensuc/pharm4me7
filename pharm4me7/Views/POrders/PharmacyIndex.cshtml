@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<pharm4me7.Models.POrder>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Requests";
 }
 
 <h2>Prescription Requests</h2>
@@ -26,6 +26,12 @@
         </th>
         <th>
             Note
+        </th>
+        <th>
+            Clinic
+        </th>
+        <th>
+            Physician
         </th>
         <th></th>
     </tr>
@@ -55,8 +61,15 @@
             @Html.DisplayFor(modelItem => item.Note)
         </td>
         <td>
-            @Html.ActionLink("Accept", "PharmacyIndex", new { id = item.POrderId }) |
-            @Html.ActionLink("Deny", "Edit", new { id = item.POrderId })
+            @Html.DisplayFor(modelItem => item.Prescript.Doctor.Clinic.Name)
+        </td>
+
+        <td>
+            <div class="btn-group">
+                @Html.ActionLink("Info", "Details", "Prescripts", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Accept", "PharmacyIndex", new { id = item.POrderId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Deny", "Edit", new { id = item.POrderId }, new { @class = "btn btn-danger" })
+            </div>
         </td>
     </tr>
     }
@@ -66,7 +79,7 @@
 
 <h2>Archived Requests</h2>
 
-
+<h3>Pending</h3>
 <table class="table">
     <tr>
         <th>
@@ -92,7 +105,7 @@
 
     @foreach (var item in Model)
     {
-        if (item.Accept == true && item.Fill == false) 
+        if (item.Accept == true && item.Fill == false)
         {
             <tr>
                 <td>
@@ -116,10 +129,39 @@
                     @Html.DisplayFor(modelItem => item.Note)
                 </td>
                 <td>
-                    PENDING @Html.ActionLink("Deny", "Edit", new { id = item.POrderId })
+                    PENDING | @Html.ActionLink("Deny", "Edit", new { id = item.POrderId }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
+    }
+</table>
+
+<h3>Filled</h3>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Prescription
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Refills
+        </th>
+        <th>
+            Note
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         if (item.Accept == true && item.Fill == true)
         {
             <tr>
@@ -148,6 +190,35 @@
                 </td>
             </tr>
         }
+    }
+</table>
+  
+<h3>Denied</h3>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Prescription
+        </th>
+        <th>
+            Brand
+        </th>
+        <th>
+            Refills
+        </th>
+        <th>
+            Note
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         if (item.Deny == true)
         {
             <tr>
@@ -177,6 +248,9 @@
             </tr>
         }
     }
+</table>  
+        
+  
 
-</table>
+
 

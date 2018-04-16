@@ -92,15 +92,14 @@ namespace pharm4me7.Controllers
         {
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var currentUser = manager.FindById(User.Identity.GetUserId());
-            int? value = currentUser.Pharmacist.PharmacyId;
-            int currentLocation = value.Value;
-            var pOrders = db.POrders.Include(p => p.Pharmacy).Include(p => p.Prescript).Where(p => p.PharmacyId == currentLocation).Where(p => p.Accept == true);
+
+            var pOrders = db.POrders.Include(p => p.Pharmacy).Include(p => p.Prescript).Where(p => p.PharmacyId == currentUser.Pharmacist.PharmacyId).Where(p => p.Accept == true);
 
             POrder porder = db.POrders.Find(id);
             POrderFill model = new POrderFill();
             ViewData["porder"] = porder;
 
-            var inventories = db.Inventories.Where(i => i.PharmacyId == currentLocation).Where(i => i.ItemId == porder.Prescript.ItemId).Where(i => i.Amount >= porder.Prescript.Disp).ToList();
+            var inventories = db.Inventories.Where(i => i.PharmacyId == currentUser.Pharmacist.PharmacyId).Where(i => i.ItemId == porder.Prescript.ItemId).Where(i => i.Amount >= porder.Prescript.Disp).ToList();
 
             IEnumerable<SelectListItem> selectList = from i in inventories
                                                      select new SelectListItem
@@ -135,7 +134,7 @@ namespace pharm4me7.Controllers
 
             Inventory inventory = db.Inventories.Find(pOrderFill.InventoryId);
             inventory.Amount = inventory.Amount - pOrder.Prescript.Disp;
-
+            pOrderFill.Ready = true;
 
             if (ModelState.IsValid)
             {
@@ -151,6 +150,7 @@ namespace pharm4me7.Controllers
             return View(pOrderFill);
         }
 
+        [ActionName("PharmacyPickup")]
         // GET: POrderFills/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -171,15 +171,23 @@ namespace pharm4me7.Controllers
         // POST: POrderFills/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [ActionName("PharmacyPickup")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "POrderFillId,POrderId,InventoryId,DateFilled,DatePicked,Note,PhamacistId,Ready")] POrderFill pOrderFill)
         {
+            pOrderFill.DatePicked = System.DateTime.Now;
+            pOrderFill.Ready = false;
+
+            POrder pOrder = db.POrders.Find(pOrderFill.POrderId);
+            pOrder.Deny = true;
+
             if (ModelState.IsValid)
             {
+                db.Entry(pOrder).State = EntityState.Modified;
                 db.Entry(pOrderFill).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("PharmacyIndex", "Patients");
             }
             ViewBag.InventoryId = new SelectList(db.Inventories, "InventoryId", "DispType", pOrderFill.InventoryId);
             ViewBag.POrderId = new SelectList(db.POrders, "POrderId", "Note", pOrderFill.POrderId);

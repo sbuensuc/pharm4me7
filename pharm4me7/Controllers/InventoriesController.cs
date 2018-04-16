@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using pharm4me7.Models;
 using Microsoft.AspNet.Identity;
-
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace pharm4me7.Controllers
 {
@@ -58,6 +58,11 @@ namespace pharm4me7.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "InventoryId,ItemId,Amount,DispType,Brand,PharmacyId")] Inventory inventory)
         {
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+
+            inventory.PharmacyId = currentUser.Pharmacist.PharmacyId;
+
             if (ModelState.IsValid)
             {
                 db.Inventories.Add(inventory);

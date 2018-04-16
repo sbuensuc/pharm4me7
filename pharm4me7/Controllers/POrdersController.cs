@@ -47,10 +47,8 @@ namespace pharm4me7.Controllers
             }
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var currentUser = manager.FindById(User.Identity.GetUserId());
-            int? value = currentUser.Pharmacist.PharmacyId;
-            int currentLocation = value.Value;
 
-            var pOrders = db.POrders.Include(p => p.Pharmacy).Include(p => p.Prescript).Where(p => p.PharmacyId == currentLocation);
+            var pOrders = db.POrders.Include(p => p.Pharmacy).Include(p => p.Prescript).Where(p => p.PharmacyId == currentUser.Pharmacist.PharmacyId);
             return View(pOrders.ToList());
         }
 

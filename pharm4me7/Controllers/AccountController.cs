@@ -52,6 +52,9 @@ namespace pharm4me7.Controllers
             }
         }
 
+        
+
+
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -137,8 +140,9 @@ namespace pharm4me7.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string Role)
         {
+            ViewData["Role"] = Role;
             return View();
         }
 
@@ -151,32 +155,93 @@ namespace pharm4me7.Controllers
         {
             if (ModelState.IsValid)
             {
-                var context = new OrderContext();
+
+                var context = new Pharm4MeContext();
+                var context2 = new ApplicationDbContext();
                 int userpin = model.pin;
-                Patient patient = context.Patients.Find(userpin);
-                if (patient != null)
-                { 
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, RoleName = model.RoleName, PatientId = model.pin };
-                    var result = await UserManager.CreateAsync(user, model.Password);
-                    if (result.Succeeded)
+                if (model.RoleName == "Patient")
+                {
+                    Patient check1 = context.Patients.Find(userpin);
+                    var check2 = context2.Users.FirstOrDefault(u => u.PatientId == model.pin);
+                    if (check1 != null && check2 == null)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        var user = new ApplicationUser { UserName = model.Email, Email = model.Email, RoleName = model.RoleName, PatientId = model.pin };
+                        var result = await UserManager.CreateAsync(user, model.Password);
+                        if (result.Succeeded)
+                        {
+                            result = UserManager.AddToRole(user.Id, "Patient");
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                        return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Home");
+                        }
+                        AddErrors(result);
+                        return View(model);
                     }
-                    AddErrors(result);
-                    return View(model);
                 }
+                else if (model.RoleName == "Clinician")
+                {
+                    Doctor check1 = context.Doctors.Find(userpin);
+                    var check2 = context2.Users.FirstOrDefault(u => u.DoctorId == model.pin);
+                    if (check1 != null && check2 == null)
+                    {
+                        var user = new ApplicationUser { UserName = model.Email, Email = model.Email, RoleName = model.RoleName, DoctorId = model.pin };
+                        var result = await UserManager.CreateAsync(user, model.Password);
+                        if (result.Succeeded)
+                        {
+                            result = UserManager.AddToRole(user.Id, "Doctor");
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                            return RedirectToAction("Index", "Home");
+                        }
+                        AddErrors(result);
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    Pharmacist check1 = context.Pharmacists.Find(userpin);
+                    var check2 = context2.Users.FirstOrDefault(u => u.PharmacistId == model.pin);
+                    if (check1 != null && check2 == null)
+                    {
+                        var user = new ApplicationUser { UserName = model.Email, Email = model.Email, RoleName = model.RoleName, PharmacistId = model.pin };
+                        var result = await UserManager.CreateAsync(user, model.Password);
+                        if (result.Succeeded)
+                        {
+                            result = UserManager.AddToRole(user.Id, "Manager");
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                            return RedirectToAction("Index", "Home");
+                        }
+                        AddErrors(result);
+                        return View(model);
+                    }
+                }
+                
+                //if (role != null)
+                //{ 
+                //    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, RoleName = model.RoleName, PatientId = model.pin };
+                //    var result = await UserManager.CreateAsync(user, model.Password);
+                //    if (result.Succeeded)
+                //    {
+                //        result = UserManager.AddToRole(user.Id, "Patient");
+                //        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                //        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                //        // Send an email with this link
+                //        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                //        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                //        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                //        return RedirectToAction("Index", "Home");
+                //    }
+                //    AddErrors(result);
+                //    return View(model);
+                //}
                 AddCustomizeError("Invalid Pin Code");
             }
 
             // If we got this far, something failed, redisplay form
+            
             return View(model);
         }
 

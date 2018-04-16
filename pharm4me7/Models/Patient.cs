@@ -39,6 +39,7 @@ namespace pharm4me7.Models
         public string Gender { get; set; }
 
         [Column(TypeName = "date")]
+        [DataType(DataType.Date)]
         public DateTime? Birth { get; set; }
 
         public int? ClinicId { get; set; }

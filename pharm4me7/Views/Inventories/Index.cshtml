@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<pharm4me7.Models.Inventory>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Inventory";
 }
 
-<h2>Index</h2>
+<h2>Inventory</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -41,9 +41,11 @@
             @Html.DisplayFor(modelItem => item.Brand)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.InventoryId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.InventoryId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.InventoryId })
+            <div class="btn-group">
+                @Html.ActionLink("Edit", "Edit", new { id = item.InventoryId }, new { @class = "btn btn-success" })
+                @*@Html.ActionLink("Details", "Details", new { id = item.InventoryId }, new { @class = "btn btn-info" })*@
+                @Html.ActionLink("Delete", "Delete", new { id = item.InventoryId }, new { @class = "btn btn-danger" })
+            </div>
         </td>
     </tr>
 }

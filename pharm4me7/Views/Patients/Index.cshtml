@@ -9,7 +9,7 @@
 <p>
     @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
     {
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
     }
 </p>
 <table class="table">
@@ -75,14 +75,16 @@
                 @Html.DisplayFor(modelItem => item.Birth)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.PatientId }) |
-                @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
+                <div class="btn-group">
+                    @Html.ActionLink("Details", "Details", new { id = item.PatientId }, new { @class = "btn btn-info" }) 
+                    @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.PatientId })} | 
-                @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PatientId }, new { @class = "btn btn-success" })} 
+                    @if (User.IsInRole("Admin"))
                 {
-                    @Html.ActionLink("Delete", "Delete", new { id = item.PatientId })
-                }
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PatientId }, new { @class = "btn btn-danger" })
+                    }
+                </div>
             </td>
         </tr>
                 }

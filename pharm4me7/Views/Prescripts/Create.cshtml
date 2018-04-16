@@ -4,6 +4,25 @@
     ViewBag.Title = "Create Prescription";
 }
 
+@{
+    List<SelectListItem> unitList = new List<SelectListItem>();
+    unitList.Add(new SelectListItem
+    {
+        Text = "Capsules",
+        Value = "Capsules"
+    });
+    unitList.Add(new SelectListItem
+    {
+        Text = "Tablets",
+        Value = "Tablets",
+    });
+    unitList.Add(new SelectListItem
+    {
+        Text = "mL",
+        Value = "mL"
+    });
+}
+
 <h2>Create Prescription</h2>
 
 
@@ -34,7 +53,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Disp, "Amount", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Disp, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Disp,"0", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Disp, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,7 +61,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.DispType, "Unit Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.DispType, "Unit Type", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.DispType, unitList, null, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DispType, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -92,7 +92,7 @@
 <h4>Prescriptions</h4>
 
 <p>
-    @Html.ActionLink("Create New", "Create", "Prescripts")
+    @Html.ActionLink("Create New", "PrescriptCreate", new { id = Model.PatientId }, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
@@ -117,6 +117,9 @@
         </th>
         <th>
             Refill
+        </th>
+        <th>
+            Prescribed By
         </th>
         <th></th>
     </tr>
@@ -146,9 +149,11 @@
                 @Html.DisplayFor(modelItem => item.Refill)
             </td>
             <td>
-                @*@Html.ActionLink("Delete", "Delete", "Prescripts")*@
-                @*@Html.ActionLink("Delete", "Delete", "Prescripts", new { id = item.PrescriptId }, null)*@
-                @Html.ActionLink("Delete", "PrescriptDelete", new { id = item.PrescriptId })
+                @Html.DisplayFor(modelItem => item.Doctor.LastName ), @Html.DisplayFor(modelItem => item.Doctor.FirstName)
+            </td>
+            <td>
+                
+                @*@Html.ActionLink("Delete", "PrescriptDelete", new { id = item.PrescriptId }, new { @class = "btn btn-danger" })*@
             </td>
         </tr>
     }

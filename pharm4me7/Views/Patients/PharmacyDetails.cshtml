@@ -1,0 +1,166 @@
+﻿@using pharm4me7.Models
+@model pharm4me7.Models.Patient
+
+@{
+    ViewBag.Title = "Patient Details";
+}
+@{
+    var pof = (IEnumerable<POrderFill>)ViewData["porderFills"];
+} 
+<h2>Patient Details</h2>
+
+<div>
+    <h4>Patient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Healthcard)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Healthcard)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Birth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Birth)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "PharmacyIndex")
+</p>
+
+<h3>Filled Orders</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Order#
+        </th>
+        <th>
+            Customer
+        </th>
+        <th>
+            Prescription
+        </th>
+        <th>
+            OrderID
+        </th>
+        <th>
+            Date Filled
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.DatePicked)
+            </th>*@
+        <th>
+            Note
+        </th>
+        <th>
+            FilledBy
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Ready)
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in pof)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.POrderFillId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.POrder.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.POrder.Prescript.Patient.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.POrder.Prescript.item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.POrder.Prescript.item.Name) @Html.DisplayFor(modelItem => item.POrder.Prescript.Disp) @Html.DisplayFor(modelItem => item.POrder.Prescript.DispType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateFilled)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.DatePicked)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pharmacist1.LastName), @Html.DisplayFor(modelItem => item.Pharmacist1.FirstName)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Ready)
+                </td>*@
+            @if (item.Ready == true)
+            {
+                <td>
+                    @Html.ActionLink("Waiting for Pickup", "PharmacyPickup", "POrderFills", new { id = item.POrderFillId }, new { @class = "btn btn-primary" })
+                </td>
+            }
+            else
+            {
+                <td>
+                    ITEM RETRIEVED
+                </td>
+            }
+        </tr>
+    }
+
+</table>

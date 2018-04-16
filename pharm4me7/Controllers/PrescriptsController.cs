@@ -14,7 +14,7 @@ namespace pharm4me7.Controllers
 {
     public class PrescriptsController : Controller
     {
-        private ClinicContext db = new ClinicContext();
+        private Pharm4MeContext db = new Pharm4MeContext();
         
 
         // GET: Prescripts
@@ -55,15 +55,10 @@ namespace pharm4me7.Controllers
                                                          Text = string.Format("{0} - {1}, {2}", p.Name, p.Address, p.City)
                                                      };
 
-            //var pharmacies = db.Pharmacies
-            //.Select(s => new
-            //{
-            //    PharmacyID = s.PharmacyId,
-            //    Name = string.Format("{0} - {1}, {2}", s.Name, s.Address, s.City)
-            //})
-            //.ToList();
-            ViewData["Prescript"] = prescript;
+           
+            
             ViewBag.PharmacyId = new SelectList(selectList, "Value", "Text");
+            ViewData["Prescript"] = prescript;
             model.PrescriptId = prescript.PrescriptId;
             return View(model);
         }
@@ -115,8 +110,17 @@ namespace pharm4me7.Controllers
         // GET: Prescripts/Create
         public ActionResult Create()
         {
-            ViewBag.ItemId = new SelectList(db.items, "ItemId", "Name");
-            ViewBag.PatientId = new SelectList(db.Patients, "PatientId", "FirstName");
+            var patients = db.Patients.OrderBy(p => p.LastName).OrderBy(p => p.PatientId).ToList();
+
+            IEnumerable<SelectListItem> selectList = from p in patients
+                                                     select new SelectListItem
+                                                     {
+                                                         Value = p.PatientId.ToString(),
+                                                         Text = string.Format("{0} - {1}, {2}", p.PatientId, p.LastName, p.FirstName)
+                                                     };
+
+            ViewBag.ItemId = new SelectList(db.items.OrderBy(p => p.Name), "ItemId", "Name");
+            ViewBag.PatientId = new SelectList(selectList, "Value", "Text");
             return View();
 
             

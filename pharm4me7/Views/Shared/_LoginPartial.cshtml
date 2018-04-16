@@ -15,17 +15,17 @@
         }
         @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
         {
+            <li>@Html.ActionLink("Customers", "PharmacyIndex", "Patients")</li>
             <li>@Html.ActionLink("Inventory", "Index", "Inventories")</li>
-        }
-        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
-        {
             <li>@Html.ActionLink("Requests", "PharmacyIndex", "POrders")</li>
             <li>@Html.ActionLink("Orders", "PharmacyIndex", "POrderFills")</li>
+            <li>@Html.ActionLink(" ", "Config", "Home", null, new { @class = "glyphicon glyphicon-cog" })</li>
         }
         @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
         {
             <li>@Html.ActionLink("Patients", "Index", "Patients")</li>
             <li>@Html.ActionLink("Prescriptions", "Index", "Prescripts")</li>
+            <li>@Html.ActionLink(" ", "Config", "Home", null, new { @class = "glyphicon glyphicon-cog" })</li>
         }
         @if (User.IsInRole("Patient"))
         {
@@ -38,7 +38,7 @@
 else
 {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Register", "PreRegister", "Home")</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

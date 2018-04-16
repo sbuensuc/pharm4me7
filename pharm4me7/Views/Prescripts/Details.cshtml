@@ -66,6 +66,13 @@
         <dd>
             @Html.DisplayFor(model => model.Refill)
         </dd>
+        <dt>
+            Prescribed By
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.LastName), @Html.DisplayFor(model => model.Doctor.FirstName)
+        </dd>
 
     </dl>
 </div>

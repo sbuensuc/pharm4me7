@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "PreRegister";
+}
+
+<h2>Register as:</h2>
+
+<div class="btn-group">
+    @Html.ActionLink("Patient", "Register", "Account", routeValues: new { role = "Patient" }, htmlAttributes: new { @class = "btn btn-primary", id = "registerLink" })
+    @Html.ActionLink("Clinician", "Register", "Account", routeValues: new { role = "Clinician" }, htmlAttributes: new { @class = "btn btn-primary", id = "registerLink" })
+    @Html.ActionLink("Pharmacist", "Register", "Account", routeValues: new { role = "Pharmacist" }, htmlAttributes: new { @class = "btn btn-primary", id = "registerLink" })
+</div>
+
+

@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Config";
+}
+
+<h2>Config</h2>
+
+@if (User.IsInRole("Doctor"))
+    {
+<h4>@ViewBag.Message2</h4>
+<div>
+    @Html.ActionLink("Create New Clinical User", "Index", "Doctors", null, new { @class = "btn btn-info" })
+</div>
+    }
+    else if (User.IsInRole("Manager"))
+    {
+<h4>@ViewBag.Message2</h4>
+<div>
+    @Html.ActionLink("Create New Pharmacy User", "Index", "Pharmacists", null, new { @class = "btn btn-info" })
+</div>
+    }
+
+

@@ -1,5 +1,46 @@
-﻿@{
+﻿
+
+@{
     ViewBag.Title = "Pharm4me";
 }
 
-<h3>@ViewBag.Message</h3>
+
+
+<h3>@ViewBag.Message1</h3>
+
+
+
+    
+    @if (User.IsInRole("Patient"))
+    {
+        @Html.ActionLink("View Prescriptions", "PatientsIndex", "Prescripts", null, new { @class = "btn btn-info" })
+    }
+    else if (User.IsInRole("Doctor"))
+    {
+        <h4>@ViewBag.Message2</h4>
+        <div>
+            @Html.ActionLink("Patients", "Index", "Patients", null, new { @class = "btn btn-info" })
+        </div>
+        <div>
+            @Html.ActionLink("Prescriptions", "Index", "Prescripts", null, new { @class = "btn btn-info" })
+        </div>
+    }
+    else if (User.IsInRole("Manager"))
+    {
+        <h4>@ViewBag.Message2</h4>
+        <div>
+            @Html.ActionLink("Customers", "PharmacyIndex", "Patients", null, new { @class = "btn btn-info" })
+        </div>
+        <div>
+            @Html.ActionLink("Inventory", "Index", "Inventories", null, new { @class = "btn btn-info" })
+        </div>
+        <div>
+            @Html.ActionLink("Requests", "PharmacyIndex", "POrders", null, new { @class = "btn btn-info" })
+        </div>
+        <div>
+            @Html.ActionLink("Orders", "PharmacyIndex", "POrderFills", null, new { @class = "btn btn-info" })
+        </div>
+    }
+
+
+
