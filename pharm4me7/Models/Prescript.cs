@@ -23,6 +23,7 @@ namespace pharm4me7.Models
 
         public DateTime? Date { get; set; }
 
+        [Required(ErrorMessage = "The Amount field is required.")]
         public int? Disp { get; set; }
 
         [StringLength(10)]
@@ -30,7 +31,7 @@ namespace pharm4me7.Models
 
         [StringLength(4000)]
         public string Sig { get; set; }
-
+        
         [StringLength(256)]
         public string Sub { get; set; }
 

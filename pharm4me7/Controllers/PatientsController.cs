@@ -79,8 +79,10 @@ namespace pharm4me7.Controllers
         }
 
         // GET: Patients/Details/5
-        public ActionResult PharmacyDetails(int? id)
+        public ActionResult PharmacyDetails(int? id, int? requestid)
         {
+
+            
 
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
@@ -89,6 +91,8 @@ namespace pharm4me7.Controllers
             var pOrders = db.POrders.Include(p => p.Pharmacy).Include(p => p.Prescript).Where(po => po.PharmacyId == currentLocation);
 
             List<POrderFill> pOrderFills = new List<POrderFill>();
+
+
 
             foreach (var p in pOrders)
             {
