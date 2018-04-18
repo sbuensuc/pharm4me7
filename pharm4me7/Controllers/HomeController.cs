@@ -25,14 +25,14 @@ namespace pharm4me7.Controllers
                 if (currentUser.PatientId != null)
                 {
                     
-                    ViewBag.Message1 = "Welcome to Pharm4me, " + currentUser.Patient.FirstName + " " + currentUser.Patient.LastName;
+                    ViewBag.Message1 = "Welcome, " + currentUser.Patient.FirstName + " " + currentUser.Patient.LastName;
 
                     
                 }
 
                 else if (currentUser.DoctorId != null)
                 {
-                    ViewBag.Message1 = "Welcome to Pharm4me, " + currentUser.Doctor.FirstName + " " + currentUser.Doctor.LastName;
+                    ViewBag.Message1 = "Welcome, " + currentUser.Doctor.FirstName + " " + currentUser.Doctor.LastName;
                     ViewBag.Message2 = currentUser.Doctor.Clinic.Name;
 
                     
@@ -40,7 +40,7 @@ namespace pharm4me7.Controllers
 
                 else if (currentUser.PharmacistId != null)
                 {
-                    ViewBag.Message1 = "Welcome to Pharm4me, " + currentUser.Pharmacist.FirstName + " " + currentUser.Pharmacist.LastName;
+                    ViewBag.Message1 = "Welcome, " + currentUser.Pharmacist.FirstName + " " + currentUser.Pharmacist.LastName;
                     ViewBag.Message2 = currentUser.Pharmacist.Pharmacy.Name ;
 
                     
