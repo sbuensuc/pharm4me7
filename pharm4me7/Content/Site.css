@@ -1,8 +1,12 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-image: url('~\Assets\images\bg.jpg');
-    /*background-color: #F0F8FF;*/
+
+    background-image: url('~/Assets/images/bg.jpg');
+    background-color: #F0F8FF;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
 
 /* Set padding to keep content from hitting the edges */
