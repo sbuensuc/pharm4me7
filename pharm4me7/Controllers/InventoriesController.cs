@@ -102,6 +102,11 @@ namespace pharm4me7.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "InventoryId,ItemId,Amount,DispType,Brand,PharmacyId")] Inventory inventory)
         {
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+
+            inventory.PharmacyId = currentUser.Pharmacist.PharmacyId;
+
             if (ModelState.IsValid)
             {
                 db.Entry(inventory).State = EntityState.Modified;
