@@ -32,10 +32,8 @@ textarea {
 /* Ovverride bootstrap.css navbar class*/
 .navbar {
     background-color: #006DB0;
+    color: #F9FFFF;
 }
-    .navbar li {
-        color: #F9FFFF;
-    }
         .navbar li:hover {
             color: #85C33E;
         }
