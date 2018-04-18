@@ -21,8 +21,11 @@ namespace pharm4me7.Controllers
         // GET: Inventories
         public ActionResult Index()
         {
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+            int currentLocation = currentUser.Pharmacist.PharmacyId ?? default(int);
 
-            var inventories = db.Inventories.Include(i => i.item).Include(i => i.Pharmacy);
+            var inventories = db.Inventories.Include(i => i.item).Include(i => i.Pharmacy).Where(po => po.PharmacyId == currentLocation);
             return View(inventories.ToList());
 
             

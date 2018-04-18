@@ -19,7 +19,11 @@ namespace pharm4me7.Controllers
         // GET: Pharmacists
         public ActionResult Index()
         {
-            var pharmacists = db.Pharmacists.Include(p => p.Pharmacy);
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+            int currentLocation = currentUser.Pharmacist.PharmacyId ?? default(int);
+
+            var pharmacists = db.Pharmacists.Include(p => p.Pharmacy).Where(po => po.PharmacyId == currentLocation);
             return View(pharmacists.ToList());
         }
 
