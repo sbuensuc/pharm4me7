@@ -32,12 +32,14 @@ textarea {
 .navbar {
     background-color: #006DB0;
     border-bottom-color: #fff;
-    
 }
-    .navbar a {
-    color: #F9FFFF;
 
-    }
+/*Err... idk what css property is handling this in the bootstrap.css file 
+    (because there's like 10980239809234 .navbar properties and variants) 
+    but it's not changing the link color rip... mvc y u so complicated for*/
+.navbar-right li a {
+    color: #F9FFFF;
+}
         .navbar a:hover {
             color: #85C33E;
         }
