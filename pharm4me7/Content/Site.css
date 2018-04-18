@@ -1,7 +1,6 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-
     background-image: url('../Assets/images/bg.jpg');
     background-color: #F0F8FF;
     background-attachment: fixed;
@@ -32,8 +31,12 @@ textarea {
 /* Ovverride bootstrap.css navbar class*/
 .navbar {
     background-color: #006DB0;
-    color: #F9FFFF;
 }
-        .navbar li:hover {
+
+    .navbar a {
+        color: #F9FFFF;
+    }
+
+        .navbar a:hover {
             color: #85C33E;
         }
