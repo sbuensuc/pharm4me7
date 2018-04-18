@@ -2,6 +2,32 @@
     ViewBag.Title = "Pharm4Me";
 }
 
+@if (User.IsInRole("Patient"))
+{
+    @Html.ActionLink("View Prescriptions", "PatientsIndex", "Prescripts", null, new { @class = "btn btn-info" })
+}
+else if (User.IsInRole("Doctor"))
+{
+    <h4>@ViewBag.Message2</h4>
+    <div class="btn-group">
+        @Html.ActionLink("Patients", "Index", "Patients", null, new { @class = "btn btn-info" })
+    
+        @Html.ActionLink("Prescriptions", "Index", "Prescripts", null, new { @class = "btn btn-info" })
+    </div>
+}
+else if (User.IsInRole("Manager"))
+{
+    <h4>@ViewBag.Message2</h4>
+    <div class="btn-group">
+        @Html.ActionLink("Customers", "PharmacyIndex", "Patients", null, new { @class = "btn btn-info" })
+    
+        @Html.ActionLink("Inventory", "Index", "Inventories", null, new { @class = "btn btn-info" })
+    
+        @Html.ActionLink("Requests", "PharmacyIndex", "POrders", null, new { @class = "btn btn-info" })
+    
+        @Html.ActionLink("Orders", "PharmacyIndex", "POrderFills", null, new { @class = "btn btn-info" })
+    </div>
+}
 
 <h2>@ViewBag.Title</h2>
 <img src="~/Assets/images/index.jpg" alt="Index Banner" />

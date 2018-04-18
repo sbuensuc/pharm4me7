@@ -34,6 +34,14 @@ textarea {
     border-bottom-color: #fff;
 }
 
+div {
+    padding-top: 5px;
+}
+
+div img {
+    min-width:100%;
+}
+
 /*Err... idk what css property is handling this in the bootstrap.css file 
     (because there's like 10980239809234 .navbar properties and variants) 
     but it's not changing the link color rip... mvc y u so complicated for*/
