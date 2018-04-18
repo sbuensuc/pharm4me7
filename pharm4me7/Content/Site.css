@@ -28,3 +28,8 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Ovverride bootstrap.css navbar class*/
+.navbar {
+    background-color: #006DB0;
+}
