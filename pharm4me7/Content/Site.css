@@ -2,7 +2,7 @@
     padding-top: 50px;
     padding-bottom: 20px;
 
-    background-image: url('~/Assets/images/bg.jpg');
+    background-image: url('../Assets/images/bg.jpg');
     background-color: #F0F8FF;
     background-attachment: fixed;
     background-repeat: no-repeat;
