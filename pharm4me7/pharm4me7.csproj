@@ -403,6 +403,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Assets\images\" />
     <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>
