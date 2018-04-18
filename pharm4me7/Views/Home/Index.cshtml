@@ -1,50 +1,48 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "Pharm4Me";
 }
 
 
 <h2>@ViewBag.Title</h2>
-
+<img src="~/Assets/images/index.jpg" alt="Index Banner" />
 <h3><i>"Bringing healthcare solutions closer to home."</i></h3>
-<img src="/../../Assets/images/index.jpg" alt="Index Banner" />
-    <p>Pharm4Me is one of Ontario's upcoming ePrescription system. With Pharm4Me you can access, track, and place your prescription orders in the comfort of your home. By making Pharm4Me online, you never have to worry about losing a prescription. A digital version will always be available for your reference. Don't favour the ePrescription too much? You also have the option to print out your prescriptions as well. By keeping things digital, we keep a light carbon footprint to reducing paper waste.</p>
+<p>Pharm4Me is one of Ontario's upcoming ePrescription system. With Pharm4Me you can access, track, and place your prescription orders in the comfort of your home. By making Pharm4Me online, you never have to worry about losing a prescription. A digital version will always be available for your reference. Don't favour the ePrescription too much? You also have the option to print out your prescriptions as well. By keeping things digital, we keep a light carbon footprint to reducing paper waste.</p>
 
-    <h4>Know your meds.</h4>
-    <img src="/../../Assets/images/consult.jpg" alt="Consult" />
-        <p>Remember those old prescription papers your doctor gives to you? Do you ever understand what it says, or what it means (given that you're able to read it)? There's a chance that you may have glanced at it, paid it no mind, and gave it to your local pharmacist to get your medication. By using our services, get a medical knowledge of the prescriptions you are given. Every prescription you receive through Pharm4Me will have its information of the drug, the medical and common name for it, the description of it and what it helps/relieve. At Pharm4Me, we believe it is a good practice to know what your body ingests and know the effects of medicines as well.</p>
+<h4>Know your meds.</h4>
+<img src="~/Assets/images/consult.jpg" alt="Consult" />
+<p>Remember those old prescription papers your doctor gives to you? Do you ever understand what it says, or what it means (given that you're able to read it)? There's a chance that you may have glanced at it, paid it no mind, and gave it to your local pharmacist to get your medication. By using our services, get a medical knowledge of the prescriptions you are given. Every prescription you receive through Pharm4Me will have its information of the drug, the medical and common name for it, the description of it and what it helps/relieve. At Pharm4Me, we believe it is a good practice to know what your body ingests and know the effects of medicines as well.</p>
 
+<h5>Interested to know more? Read about us!</h5>
 
-        @if (User.IsInRole("Patient"))
+@if (User.IsInRole("Patient"))
     {
-        @Html.ActionLink("View Prescriptions", "PatientsIndex", "Prescripts", null, new { @class = "btn btn-info" })
+@Html.ActionLink("View Prescriptions", "PatientsIndex", "Prescripts", null, new { @class = "btn btn-info" })
     }
     else if (User.IsInRole("Doctor"))
     {
-        <h4>@ViewBag.Message2</h4>
-        <div>
-            @Html.ActionLink("Patients", "Index", "Patients", null, new { @class = "btn btn-info" })
-        </div>
-        <div>
-            @Html.ActionLink("Prescriptions", "Index", "Prescripts", null, new { @class = "btn btn-info" })
-        </div>
+<h4>@ViewBag.Message2</h4>
+<div>
+    @Html.ActionLink("Patients", "Index", "Patients", null, new { @class = "btn btn-info" })
+</div>
+<div>
+    @Html.ActionLink("Prescriptions", "Index", "Prescripts", null, new { @class = "btn btn-info" })
+</div>
     }
     else if (User.IsInRole("Manager"))
     {
-        <h4>@ViewBag.Message2</h4>
-        <div>
-            @Html.ActionLink("Customers", "PharmacyIndex", "Patients", null, new { @class = "btn btn-info" })
-        </div>
-        <div>
-            @Html.ActionLink("Inventory", "Index", "Inventories", null, new { @class = "btn btn-info" })
-        </div>
-        <div>
-            @Html.ActionLink("Requests", "PharmacyIndex", "POrders", null, new { @class = "btn btn-info" })
-        </div>
-        <div>
-            @Html.ActionLink("Orders", "PharmacyIndex", "POrderFills", null, new { @class = "btn btn-info" })
-        </div>
+<h4>@ViewBag.Message2</h4>
+<div>
+    @Html.ActionLink("Customers", "PharmacyIndex", "Patients", null, new { @class = "btn btn-info" })
+</div>
+<div>
+    @Html.ActionLink("Inventory", "Index", "Inventories", null, new { @class = "btn btn-info" })
+</div>
+<div>
+    @Html.ActionLink("Requests", "PharmacyIndex", "POrders", null, new { @class = "btn btn-info" })
+</div>
+<div>
+    @Html.ActionLink("Orders", "PharmacyIndex", "POrderFills", null, new { @class = "btn btn-info" })
+</div>
     }
 
 

@@ -31,12 +31,15 @@ textarea {
 /* Ovverride bootstrap.css navbar class*/
 .navbar {
     background-color: #006DB0;
+    color: #F9FFFF;
 }
-
-    .navbar a {
-        color: #F9FFFF;
-    }
-
         .navbar a:hover {
             color: #85C33E;
         }
+
+.navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: #fff;
+}
+.navbar-inverse .navbar-link {
+    color: #F9FFFF;
+}
