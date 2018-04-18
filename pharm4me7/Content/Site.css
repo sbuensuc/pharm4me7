@@ -46,8 +46,8 @@ div img {
     (because there's like 10980239809234 .navbar properties and variants) 
     but it's not changing the link color rip... mvc y u so complicated for*/
 .navbar-right li a {
-    color: #F9FFFF;
+    color: white !important;
 }
         .navbar a:hover {
-            color: #85C33E;
+            color: #85C33E !important;
         }
