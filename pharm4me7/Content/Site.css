@@ -1,8 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    background-color: #F0F8FF;
-    background-image: url('..\Assets\images\bg.jpg');
+    background-image: url('~\Assets\images\bg.jpg');
+    /*background-color: #F0F8FF;*/
 }
 
 /* Set padding to keep content from hitting the edges */
