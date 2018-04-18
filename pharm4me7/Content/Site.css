@@ -33,3 +33,9 @@ textarea {
 .navbar {
     background-color: #006DB0;
 }
+    .navbar li {
+        color: #F9FFFF;
+    }
+        .navbar li:hover {
+            color: #85C33E;
+        }
