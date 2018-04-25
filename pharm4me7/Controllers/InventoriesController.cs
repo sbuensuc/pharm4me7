@@ -21,8 +21,11 @@ namespace pharm4me7.Controllers
         // GET: Inventories
         public ActionResult Index()
         {
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+            int currentLocation = currentUser.Pharmacist.PharmacyId ?? default(int);
 
-            var inventories = db.Inventories.Include(i => i.item).Include(i => i.Pharmacy);
+            var inventories = db.Inventories.Include(i => i.item).Include(i => i.Pharmacy).Where(po => po.PharmacyId == currentLocation);
             return View(inventories.ToList());
 
             
@@ -99,6 +102,11 @@ namespace pharm4me7.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "InventoryId,ItemId,Amount,DispType,Brand,PharmacyId")] Inventory inventory)
         {
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+
+            inventory.PharmacyId = currentUser.Pharmacist.PharmacyId;
+
             if (ModelState.IsValid)
             {
                 db.Entry(inventory).State = EntityState.Modified;

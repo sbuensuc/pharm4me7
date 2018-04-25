@@ -234,8 +234,18 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\images\1.jpg" />
+    <Content Include="Assets\images\2.jpg" />
+    <Content Include="Assets\images\about.jpg" />
     <Content Include="Assets\images\bg.jpg" />
+    <Content Include="Assets\images\checkmark.png" />
+    <Content Include="Assets\images\consult.jpg" />
+    <Content Include="Assets\images\contact.jpg" />
+    <Content Include="Assets\images\index.jpg" />
     <Content Include="Assets\images\logo.png" />
+    <Content Include="Assets\images\order.png" />
+    <Content Include="Assets\images\pickup.jpg" />
+    <Content Include="Assets\images\register.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -287,7 +297,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
