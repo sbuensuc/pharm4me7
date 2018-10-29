@@ -4,6 +4,21 @@
     ViewBag.Title = "Create Patient";
 }
 
+@{
+    List<SelectListItem> genderList = new List<SelectListItem>();
+    genderList.Add(new SelectListItem
+    {
+        Text = "Male",
+        Value = "Male"
+    });
+    genderList.Add(new SelectListItem
+    {
+        Text = "Female",
+        Value = "Female",
+    });
+
+}
+
 <h2>Create Patient</h2>
 
 
@@ -66,7 +81,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Gender, genderList, null, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
             </div>
         </div>
