@@ -58,6 +58,7 @@
         @Html.LabelFor(m => m.pin, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.pin, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.pin)
         </div>
     </div>
 

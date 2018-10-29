@@ -25,6 +25,7 @@ namespace pharm4me7.Models
         public string LastName { get; set; }
 
         [StringLength(256)]
+        [RegularExpression(@"\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*", ErrorMessage = "Not a valid email")]
         public string Email { get; set; }
 
         public int? ClinicId { get; set; }

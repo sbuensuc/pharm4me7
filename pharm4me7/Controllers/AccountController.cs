@@ -175,6 +175,7 @@ namespace pharm4me7.Controllers
                             return RedirectToAction("Index", "Home");
                         }
                         AddErrors(result);
+                        
                         return View(model);
                     }
                 }
