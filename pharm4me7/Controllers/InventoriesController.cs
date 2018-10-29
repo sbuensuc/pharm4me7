@@ -19,13 +19,52 @@ namespace pharm4me7.Controllers
 
 
         // GET: Inventories
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var currentUser = manager.FindById(User.Identity.GetUserId());
             int currentLocation = currentUser.Pharmacist.PharmacyId ?? default(int);
 
+            ViewBag.ItemSortParm = String.IsNullOrEmpty(sortOrder) ? "item" : "";
+            ViewBag.AmountParm = sortOrder == "Amount" ? "amount_desc" : "Amount";
+            ViewBag.UnitParm = sortOrder == "Unit" ? "unit_desc" : "Unit";
+            ViewBag.Brand = sortOrder == "Brand" ? "brand_desc" : "Brand";
+
             var inventories = db.Inventories.Include(i => i.item).Include(i => i.Pharmacy).Where(po => po.PharmacyId == currentLocation);
+
+
+
+            switch (sortOrder)
+            {
+
+
+                case "item":
+                    inventories = inventories.OrderByDescending(p => p.item.Name);
+                    break;
+
+                case "amount_desc":
+                    inventories = inventories.OrderByDescending(p => p.Amount).ThenByDescending(p => p.item.Name);
+                    break;
+                case "Amount":
+                    inventories = inventories.OrderBy(p => p.Amount).ThenBy(p => p.item.Name);
+                    break;
+                case "unit_desc":
+                    inventories = inventories.OrderByDescending(p => p.DispType).ThenByDescending(p => p.item.Name);
+                    break;
+                case "Unit":
+                    inventories = inventories.OrderBy(p => p.DispType).ThenBy(p => p.item.Name);
+                    break;
+                case "brand_desc":
+                    inventories = inventories.OrderByDescending(p => p.Brand).ThenByDescending(p => p.item.Name);
+                    break;
+                case "Brand":
+                    inventories = inventories.OrderBy(p => p.Brand).ThenBy(p => p.item.Name);
+                    break;
+                default:
+                    inventories = inventories.OrderBy(p => p.item.Name);
+                    break;
+            }
+
             return View(inventories.ToList());
 
             

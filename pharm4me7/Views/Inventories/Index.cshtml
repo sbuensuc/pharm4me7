@@ -12,16 +12,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.item.Name)
+            @Html.ActionLink("Item", "Index", new { sortOrder = ViewBag.ItemSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Amount)
+            @Html.ActionLink("Amount", "Index", new { sortOrder = ViewBag.AmountSortParm })
         </th>
         <th>
-            Unit Measure
+            @Html.ActionLink("Unit Type", "Index", new { sortOrder = ViewBag.UnitSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Brand)
+            @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })
         </th>
         <th></th>
     </tr>

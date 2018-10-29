@@ -15,10 +15,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.ActionLink("First Name", "PharmacyIndex", new { sortOrder = ViewBag.FnameParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.ActionLink("Last Name", "PharmacyIndex", new { sortOrder = ViewBag.LnameParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Healthcard)
@@ -27,7 +27,7 @@
                 @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.City)
+                @Html.ActionLink("City", "PharmacyIndex", new { sortOrder = ViewBag.CityParm })
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Phone)
@@ -36,7 +36,7 @@
             @Html.DisplayNameFor(model => model.Gender)
         </th>
         <th>
-            DOB
+            @Html.ActionLink("DOB", "PharmacyIndex", new { sortOrder = ViewBag.DateSortParm })
         </th>
         <th></th>
     </tr>

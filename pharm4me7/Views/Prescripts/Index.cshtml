@@ -15,34 +15,34 @@
 <table class="table">
     <tr>
         <th>
-            Item
+            @Html.ActionLink("Item", "Index", new { sortOrder = ViewBag.ItemSortParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Patient.FirstName)
+           @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FnameParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Patient.LastName)
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LnameParm })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm })
         </th>
         <th>
-            Amount
+            @Html.ActionLink("Amount", "Index", new { sortOrder = ViewBag.AmountSortParm })
         </th>
         <th>
-            Unit Type
+            @Html.ActionLink("Unit Type", "Index", new { sortOrder = ViewBag.UnitSortParm })
         </th>
         <th>
             Details
         </th>
         <th>
-            Brand
+           @Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Refill)
         </th>
         <th>
-            Prescribed By
+           @Html.ActionLink("Prescribed By", "Index", new { sortOrder = ViewBag.DocSortParm })
         </th>
         <th></th>
     </tr>
