@@ -42,11 +42,8 @@ div img {
     width:100%;
 }
 
-/*Err... idk what css property is handling this in the bootstrap.css file 
-    (because there's like 10980239809234 .navbar properties and variants) 
-    but it's not changing the link color rip... mvc y u so complicated for*/
-.navbar-right li a {
-    color: white !important;
+.navbar a {
+    color: #fff !important;
 }
         .navbar a:hover {
             color: #85C33E !important;
