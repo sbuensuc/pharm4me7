@@ -211,6 +211,10 @@
     <Compile Include="Migrations\201804110440383_InitialMigrations1.Designer.cs">
       <DependentUpon>201804110440383_InitialMigrations1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810291055580_EditPhoneDataType.cs" />
+    <Compile Include="Migrations\201810291055580_EditPhoneDataType.Designer.cs">
+      <DependentUpon>201810291055580_EditPhoneDataType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Clinic.cs" />
@@ -432,6 +436,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804110440383_InitialMigrations1.resx">
       <DependentUpon>201804110440383_InitialMigrations1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810291055580_EditPhoneDataType.resx">
+      <DependentUpon>201810291055580_EditPhoneDataType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
