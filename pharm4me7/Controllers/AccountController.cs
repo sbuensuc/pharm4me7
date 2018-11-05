@@ -12,6 +12,8 @@ using pharm4me7.Models;
 
 namespace pharm4me7.Controllers
 {
+    //test
+
     [Authorize]
     public class AccountController : Controller
     {

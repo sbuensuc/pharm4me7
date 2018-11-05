@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace pharm4me7.Controllers
 {
+    //test
     public class PharmacistsController : Controller
     {
         private Pharm4MeContext db = new Pharm4MeContext();
