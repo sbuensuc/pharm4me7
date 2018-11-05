@@ -14,6 +14,7 @@ namespace pharm4me7.Controllers
 {
     public class PatientsController : Controller
     {
+        //test
         private OrderContext db = new OrderContext();
         // GET: Patients
         public ActionResult Index(string sortOrder)
