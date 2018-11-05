@@ -36,45 +36,44 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+@foreach (var item in Model) {
+    if (item.Accept == false && item.Deny == false)
     {
-        if (item.Accept == false && item.Deny == false)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateOrdered)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prescript.Sub)
-                </td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOrdered)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescript.Sub)
+        </td>
+        
 
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescript.Refill)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Prescript.Doctor.Clinic.Name)
+        </td>
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prescript.Refill)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Note)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prescript.Doctor.Clinic.Name)
-                </td>
-
-                <td>
-                    <div class="btn-group">
-                        @Html.ActionLink("Info", "Details", "Prescripts", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
-                        @Html.ActionLink("Accept", "PharmacyIndex", new { id = item.POrderId }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Deny", "Edit", new { id = item.POrderId }, new { @class = "btn btn-danger" })
-                    </div>
-                </td>
-            </tr>
-        }
+        <td>
+            <div class="btn-group">
+                @Html.ActionLink("Info", "Details", "Prescripts", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Accept", "PharmacyIndex", new { id = item.POrderId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Deny", "Edit", new { id = item.POrderId }, new { @class = "btn btn-danger" })
+            </div>
+        </td>
+    </tr>
     }
+}
 
 </table>
 
@@ -193,7 +192,7 @@
         }
     }
 </table>
-
+  
 <h3>Denied</h3>
 <table class="table">
     <tr>
@@ -249,49 +248,9 @@
             </tr>
         }
     }
-</table>
-
-<script>
-function sortTable(n) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("myTable2");
-  switching = true;
-  dir = "asc";
-  while (switching) {
-	switching = false;
-	rows = table.rows;
-	for (i = 1; i < (rows.length - 1); i++) {
-  	 shouldSwitch = false;
-  	x = rows[i].getElementsByTagName("TD")[n];
-  	 y = rows[i + 1].getElementsByTagName("TD")[n];
-  	if (dir == "asc") {
-    	if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-      	 shouldSwitch = true;
-      	 break;
-    	}
-  	 } else if (dir == "desc") {
-    	if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-      	 shouldSwitch = true;
-      	 break;
-    	}
-  	 }
-	}
-	if (shouldSwitch) {
-  	 rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-  	 switching = true;
-  	switchcount ++;
-	} else {
-  	 if (switchcount == 0 && dir == "asc") {
-    	 dir = "desc";
-    	switching = true;
-  	 }
-	}
-  }
-}
-</script>
-
-
-
+</table>  
+        
+  
 
 
 
