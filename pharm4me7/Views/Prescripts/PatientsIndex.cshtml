@@ -9,8 +9,36 @@
 
 <h2>Orders</h2>
 <h2>Ready for Pickup</h2>
-<table class="table">
-
+<table id="ordersTable" class="table">
+    <tr>
+        <th onclick="sortTable(0,1)">
+            ID
+        </th>
+        <th onclick="sortTable(1,1)">
+            Date Ordered
+        </th>
+        <th onclick="sortTable(2,1)">
+            Pharmacy
+        </th>
+        <th onclick="sortTable(3,1)">
+            Address
+        </th>
+        <th onclick="sortTable(4,1)">
+            Item
+        </th>
+        <th onclick="sortTable(5,1)">
+            Amount
+        </th>
+        <th onclick="sortTable(6,1)">
+            Type
+        </th>
+        <th onclick="sortTable(7,1)">
+            Status
+        </th>
+        <th onclick="sortTable(8,1)">
+            Reason
+        </th>
+    </tr>
 
     @foreach (var item in Model)
     {
@@ -79,34 +107,37 @@
 <h2>Prescriptions</h2>
 
 
-<table class="table">
+<table id="prescriptsTable" class="table">
     <tr>
-        <th>
+        <th onclick="sortTable(0,2)">
+            ID
+        </th>
+        <th onclick="sortTable(1,2)">
             @Html.DisplayNameFor(model => model.Date)
         </th>
-        <th>
+        <th onclick="sortTable(2,2)">
             Item
         </th>
-        <th>
+        <th onclick="sortTable(3,2)">
             Brand
         </th>
-        <th>
+        <th onclick="sortTable(4, 2)">
             Amount
         </th>
-        <th>
+        <th onclick="sortTable(5, 2)">
             Unit Type
         </th>
-        <th>
+        <th onclick="sortTable(6, 2)">
             Details
         </th>
 
-        <th>
+        <th onclick="sortTable(7, 2)">
             @Html.DisplayNameFor(model => model.Refill)
         </th>
-        <th>
+        <th onclick="sortTable(8, 2)">
             Prescribed By
         </th>
-        <th>Status</th>
+        <th onclick="sortTable(9, 2)">Status</th>
     </tr>
 
     @foreach (var item in Model)
@@ -159,9 +190,13 @@
 </table>
 
 <script>
-function sortTable(n) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("myTable2");
+function sortTable(n,t) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    if (t==1) {
+        table = document.getElementById("ordersTable");
+    } else if (t==2) {
+        table = document.getElementById("prescriptsTable");
+    }
   switching = true;
   dir = "asc";
   while (switching) {

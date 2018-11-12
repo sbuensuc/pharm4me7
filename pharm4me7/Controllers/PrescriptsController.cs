@@ -31,58 +31,58 @@ namespace pharm4me7.Controllers
 
             var prescripts = db.Prescripts.Include(p => p.item).Include(p => p.Patient);
 
-            switch (sortOrder)
-            {
-                case "date":
-                    prescripts = prescripts.OrderBy(p => p.Date);
-                    break;
-                case "fName_desc":
-                    prescripts = prescripts.OrderByDescending(p => p.Patient.FirstName).ThenByDescending(p => p.Patient.LastName);
-                    break;
-                case "FirstName":
-                    prescripts = prescripts.OrderBy(p => p.Patient.FirstName).ThenBy(p => p.Patient.LastName);
-                    break;
-                case "lName_desc":
-                    prescripts = prescripts.OrderByDescending(p => p.Patient.LastName).ThenByDescending(p => p.Patient.FirstName);
-                    break;
-                case "LastName":
-                    prescripts = prescripts.OrderBy(p => p.Patient.LastName).ThenBy(p => p.Patient.FirstName);
-                    break;
-                case "item_desc":
-                    prescripts = prescripts.OrderByDescending(p => p.item).ThenByDescending(p => p.Date);
-                    break;
-                case "Item":
-                    prescripts = prescripts.OrderBy(p => p.item).ThenBy(p => p.Date);
-                    break;
-                case "amount_desc":
-                    prescripts = prescripts.OrderByDescending(p => p.Disp).ThenByDescending(p => p.Date);
-                    break;
-                case "Amount":
-                    prescripts = prescripts.OrderBy(p => p.Disp).ThenBy(p => p.Date);
-                    break;
-                case "unit_desc":
-                    prescripts = prescripts.OrderByDescending(p => p.DispType).ThenByDescending(p => p.Date);
-                    break;
-                case "Unit":
-                    prescripts = prescripts.OrderBy(p => p.DispType).ThenBy(p => p.Date);
-                    break;
-                case "brand_desc":
-                    prescripts = prescripts.OrderByDescending(p => p.item).ThenByDescending(p => p.Date);
-                    break;
-                case "Brand":
-                    prescripts = prescripts.OrderBy(p => p.item).ThenBy(p => p.Date);
-                    break;
-                case "doctor_desc":
-                    prescripts = prescripts.OrderByDescending(p => p.Doctor.LastName).ThenByDescending(p => p.Date);
-                    break;
-                case "Doctor":
-                    prescripts = prescripts.OrderBy(p => p.item).ThenBy(p => p.Date);
-                    break;
+            //switch (sortOrder)
+            //{
+            //    case "date":
+            //        prescripts = prescripts.OrderBy(p => p.Date);
+            //        break;
+            //    case "fName_desc":
+            //        prescripts = prescripts.OrderByDescending(p => p.Patient.FirstName).ThenByDescending(p => p.Patient.LastName);
+            //        break;
+            //    case "FirstName":
+            //        prescripts = prescripts.OrderBy(p => p.Patient.FirstName).ThenBy(p => p.Patient.LastName);
+            //        break;
+            //    case "lName_desc":
+            //        prescripts = prescripts.OrderByDescending(p => p.Patient.LastName).ThenByDescending(p => p.Patient.FirstName);
+            //        break;
+            //    case "LastName":
+            //        prescripts = prescripts.OrderBy(p => p.Patient.LastName).ThenBy(p => p.Patient.FirstName);
+            //        break;
+            //    case "item_desc":
+            //        prescripts = prescripts.OrderByDescending(p => p.item).ThenByDescending(p => p.Date);
+            //        break;
+            //    case "Item":
+            //        prescripts = prescripts.OrderBy(p => p.item).ThenBy(p => p.Date);
+            //        break;
+            //    case "amount_desc":
+            //        prescripts = prescripts.OrderByDescending(p => p.Disp).ThenByDescending(p => p.Date);
+            //        break;
+            //    case "Amount":
+            //        prescripts = prescripts.OrderBy(p => p.Disp).ThenBy(p => p.Date);
+            //        break;
+            //    case "unit_desc":
+            //        prescripts = prescripts.OrderByDescending(p => p.DispType).ThenByDescending(p => p.Date);
+            //        break;
+            //    case "Unit":
+            //        prescripts = prescripts.OrderBy(p => p.DispType).ThenBy(p => p.Date);
+            //        break;
+            //    case "brand_desc":
+            //        prescripts = prescripts.OrderByDescending(p => p.item).ThenByDescending(p => p.Date);
+            //        break;
+            //    case "Brand":
+            //        prescripts = prescripts.OrderBy(p => p.item).ThenBy(p => p.Date);
+            //        break;
+            //    case "doctor_desc":
+            //        prescripts = prescripts.OrderByDescending(p => p.Doctor.LastName).ThenByDescending(p => p.Date);
+            //        break;
+            //    case "Doctor":
+            //        prescripts = prescripts.OrderBy(p => p.item).ThenBy(p => p.Date);
+            //        break;
 
-                default:
-                    prescripts = prescripts.OrderByDescending(p => p.Date);
-                    break;
-            }
+            //    default:
+            //        prescripts = prescripts.OrderByDescending(p => p.Date);
+            //        break;
+            //}
             return View(prescripts.ToList());
         }
 

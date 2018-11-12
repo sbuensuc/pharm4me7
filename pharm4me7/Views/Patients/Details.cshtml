@@ -94,31 +94,31 @@
 <p>
     @Html.ActionLink("Create New", "PrescriptCreate", new { id = Model.PatientId }, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table id="prescriptTable" class="table">
     <tr>
-        <th>
+        <th onclick="sortTable(0)">
             Item Name
         </th>
 
-        <th>
+        <th onclick="sortTable(1)">
             Date Created
         </th>
-        <th>
+        <th onclick="sortTable(2)">
             Amount
         </th>
-        <th>
+        <th onclick="sortTable(3)">
             Measurement
         </th>
-        <th>
+        <th onclick="sortTable(4)">
             Details
         </th>
-        <th>
+        <th onclick="sortTable(5)">
             Brand
         </th>
-        <th>
+        <th onclick="sortTable(6)">
             Refill
         </th>
-        <th>
+        <th onclick="sortTable(7)">
             Prescribed By
         </th>
         <th></th>
@@ -163,7 +163,7 @@
 <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.getElementById("myTable2");
+  table = document.getElementById("prescriptTable");
   switching = true;
   dir = "asc";
   while (switching) {

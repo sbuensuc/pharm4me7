@@ -29,33 +29,33 @@ namespace pharm4me7.Controllers
 
 
             var patients = db.Patients.Include(p => p.Clinic).Where(p => p.ClinicId == currentUser.Doctor.ClinicId);
-            switch (sortOrder)
-            {
-                case "patientid_desc":
-                    patients = patients.OrderByDescending(p => p.PatientId);
-                    break;
-                case "fName_desc":
-                    patients = patients.OrderByDescending(p => p.FirstName).ThenByDescending(p => p.LastName);
-                    break;
-                case "FirstName":
-                    patients = patients.OrderBy(p => p.FirstName).ThenBy(p => p.LastName);
-                    break;
-                case "lName_desc":
-                    patients = patients.OrderByDescending(p => p.LastName).ThenByDescending(p => p.FirstName);
-                    break;
-                case "LastName":
-                    patients = patients.OrderBy(p => p.LastName).ThenBy(p => p.FirstName);
-                    break;
-                case "DOB_desc":
-                    patients = patients.OrderByDescending(p => p.Birth).ThenByDescending(p => p.LastName);
-                    break;
-                case "DOB":
-                    patients = patients.OrderBy(p => p.Birth).ThenBy(p => p.LastName);
-                    break;
-                default:
-                    patients = patients.OrderBy(p => p.PatientId);
-                    break;
-            }
+            //switch (sortOrder)
+            //{
+            //    case "patientid_desc":
+            //        patients = patients.OrderByDescending(p => p.PatientId);
+            //        break;
+            //    case "fName_desc":
+            //        patients = patients.OrderByDescending(p => p.FirstName).ThenByDescending(p => p.LastName);
+            //        break;
+            //    case "FirstName":
+            //        patients = patients.OrderBy(p => p.FirstName).ThenBy(p => p.LastName);
+            //        break;
+            //    case "lName_desc":
+            //        patients = patients.OrderByDescending(p => p.LastName).ThenByDescending(p => p.FirstName);
+            //        break;
+            //    case "LastName":
+            //        patients = patients.OrderBy(p => p.LastName).ThenBy(p => p.FirstName);
+            //        break;
+            //    case "DOB_desc":
+            //        patients = patients.OrderByDescending(p => p.Birth).ThenByDescending(p => p.LastName);
+            //        break;
+            //    case "DOB":
+            //        patients = patients.OrderBy(p => p.Birth).ThenBy(p => p.LastName);
+            //        break;
+            //    default:
+            //        patients = patients.OrderBy(p => p.PatientId);
+            //        break;
+            //}
             return View(patients.ToList());
         }
 
@@ -113,7 +113,8 @@ namespace pharm4me7.Controllers
             }
 
             //var patients = db.Patients.Include(p => p.Clinic).Where(p => p.Prescripts.Where(pr => pr.POrders.Where(po => po.PharmacyId == currentLocation) ) );
-            return View(finalpatients);
+            //return View(finalpatients);
+            return View(patients.Distinct().ToList());
         }
 
         // GET: Patients/Details/5
