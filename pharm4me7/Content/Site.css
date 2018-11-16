@@ -88,8 +88,6 @@ div img {
         border-bottom: 1px solid #808080;
         position: relative;
         padding-left: 50%;
-        white-space: normal;
-        text-align: left;
     }
 
         td:before {
@@ -99,6 +97,9 @@ div img {
             width: 45%;
             padding-right: 10px;
             white-space: nowrap;
+        }
+
+        td:before {
             content: attr(data-th);
         }
-}
+    }
