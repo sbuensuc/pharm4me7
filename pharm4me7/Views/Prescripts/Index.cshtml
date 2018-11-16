@@ -57,37 +57,37 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td data-th="Item">
             @Html.DisplayFor(modelItem => item.item.Name)
         </td>
-        <td>
+        <td data-th="First Name">
             @Html.DisplayFor(modelItem => item.Patient.FirstName)
         </td>
-        <td>
+        <td data-th="Last Name">
             @Html.DisplayFor(modelItem => item.Patient.LastName)
         </td>
-        <td>
+        <td data-th="Date">
             @Html.DisplayFor(modelItem => item.Date)
         </td>
-        <td>
+        <td data-th="Amount">
             @Html.DisplayFor(modelItem => item.Disp)
         </td>
-        <td>
+        <td data-th="Unit Type">
             @Html.DisplayFor(modelItem => item.DispType)
         </td>
-        <td>
+        <td data-th="Details">
             @Html.DisplayFor(modelItem => item.Sig)
         </td>
-        <td>
+        <td data-th="Brand">
             @Html.DisplayFor(modelItem => item.Sub)
         </td>
-        <td>
+        <td data-th="Refill">
             @Html.DisplayFor(modelItem => item.Refill)
         </td>
-        <td>
+        <td data-th="Prescribed By">
             @Html.DisplayFor(modelItem => item.Doctor.LastName), @Html.DisplayFor(modelItem => item.Doctor.FirstName)
         </td>
-        <td>
+        <td data-th="Action">
             <div class="btn-group">
                 @Html.ActionLink("Details", "Details", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
                 @*@if (User.IsInRole("Admin") || User.IsInRole("Doctor"))

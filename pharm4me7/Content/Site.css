@@ -69,7 +69,7 @@ div img {
         display: block;
     }
 
-        thead tr {
+        th tr {
             position: absolute;
             top: -9999px;
             left: -9999px;
