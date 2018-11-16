@@ -182,12 +182,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClinicsController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoriesController.cs" />
     <Compile Include="Controllers\itemsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
+    <Compile Include="Controllers\PharmaciesController.cs" />
     <Compile Include="Controllers\PharmacistsController.cs" />
     <Compile Include="Controllers\POrderFillsController.cs" />
     <Compile Include="Controllers\POrdersController.cs" />
@@ -210,6 +212,10 @@
     <Compile Include="Migrations\201804110440383_InitialMigrations1.cs" />
     <Compile Include="Migrations\201804110440383_InitialMigrations1.Designer.cs">
       <DependentUpon>201804110440383_InitialMigrations1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810291055580_EditPhoneDataType.cs" />
+    <Compile Include="Migrations\201810291055580_EditPhoneDataType.Designer.cs">
+      <DependentUpon>201810291055580_EditPhoneDataType.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -412,6 +418,16 @@
     <Content Include="Views\Pharmacists\Create.cshtml" />
     <Content Include="Views\Doctors\Index.cshtml" />
     <Content Include="Views\Pharmacists\Index.cshtml" />
+    <Content Include="Views\Pharmacies\Create.cshtml" />
+    <Content Include="Views\Pharmacies\Delete.cshtml" />
+    <Content Include="Views\Pharmacies\Details.cshtml" />
+    <Content Include="Views\Pharmacies\Edit.cshtml" />
+    <Content Include="Views\Pharmacies\Index.cshtml" />
+    <Content Include="Views\Clinics\Create.cshtml" />
+    <Content Include="Views\Clinics\Delete.cshtml" />
+    <Content Include="Views\Clinics\Details.cshtml" />
+    <Content Include="Views\Clinics\Edit.cshtml" />
+    <Content Include="Views\Clinics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -432,6 +448,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804110440383_InitialMigrations1.resx">
       <DependentUpon>201804110440383_InitialMigrations1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810291055580_EditPhoneDataType.resx">
+      <DependentUpon>201810291055580_EditPhoneDataType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

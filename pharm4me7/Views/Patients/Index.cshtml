@@ -6,27 +6,32 @@
 
 <h2>Patients</h2>
 
+@*test*@
+
 <p>
     @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
     {
         @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
     }
 </p>
-<table class="table">
+<table id="patientTable"class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PatientId)
+        <th onclick="sortTable(0)">
+            Patient ID
+            @*@Html.ActionLink("Patient ID", "Index", new { sortOrder = ViewBag.PatientIdSortParm })*@
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+        <th onclick="sortTable(1)">
+            First Name
+            @*@Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FnameParm })*@
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
+        <th onclick="sortTable(2)">
+            Last Name
+            @*@Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LnameParm })*@
         </th>
-        <th>
+        <th onclick="sortTable(3)">
             @Html.DisplayNameFor(model => model.Healthcard)
         </th>
-        @*<th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Address)
             </th>
             <th>
@@ -35,11 +40,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Phone)
             </th>*@
-        <th>
+        <th onclick="sortTable(4)">
             @Html.DisplayNameFor(model => model.Gender)
         </th>
-        <th>
+        <th onclick="sortTable(5)">
             DOB
+            @*@Html.ActionLink("DOB", "Index", new { sortOrder = ViewBag.DateSortParm })*@
         </th>
         <th></th>
     </tr>
@@ -90,3 +96,61 @@
                 }
 
 </table>
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("patientTable");
+  tr = table.getElementsByTagName("tr");
+
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("patientTable");
+    switching = true;
+    dir = "asc";
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1) ; i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
+</script>

@@ -3,157 +3,232 @@
 
 
 
-    @{
-        ViewBag.Title = "Prescriptions";
-    }
+@{
+    ViewBag.Title = "Prescriptions";
+}
 
-    <h2>Orders</h2>
-    <h2>Ready for Pickup</h2>
-    <table class="table">
-        
+<h2>Orders</h2>
+<h2>Ready for Pickup</h2>
+<table id="ordersTable" class="table">
+    <tr>
+        <th onclick="sortTable(0,1)">
+            ID
+        </th>
+        <th onclick="sortTable(1,1)">
+            Date Ordered
+        </th>
+        <th onclick="sortTable(2,1)">
+            Pharmacy
+        </th>
+        <th onclick="sortTable(3,1)">
+            Address
+        </th>
+        <th onclick="sortTable(4,1)">
+            Item
+        </th>
+        <th onclick="sortTable(5,1)">
+            Amount
+        </th>
+        <th onclick="sortTable(6,1)">
+            Type
+        </th>
+        <th onclick="sortTable(7,1)">
+            Status
+        </th>
+        <th onclick="sortTable(8,1)">
+            Reason
+        </th>
+    </tr>
 
-        @foreach (var item in Model)
-        {
-            var orderModel = item.POrders.OrderBy(a => a.Fill).ThenBy(a => a.Accept);
-            foreach (var i in orderModel)
-            {
-                    <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => i.PrescriptId)
-                    </td>
-                    <td>
-                        @if (i.DateOrdered.HasValue)
-                    {
-                    @i.DateOrdered.Value.ToString("MMM-dd-yyyy")
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => i.Pharmacy.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => i.Pharmacy.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => i.Prescript.item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => i.Prescript.Disp)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => i.Prescript.DispType)
-                    </td>
-
-
-                        <td>
-                            @if (i.Accept == false && i.Deny == false)
-                    {
-                                @: REQUEST PENDING
-                    }
-                    else if (i.Accept == true && i.Deny == false && i.Fill == false)
-                    {
-                                @: ORDER IN PROGRESS
-                    }
-                    else if (i.Accept == false && i.Deny == true)
-                    {
-                                @: ORDER CANCELLED
-                    }
-                    else if (i.Fill == true && i.Accept == true && i.Deny == false)
-                    {
-                                @: ORDER READY FOR PICK UP
-                    }
-                    else if (i.Fill == true && i.Accept == true && i.Deny == true)
-                    {
-                                @: ORDER RETRIEVED
-                    }
-
-                        </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => i.Note)
-                    </td>
-                </tr>
-            }
-        }
-    </table>
-
-
-    <h2>Prescriptions</h2>
-
-
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Date)
-            </th>
-            <th>
-                Item
-            </th>
-            <th>
-                Brand
-            </th>
-            <th>
-                Amount
-            </th>
-            <th>
-                Unit Type
-            </th>
-            <th>
-                Details
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.Refill)
-            </th>
-            <th>
-                Prescribed By
-            </th>
-            <th>Status</th>
-        </tr>
-
-        @foreach (var item in Model)
+    @foreach (var item in Model)
+    {
+        var orderModel = item.POrders.OrderBy(a => a.Fill).ThenBy(a => a.Accept);
+        foreach (var i in orderModel)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PrescriptId)
+                    @Html.DisplayFor(modelItem => i.PrescriptId)
                 </td>
                 <td>
-                    @if (item.Date.HasValue)
+                    @if (i.DateOrdered.HasValue)
                     {
-                        @item.Date.Value.ToString("MMM-dd-yyyy")
+                        @i.DateOrdered.Value.ToString("MMM-dd-yyyy")
                     }
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.item.Name)
+                    @Html.DisplayFor(modelItem => i.Pharmacy.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Sub)
+                    @Html.DisplayFor(modelItem => i.Pharmacy.Address)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Disp)
+                    @Html.DisplayFor(modelItem => i.Prescript.item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DispType)
+                    @Html.DisplayFor(modelItem => i.Prescript.Disp)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Sig)
+                    @Html.DisplayFor(modelItem => i.Prescript.DispType)
                 </td>
 
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.Refill)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Doctor.LastName), @Html.DisplayFor(modelItem => item.Doctor.FirstName)
-                </td>
-                <td>
-                    @if (item.Sent == false || item.Sent == null)
+                    @if (i.Accept == false && i.Deny == false)
                     {
-                        <text>@Html.ActionLink("Order", "PorderCreate", new { id = item.PrescriptId }, new { @class = "btn btn-primary" })</text>
+                        @: REQUEST PENDING
                     }
-                    @if (item.Sent == true)
+                    else if (i.Accept == true && i.Deny == false && i.Fill == false)
                     {
-                        @: Ordered
-            }
+                        @: ORDER IN PROGRESS
+                    }
+                    else if (i.Accept == false && i.Deny == true)
+                    {
+                        @: ORDER CANCELLED
+                    }
+                    else if (i.Fill == true && i.Accept == true && i.Deny == false)
+                    {
+                        @: ORDER READY FOR PICK UP
+                    }
+                    else if (i.Fill == true && i.Accept == true && i.Deny == true)
+                    {
+                        @: ORDER RETRIEVED
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => i.Note)
                 </td>
             </tr>
         }
+    }
+</table>
 
-    </table>
+
+<h2>Prescriptions</h2>
+
+
+<table id="prescriptsTable" class="table">
+    <tr>
+        <th onclick="sortTable(0,2)">
+            ID
+        </th>
+        <th onclick="sortTable(1,2)">
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th onclick="sortTable(2,2)">
+            Item
+        </th>
+        <th onclick="sortTable(3,2)">
+            Brand
+        </th>
+        <th onclick="sortTable(4, 2)">
+            Amount
+        </th>
+        <th onclick="sortTable(5, 2)">
+            Unit Type
+        </th>
+        <th onclick="sortTable(6, 2)">
+            Details
+        </th>
+
+        <th onclick="sortTable(7, 2)">
+            @Html.DisplayNameFor(model => model.Refill)
+        </th>
+        <th onclick="sortTable(8, 2)">
+            Prescribed By
+        </th>
+        <th onclick="sortTable(9, 2)">Status</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrescriptId)
+            </td>
+            <td>
+                @if (item.Date.HasValue)
+                {
+                    @item.Date.Value.ToString("MMM-dd-yyyy")
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sub)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DispType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sig)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Refill)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.LastName), @Html.DisplayFor(modelItem => item.Doctor.FirstName)
+            </td>
+            <td>
+                @if (item.Sent == false || item.Sent == null)
+                {
+                    <text>@Html.ActionLink("Order", "PorderCreate", new { id = item.PrescriptId }, new { @class = "btn btn-primary" })</text>
+                }
+                @if (item.Sent == true)
+                {
+                    @: Ordered
+                }
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+function sortTable(n,t) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    if (t==1) {
+        table = document.getElementById("ordersTable");
+    } else if (t==2) {
+        table = document.getElementById("prescriptsTable");
+    }
+  switching = true;
+  dir = "asc";
+  while (switching) {
+	switching = false;
+	rows = table.rows;
+	for (i = 1; i < (rows.length - 1); i++) {
+  	 shouldSwitch = false;
+  	x = rows[i].getElementsByTagName("TD")[n];
+  	 y = rows[i + 1].getElementsByTagName("TD")[n];
+  	if (dir == "asc") {
+    	if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+      	 shouldSwitch = true;
+      	 break;
+    	}
+  	 } else if (dir == "desc") {
+    	if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+      	 shouldSwitch = true;
+      	 break;
+    	}
+  	 }
+	}
+	if (shouldSwitch) {
+  	 rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+  	 switching = true;
+  	switchcount ++;
+	} else {
+  	 if (switchcount == 0 && dir == "asc") {
+    	 dir = "desc";
+    	switching = true;
+  	 }
+	}
+  }
+}
+</script>
+

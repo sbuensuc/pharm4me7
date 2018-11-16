@@ -32,7 +32,8 @@ namespace pharm4me7.Models
         [StringLength(50)]
         public string City { get; set; }
 
-        [StringLength(50)]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^(\+\s?)?((?<!\+.*)\(\+?\d+([\s\-\.]?\d+)?\)|\d+)([\s\-\.]?(\(\d+([\s\-\.]?\d+)?\)|\d+))*(\s?(x|ext\.?)\s?\d+)?$", ErrorMessage = "Not a valid phone number")]
         public string Phone { get; set; }
 
         [StringLength(20)]

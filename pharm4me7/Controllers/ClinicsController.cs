@@ -7,123 +7,110 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using pharm4me7.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace pharm4me7.Controllers
 {
-    //test
-    public class DoctorsController : Controller
+    public class ClinicsController : Controller
     {
         private Pharm4MeContext db = new Pharm4MeContext();
 
-        // GET: Doctors
+        // GET: Clinics
         public ActionResult Index()
         {
-            var doctors = db.Doctors.Include(d => d.Clinic);
-            return View(doctors.ToList());
+            return View(db.Clinics.ToList());
         }
 
-        // GET: Doctors/Details/5
+        // GET: Clinics/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Doctor doctor = db.Doctors.Find(id);
-            if (doctor == null)
+            Clinic clinic = db.Clinics.Find(id);
+            if (clinic == null)
             {
                 return HttpNotFound();
             }
-            return View(doctor);
+            return View(clinic);
         }
 
-        // GET: Doctors/Create
+        // GET: Clinics/Create
         public ActionResult Create()
         {
-            ViewBag.ClinicId = new SelectList(db.Clinics, "ClinicId", "Name");
             return View();
         }
 
-        // POST: Doctors/Create
+        // POST: Clinics/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "DoctorId,FirstName,LastName,Email,ClinicId")] Doctor doctor)
+        public ActionResult Create([Bind(Include = "ClinicId,Name,Address,City,Phone")] Clinic clinic)
         {
-            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-            var currentUser = manager.FindById(User.Identity.GetUserId());
-
-            doctor.ClinicId = currentUser.Doctor.ClinicId;
-
             if (ModelState.IsValid)
             {
-                db.Doctors.Add(doctor);
+                db.Clinics.Add(clinic);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ClinicId = new SelectList(db.Clinics, "ClinicId", "Name", doctor.ClinicId);
-            return View(doctor);
+            return View(clinic);
         }
 
-        // GET: Doctors/Edit/5
+        // GET: Clinics/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Doctor doctor = db.Doctors.Find(id);
-            if (doctor == null)
+            Clinic clinic = db.Clinics.Find(id);
+            if (clinic == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ClinicId = new SelectList(db.Clinics, "ClinicId", "Name", doctor.ClinicId);
-            return View(doctor);
+            return View(clinic);
         }
 
-        // POST: Doctors/Edit/5
+        // POST: Clinics/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "DoctorId,FirstName,LastName,Email,ClinicId")] Doctor doctor)
+        public ActionResult Edit([Bind(Include = "ClinicId,Name,Address,City,Phone")] Clinic clinic)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(doctor).State = EntityState.Modified;
+                db.Entry(clinic).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ClinicId = new SelectList(db.Clinics, "ClinicId", "Name", doctor.ClinicId);
-            return View(doctor);
+            return View(clinic);
         }
 
-        // GET: Doctors/Delete/5
+        // GET: Clinics/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Doctor doctor = db.Doctors.Find(id);
-            if (doctor == null)
+            Clinic clinic = db.Clinics.Find(id);
+            if (clinic == null)
             {
                 return HttpNotFound();
             }
-            return View(doctor);
+            return View(clinic);
         }
 
-        // POST: Doctors/Delete/5
+        // POST: Clinics/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Doctor doctor = db.Doctors.Find(id);
-            db.Doctors.Remove(doctor);
+            Clinic clinic = db.Clinics.Find(id);
+            db.Clinics.Remove(clinic);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -14,20 +14,52 @@ namespace pharm4me7.Controllers
 {
     public class PatientsController : Controller
     {
+        //test
         private OrderContext db = new OrderContext();
         // GET: Patients
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
             var currentUser = manager.FindById(User.Identity.GetUserId());
+            ViewBag.PatientIdSortParm = String.IsNullOrEmpty(sortOrder) ? "patientid_desc" : "";
+            ViewBag.FnameParm = sortOrder == "FirstName" ? "fName_desc" : "FirstName";
+            ViewBag.LnameParm = sortOrder == "LastName" ? "lName_desc" : "LastName";
+            ViewBag.DateSortParm = sortOrder == "DOB" ? "DOB_desc" : "DOB";
 
-            
+
             var patients = db.Patients.Include(p => p.Clinic).Where(p => p.ClinicId == currentUser.Doctor.ClinicId);
+            //switch (sortOrder)
+            //{
+            //    case "patientid_desc":
+            //        patients = patients.OrderByDescending(p => p.PatientId);
+            //        break;
+            //    case "fName_desc":
+            //        patients = patients.OrderByDescending(p => p.FirstName).ThenByDescending(p => p.LastName);
+            //        break;
+            //    case "FirstName":
+            //        patients = patients.OrderBy(p => p.FirstName).ThenBy(p => p.LastName);
+            //        break;
+            //    case "lName_desc":
+            //        patients = patients.OrderByDescending(p => p.LastName).ThenByDescending(p => p.FirstName);
+            //        break;
+            //    case "LastName":
+            //        patients = patients.OrderBy(p => p.LastName).ThenBy(p => p.FirstName);
+            //        break;
+            //    case "DOB_desc":
+            //        patients = patients.OrderByDescending(p => p.Birth).ThenByDescending(p => p.LastName);
+            //        break;
+            //    case "DOB":
+            //        patients = patients.OrderBy(p => p.Birth).ThenBy(p => p.LastName);
+            //        break;
+            //    default:
+            //        patients = patients.OrderBy(p => p.PatientId);
+            //        break;
+            //}
             return View(patients.ToList());
         }
 
-        public ActionResult PharmacyIndex()
+        public ActionResult PharmacyIndex(string sortOrder)
         {
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
 
@@ -45,11 +77,43 @@ namespace pharm4me7.Controllers
                 patients.Add(patient);
 
                 }
-           
-            
-            
-            
+
+            ViewBag.PatientIdSortParm = String.IsNullOrEmpty(sortOrder) ? "lastname" : "";
+            ViewBag.FnameParm = sortOrder == "FirstName" ? "fName_desc" : "FirstName";
+            ViewBag.CityParm = sortOrder == "City" ? "city_desc" : "City";
+
+            IEnumerable<Patient> finalpatients = patients.Distinct().ToList();
+
+            switch (sortOrder)
+            {
+                case "lName_desc":
+                    finalpatients = patients.OrderByDescending(p => p.LastName).ThenByDescending(p => p.FirstName);
+                    break;
+                case "fName_desc":
+                    finalpatients = finalpatients.OrderByDescending(p => p.FirstName).ThenByDescending(p => p.LastName);
+                    break;
+                case "FirstName":
+                    finalpatients = finalpatients.OrderBy(p => p.FirstName).ThenBy(p => p.LastName);
+                    break;
+                case "city_desc":
+                    finalpatients = finalpatients.OrderByDescending(p => p.City).ThenByDescending(p => p.LastName);
+                    break;
+                case "City":
+                    finalpatients = finalpatients.OrderBy(p => p.City).ThenBy(p => p.LastName);
+                    break;
+                case "DOB_desc":
+                    finalpatients = finalpatients.OrderByDescending(p => p.Birth).ThenByDescending(p => p.LastName);
+                    break;
+                case "DOB":
+                    finalpatients = finalpatients.OrderBy(p => p.Birth).ThenBy(p => p.LastName);
+                    break;
+                default:
+                    finalpatients = finalpatients.OrderBy(p => p.LastName).ThenBy(p => p.FirstName);
+                    break;
+            }
+
             //var patients = db.Patients.Include(p => p.Clinic).Where(p => p.Prescripts.Where(pr => pr.POrders.Where(po => po.PharmacyId == currentLocation) ) );
+            //return View(finalpatients);
             return View(patients.Distinct().ToList());
         }
 

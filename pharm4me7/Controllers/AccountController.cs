@@ -12,6 +12,8 @@ using pharm4me7.Models;
 
 namespace pharm4me7.Controllers
 {
+    //test
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -175,6 +177,7 @@ namespace pharm4me7.Controllers
                             return RedirectToAction("Index", "Home");
                         }
                         AddErrors(result);
+                        
                         return View(model);
                     }
                 }
