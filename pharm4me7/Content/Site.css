@@ -53,7 +53,7 @@ div img {
 
 /*Mobile layout using Media queries*/
 /* For smaller screens */
-@media (max-width: 1024px) {
+@media (max-width: 900px) {
     body {
         background: #F0F8FF;
     }
@@ -84,17 +84,16 @@ div img {
         }
 
     td {
-        /* Behave  like a "row" */
         border: none;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid #808080;
         position: relative;
         padding-left: 50%;
+        white-space: normal;
+        text-align: left;
     }
 
         td:before {
-            /* Now like a table header */
             position: absolute;
-            /* Top/left values mimic padding */
             top: 0;
             left: 6px;
             width: 45%;
