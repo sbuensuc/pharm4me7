@@ -1,9 +1,9 @@
-﻿/*/* Anything Smaller than Large  
-@media (max-width: @screen-xs-max) {
-    h1 {
+﻿/* Anything Smaller than Large*/  
+@media (max-width: 1000px) {
+    body {
         background: #F0F8FF;
     }
-}*/
+}
 
 body {
     padding-top: 50px;

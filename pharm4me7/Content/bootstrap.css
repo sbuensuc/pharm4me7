@@ -5,13 +5,6 @@
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
-/* Anything Smaller than Large  */
-@media (max-width: 1000) {
-    h1 {
-        background: #F0F8FF;
-    }
-}
-
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
