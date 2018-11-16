@@ -69,14 +69,8 @@ div img {
         display: block;
     }
 
-        th tr {
-            position: absolute;
-            top: -9999px;
-            left: -9999px;
-        }
-
     tr {
-        margin: 0 0 1rem 0;
+        margin: 0 0 5px 0;
     }
 
         tr:nth-child(odd) {
@@ -92,11 +86,11 @@ div img {
 
         td:before {
             position: absolute;
-            top: 0;
+            top: 3px;
             left: 5px;
             width: 45%;
             padding-right: 10px;
-            white-space: nowrap;
+            white-space: normal;
         }
 
         td:before {
