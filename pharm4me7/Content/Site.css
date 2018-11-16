@@ -81,8 +81,9 @@ div img {
         border: none;
         border-bottom: 1px solid #808080;
         position: relative;
-        padding-left: 50%;
-        text-align:center;
+        left: 50%;
+        text-align: center;
+        height: 85px;
     }
 
         td:before {
