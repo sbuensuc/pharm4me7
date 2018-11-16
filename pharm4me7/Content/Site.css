@@ -82,10 +82,12 @@ div img {
         border-bottom: 1px solid #808080;
         position: relative;
         padding-left: 50%;
+        text-align:center;
     }
 
         td:before {
             position: absolute;
+            display:inline-block;
             top: 3px;
             left: 5px;
             width: 45%;
