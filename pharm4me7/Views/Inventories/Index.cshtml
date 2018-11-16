@@ -11,40 +11,40 @@
 </p>
 <table id="inventoryTable"class="table">
     <tr>
-        <th onclick="sortTable(0)" data-th="Item">
+        <th onclick="sortTable(0)">
             Item
             @*@Html.ActionLink("Item", "Index", new { sortOrder = ViewBag.ItemSortParm })*@
         </th>
-        <th onclick="sortTable(1)" data-th="Amount">
+        <th onclick="sortTable(1)">
             Amount
             @*@Html.ActionLink("Amount", "Index", new { sortOrder = ViewBag.AmountSortParm })*@
         </th>
-        <th onclick="sortTable(2)" data-th="Unit Type">
+        <th onclick="sortTable(2)">
             Unit Type
             @*@Html.ActionLink("Unit Type", "Index", new { sortOrder = ViewBag.UnitSortParm })*@
         </th>
-        <th onclick="sortTable(3)" data-th="Brand">
+        <th onclick="sortTable(3)">
             Brand
             @*@Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })*@
         </th>
-        <th data-th="Action"></th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td data-th="Item">
             @Html.DisplayFor(modelItem => item.item.Name)
         </td>
-        <td>
+        <td data-th="Amount">
             @Html.DisplayFor(modelItem => item.Amount)
         </td>
-        <td>
+        <td data-th="Unit Type">
             @Html.DisplayFor(modelItem => item.DispType)
         </td>
-        <td>
+        <td data-th="Brand">
             @Html.DisplayFor(modelItem => item.Brand)
         </td>
-        <td>
+        <td data-th="Action">
             <div class="btn-group">
                 @Html.ActionLink("Edit", "Edit", new { id = item.InventoryId }, new { @class = "btn btn-success" })
                 @*@Html.ActionLink("Details", "Details", new { id = item.InventoryId }, new { @class = "btn btn-info" })*@

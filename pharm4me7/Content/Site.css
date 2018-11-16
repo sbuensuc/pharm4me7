@@ -81,6 +81,7 @@ div img {
         border: none;
         border-bottom: 1px solid #808080;
         position: relative;
+        text-align: center;
     }
 
         td:before {

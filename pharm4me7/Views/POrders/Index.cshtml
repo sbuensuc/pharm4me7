@@ -11,54 +11,54 @@
 </p>
 <table class="table">
     <tr>
-        <th data-th="Pharmacy Name">
+        <th>
             @Html.DisplayNameFor(model => model.Pharmacy.Name)
         </th>
-        <th data-th="Prescription Type">
+        <th>
             @Html.DisplayNameFor(model => model.Prescript.DispType)
         </th>
-        <th data-th="Date Ordered">
+        <th>
             @Html.DisplayNameFor(model => model.DateOrdered)
         </th>
-        <th data-th="Note">
+        <th>
             @Html.DisplayNameFor(model => model.Note)
         </th>
-        <th data-th="Fill">
+        <th>
             @Html.DisplayNameFor(model => model.Fill)
         </th>
-        <th data-th="Deny">
+        <th>
             @Html.DisplayNameFor(model => model.Deny)
         </th>
-        <th data-th="Accept">
+        <th
             @Html.DisplayNameFor(model => model.Accept)
         </th>
-        <th data-th="Action"></th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model) {
     <tr>
-        <td>
+        <td data-th="Pharmacy Name">
             @Html.DisplayFor(modelItem => item.Pharmacy.Name)
         </td>
-        <td>
+        <td data-th="Prescription Type">
             @Html.DisplayFor(modelItem => item.Prescript.DispType)
         </td>
-        <td>
+        <td data-th="Date Ordered">
             @Html.DisplayFor(modelItem => item.DateOrdered)
         </td>
-        <td>
+        <td data-th="Note">
             @Html.DisplayFor(modelItem => item.Note)
         </td>
-        <td>
+        <td data-th="Fill">
             @Html.DisplayFor(modelItem => item.Fill)
         </td>
-        <td>
+        <td data-th="Deny">
             @Html.DisplayFor(modelItem => item.Deny)
         </td>
-        <td>
+        <td data-th="Accept">>
             @Html.DisplayFor(modelItem => item.Accept)
         </td>
-        <td>
+        <td data-th="Action">
             @Html.ActionLink("Edit", "Edit", new { id=item.POrderId }) |
             @Html.ActionLink("Details", "Details", new { id=item.POrderId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.POrderId })

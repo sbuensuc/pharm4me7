@@ -16,19 +16,19 @@
 </p>
 <table id="patientTable"class="table">
     <tr>
-        <th onclick="sortTable(0)" data-th="Patient ID">
+        <th onclick="sortTable(0)">
             Patient ID
             @*@Html.ActionLink("Patient ID", "Index", new { sortOrder = ViewBag.PatientIdSortParm })*@
         </th>
-        <th onclick="sortTable(1)" data-th="First Name">
+        <th onclick="sortTable(1)">
             First Name
             @*@Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FnameParm })*@
         </th>
-        <th onclick="sortTable(2)" data-th="Last Name">
+        <th onclick="sortTable(2)">
             Last Name
             @*@Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LnameParm })*@
         </th>
-        <th onclick="sortTable(3)" data-th="Health Card #">
+        <th onclick="sortTable(3)">
             @Html.DisplayNameFor(model => model.Healthcard)
         </th>
             @*<th>
@@ -40,29 +40,29 @@
             <th>
                 @Html.DisplayNameFor(model => model.Phone)
             </th>*@
-        <th onclick="sortTable(4)" data-th="Gender">
+        <th onclick="sortTable(4)">
             @Html.DisplayNameFor(model => model.Gender)
         </th>
-        <th onclick="sortTable(5)" data-th="DOB">
+        <th onclick="sortTable(5)">
             DOB
             @*@Html.ActionLink("DOB", "Index", new { sortOrder = ViewBag.DateSortParm })*@
         </th>
-        <th data-th="Action"></th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td data-th="Patient ID">
                 @Html.DisplayFor(modelItem => item.PatientId)
             </td>
-            <td>
+            <td data-th="First Name">
                 @Html.DisplayFor(modelItem => item.FirstName)
             </td>
-            <td>
+            <td data-th="Last Name">
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
-            <td>
+            <td data-th="Health Card #">
                 @Html.DisplayFor(modelItem => item.Healthcard)
             </td>
             @*<td>
@@ -74,13 +74,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Phone)
                 </td>*@
-            <td>
+            <td data-th="Gender">
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>
-            <td>
+            <td data-th="DOB">
                 @Html.DisplayFor(modelItem => item.Birth)
             </td>
-            <td>
+            <td data-th="Action">
                 <div class="btn-group">
                     @Html.ActionLink("Details", "Details", new { id = item.PatientId }, new { @class = "btn btn-info" }) 
                     @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))

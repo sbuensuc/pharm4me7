@@ -11,31 +11,31 @@
 <h2>Ready for Pickup</h2>
 <table id="ordersTable" class="table">
     <tr>
-        <th onclick="sortTable(0,1)" data-th="ID">
+        <th onclick="sortTable(0,1)">
             ID
         </th>
-        <th onclick="sortTable(1,1)" data-th="Date Ordered">
+        <th onclick="sortTable(1,1)">
             Date Ordered
         </th>
-        <th onclick="sortTable(2,1)" data-th="Pharmacy">
+        <th onclick="sortTable(2,1)">
             Pharmacy
         </th>
-        <th onclick="sortTable(3,1)" data-th="Address">
+        <th onclick="sortTable(3,1)">
             Address
         </th>
-        <th onclick="sortTable(4,1)" data-th="Item">
+        <th onclick="sortTable(4,1)">
             Item
         </th>
-        <th onclick="sortTable(5,1)" data-th="Amount">
+        <th onclick="sortTable(5,1)">
             Amount
         </th>
-        <th onclick="sortTable(6,1)" data-th="Type">
+        <th onclick="sortTable(6,1)">
             Type
         </th>
-        <th onclick="sortTable(7,1)" data-th="Status">
+        <th onclick="sortTable(7,1)">
             Status
         </th>
-        <th onclick="sortTable(8,1)" data-th="Reason">
+        <th onclick="sortTable(8,1)">
             Reason
         </th>
     </tr>
@@ -46,33 +46,32 @@
         foreach (var i in orderModel)
         {
             <tr>
-                <td>
+                <td data-th="ID">
+>
                     @Html.DisplayFor(modelItem => i.PrescriptId)
                 </td>
-                <td>
+                <td data-th="Date">
                     @if (i.DateOrdered.HasValue)
                     {
                         @i.DateOrdered.Value.ToString("MMM-dd-yyyy")
                     }
                 </td>
-                <td>
+                <td data-th="Pharmacy">
                     @Html.DisplayFor(modelItem => i.Pharmacy.Name)
                 </td>
-                <td>
+                <td data-th="Address">
                     @Html.DisplayFor(modelItem => i.Pharmacy.Address)
                 </td>
-                <td>
+                <td data-th="Item">
                     @Html.DisplayFor(modelItem => i.Prescript.item.Name)
-                </td>
-                <td>
+                </td >
+                <td data-th="Amount">
                     @Html.DisplayFor(modelItem => i.Prescript.Disp)
                 </td>
-                <td>
+                <td data-th="Type">
                     @Html.DisplayFor(modelItem => i.Prescript.DispType)
                 </td>
-
-
-                <td>
+                <td data-th="Status">
                     @if (i.Accept == false && i.Deny == false)
                     {
                         @: REQUEST PENDING
@@ -95,7 +94,7 @@
                     }
 
                 </td>
-                <td>
+                <td data-th="Reason">
                     @Html.DisplayFor(modelItem => i.Note)
                 </td>
             </tr>
@@ -109,72 +108,71 @@
 
 <table id="prescriptsTable" class="table">
     <tr>
-        <th onclick="sortTable(0,2)" data-th="Prescription ID">
+        <th onclick="sortTable(0,2)">
             ID
         </th>
-        <th onclick="sortTable(1,2)" data-th="Date">
+        <th onclick="sortTable(1,2)">
             @Html.DisplayNameFor(model => model.Date)
         </th>
-        <th onclick="sortTable(2,2)" data-th="Item Prescribed">
+        <th onclick="sortTable(2,2)">
             Item
         </th>
-        <th onclick="sortTable(3,2)" data-th="Brand">
+        <th onclick="sortTable(3,2)">
             Brand
         </th>
-        <th onclick="sortTable(4, 2)" data-th="Amount Prescribed">
+        <th onclick="sortTable(4, 2)">
             Amount
         </th>
-        <th onclick="sortTable(5, 2)" data-th="Unit Type">
+        <th onclick="sortTable(5, 2)">
             Unit Type
         </th>
-        <th onclick="sortTable(6, 2)" data-th="Details">
+        <th onclick="sortTable(6, 2)">
             Details
         </th>
 
-        <th onclick="sortTable(7, 2)" data-th="Refill">
+        <th onclick="sortTable(7, 2)">
             @Html.DisplayNameFor(model => model.Refill)
         </th>
-        <th onclick="sortTable(8, 2)" data-th="Prescribed By">
+        <th onclick="sortTable(8, 2)">
             Prescribed By
         </th>
-        <th onclick="sortTable(9, 2)" data-th="Status">Prescription Status</th>
+        <th onclick="sortTable(9, 2)">Prescription Status</th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            <td data-th="Prescription ID">
                 @Html.DisplayFor(modelItem => item.PrescriptId)
             </td>
-            <td>
+            <td data-th="Date">
                 @if (item.Date.HasValue)
                 {
                     @item.Date.Value.ToString("MMM-dd-yyyy")
                 }
             </td>
-            <td>
+            <td data-th="Item Prescribed">
                 @Html.DisplayFor(modelItem => item.item.Name)
             </td>
-            <td>
+            <td data-th="Brand">
                 @Html.DisplayFor(modelItem => item.Sub)
             </td>
-            <td>
+            <td data-th="Amount Prescribed">
                 @Html.DisplayFor(modelItem => item.Disp)
             </td>
-            <td>
+            <td data-th="Unit Type">
                 @Html.DisplayFor(modelItem => item.DispType)
             </td>
-            <td>
+            <td data-th="Details">
                 @Html.DisplayFor(modelItem => item.Sig)
             </td>
-
-            <td>
+            <td data-th="Refill">
                 @Html.DisplayFor(modelItem => item.Refill)
             </td>
-            <td>
+            <td data-th="Prescribed By">
                 @Html.DisplayFor(modelItem => item.Doctor.LastName), @Html.DisplayFor(modelItem => item.Doctor.FirstName)
             </td>
-            <td>
+            <td data-th="Status">
                 @if (item.Sent == false || item.Sent == null)
                 {
                     <text>@Html.ActionLink("Order", "PorderCreate", new { id = item.PrescriptId }, new { @class = "btn btn-primary" })</text>

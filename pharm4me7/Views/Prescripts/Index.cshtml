@@ -14,80 +14,80 @@
 </p>
 <table id="prescriptTable" class="table">
     <tr>
-        <th onclick="sortTable(0)" data-th="Item">
+        <th onclick="sortTable(0)">
             Item
             @*@Html.ActionLink("Item", "Index", new { sortOrder = ViewBag.ItemSortParm })*@
         </th>
-        <th onclick="sortTable(1)" data-th="First Name">
+        <th onclick="sortTable(1)">
             First Name
            @*@Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FnameParm })*@
         </th>
-        <th onclick="sortTable(2)" data-th="Last Name">
+        <th onclick="sortTable(2)">
             Last Name
             @*@Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LnameParm })*@
         </th>
-        <th onclick="sortTable(3)" data-th="Date">
+        <th onclick="sortTable(3)">
             Date
             @*@Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm })*@
         </th>
-        <th onclick="sortTable(4)" data-th="Amount">
+        <th onclick="sortTable(4)">
             Amount
             @*@Html.ActionLink("Amount", "Index", new { sortOrder = ViewBag.AmountSortParm })*@
         </th>
-        <th onclick="sortTable(5)" data-th="Unit Type">
+        <th onclick="sortTable(5)">
             Unit Type
             @*@Html.ActionLink("Unit Type", "Index", new { sortOrder = ViewBag.UnitSortParm })*@
         </th>
-        <th onclick="sortTable(6)" data-th="Details">
+        <th onclick="sortTable(6)">
             Details
         </th>
-        <th onclick="sortTable(7)" data-th="Brand">
+        <th onclick="sortTable(7)">
             Brand
            @*@Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })*@
         </th>
-        <th onclick="sortTable(8)" data-th="Refill">
+        <th onclick="sortTable(8)">
             @Html.DisplayNameFor(model => model.Refill)
         </th>
-        <th onclick="sortTable(9)" data-th="Prescribed By">
+        <th onclick="sortTable(9)">
             Prescribed By
            @*@Html.ActionLink("Prescribed By", "Index", new { sortOrder = ViewBag.DocSortParm })*@
         </th>
-        <th data-th="Action"></th>
+        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td data-th="Item">
+        <td data-th="Item" data-th="Item">
             @Html.DisplayFor(modelItem => item.item.Name)
         </td>
-        <td data-th="First Name">
+        <td data-th="First Name" data-th="First Name">
             @Html.DisplayFor(modelItem => item.Patient.FirstName)
         </td>
-        <td data-th="Last Name">
+        <td data-th="Last Name" data-th="Last Name">
             @Html.DisplayFor(modelItem => item.Patient.LastName)
         </td>
-        <td data-th="Date">
+        <td data-th="Date" data-th="Date">
             @Html.DisplayFor(modelItem => item.Date)
         </td>
-        <td data-th="Amount">
+        <td data-th="Amount" data-th="Amount">
             @Html.DisplayFor(modelItem => item.Disp)
         </td>
-        <td data-th="Unit Type">
+        <td data-th="Unit Type" data-th="Unit Type">
             @Html.DisplayFor(modelItem => item.DispType)
         </td>
-        <td data-th="Details">
+        <td data-th="Details" data-th="Details">
             @Html.DisplayFor(modelItem => item.Sig)
         </td>
-        <td data-th="Brand">
+        <td data-th="Brand" data-th="Brand">
             @Html.DisplayFor(modelItem => item.Sub)
         </td>
-        <td data-th="Refill">
+        <td data-th="Refill" data-th="Refill">
             @Html.DisplayFor(modelItem => item.Refill)
         </td>
-        <td data-th="Prescribed By">
+        <td data-th="Prescribed By" data-th="Prescribed By">
             @Html.DisplayFor(modelItem => item.Doctor.LastName), @Html.DisplayFor(modelItem => item.Doctor.FirstName)
         </td>
-        <td data-th="Action">
+        <td data-th="Action" data-th="Action">
             <div class="btn-group">
                 @Html.ActionLink("Details", "Details", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
                 @*@if (User.IsInRole("Admin") || User.IsInRole("Doctor"))

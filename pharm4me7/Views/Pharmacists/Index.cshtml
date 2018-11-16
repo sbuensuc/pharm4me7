@@ -11,16 +11,16 @@
 </p>
 <table class="table">
     <tr>
-        <th data-th="Pharmacist ID">
+        <th>
             @Html.DisplayNameFor(model => model.PharmacistId)
         </th>
-        <th data-th="First Name">
+        <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
-        <th data-th="Last Name">
+        <th>
             @Html.DisplayNameFor(model => model.LastName)
         </th>
-        <th data-th="Email">
+        <th>
             @Html.DisplayNameFor(model => model.Email)
         </th>
         <th data-th="Action"></th>
@@ -28,16 +28,16 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td data-th="Pharmacist ID">
             @Html.DisplayFor(modelItem => item.PharmacistId)
         </td>
-        <td>
+        <td data-th="First Name">
             @Html.DisplayFor(modelItem => item.FirstName)
         </td>
-        <td>
+        <td data-th="Last Name">
             @Html.DisplayFor(modelItem => item.LastName)
         </td>
-        <td>
+        <td data-th="Email">
             @Html.DisplayFor(modelItem => item.Email)
         </td>
         <td>

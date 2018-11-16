@@ -15,28 +15,28 @@
 
 <table id="pendingTable" class="table">
     <tr>
-        <th onclick="sortTable(0,1)" data-th="Name">
+        <th onclick="sortTable(0,1)">
             Name
         </th>
-        <th onclick="sortTable(1,1)" data-th="Date">
+        <th onclick="sortTable(1,1)">
             Date
         </th>
-        <th onclick="sortTable(2,1)" data-th="Prescription">
+        <th onclick="sortTable(2,1)">
             Prescription
         </th>
-        <th onclick="sortTable(3,1)" data-th="Brand">
+        <th onclick="sortTable(3,1)">
             Brand
         </th>
-        <th onclick="sortTable(4,1)" data-th="Refills">
+        <th onclick="sortTable(4,1)">
             Refills
         </th>
-        <th data-th="Note">
+        <th>
             Note
         </th>
-        <th onclick="sortTable(5,1)" data-th="Status">
+        <th onclick="sortTable(5,1)">
             Status
         </th>
-        <th data-th="Action"></th>
+        <th></th>
     </tr>
 
     @foreach (var item in prod)
@@ -44,30 +44,30 @@
         if (item.Accept == true && item.Fill == false)
         {
     <tr>
-        <td>
+        <td data-th="Name">
             @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
         </td>
-        <td>
+        <td data-th="Date">
             @Html.DisplayFor(modelItem => item.DateOrdered)
         </td>
-        <td>
+        <td data-th="Prescription">
             @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
         </td>
-        <td>
+        <td data-th="Brand">
             @Html.DisplayFor(modelItem => item.Prescript.Sub)
         </td>
 
 
-        <td>
+        <td data-th="Refills">
             @Html.DisplayFor(modelItem => item.Prescript.Refill)
         </td>
-        <td>
+        <td data-th="Note">
             @Html.DisplayFor(modelItem => item.Note)
         </td>
-        <td>
+        <td data-th="Status">
             PENDING
         </td>
-        <td>
+        <td data-th="Action">
             @Html.ActionLink("Fill Order", "PharmacyCreate", new { id = item.POrderId }, new { @class = "btn btn-primary" })
         </td>
     </tr>

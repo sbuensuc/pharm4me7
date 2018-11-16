@@ -9,31 +9,31 @@
 
 <table id="requestTable"class="table">
     <tr>
-        <th onclick="sortTable(0,1)" data-th="Name">
+        <th onclick="sortTable(0,1)">
             Name
         </th>
-        <th onclick="sortTable(1,1)" data-th="Date">
+        <th onclick="sortTable(1,1)">
             Date
         </th>
-        <th onclick="sortTable(2,1)" data-th="Prescription">
+        <th onclick="sortTable(2,1)">
             Prescription
         </th>
-        <th onclick="sortTable(3,1)" data-th="Brand">
+        <th onclick="sortTable(3,1)">
             Brand
         </th>
-        <th onclick="sortTable(4,1)" data-th="Refills">
+        <th onclick="sortTable(4,1)">
             Refills
         </th>
-        <th data-th="Note">
+        <th>
             Note
         </th>
-        <th onclick="sortTable(5,1)" data-th="Clinic">
+        <th onclick="sortTable(5,1)">
             Clinic
         </th>
         <th onclick="sortTable(6,1)" data-th="Physician">
             Physician
         </th>
-        <th data-th="Action"></th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -41,31 +41,31 @@
         if (item.Accept == false && item.Deny == false)
         {
             <tr>
-                <td>
+                <td data-th="Name">
                     @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
                 </td>
-                <td>
+                <td data-th="Date">
                     @Html.DisplayFor(modelItem => item.DateOrdered)
                 </td>
-                <td>
+                <td data-th="Prescription">
                     @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
                 </td>
-                <td>
+                <td data-th="Brand">
                     @Html.DisplayFor(modelItem => item.Prescript.Sub)
                 </td>
 
 
-                <td>
+                <td data-th="Refills">
                     @Html.DisplayFor(modelItem => item.Prescript.Refill)
                 </td>
-                <td>
+                <td data-th="Note">
                     @Html.DisplayFor(modelItem => item.Note)
                 </td>
-                <td>
+                <td data-th="Clinic">
                     @Html.DisplayFor(modelItem => item.Prescript.Doctor.Clinic.Name)
                 </td>
 
-                <td>
+                <td data-th="Action">
                     <div class="btn-group">
                         @Html.ActionLink("Info", "Details", "Prescripts", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
                         @Html.ActionLink("Accept", "PharmacyIndex", new { id = item.POrderId }, new { @class = "btn btn-primary" })
@@ -83,25 +83,25 @@
 <h3>Pending</h3>
 <table id="archiveTable"class="table">
     <tr>
-        <th onclick="sortTable(0,2)" data-th="Name">
+        <th onclick="sortTable(0,2)">
             Name
         </th>
-        <th onclick="sortTable(1,2)" data-th="Date">
+        <th onclick="sortTable(1,2)">
             Date
         </th>
-        <th onclick="sortTable(2,2)" data-th="Prescription">
+        <th onclick="sortTable(2,2)">
             Prescription
         </th>
-        <th onclick="sortTable(3,2)" data-th="Brand">
+        <th onclick="sortTable(3,2)">
             Brand
         </th>
-        <th onclick="sortTable(4,2)" data-th="Refills">
+        <th onclick="sortTable(4,2)">
             Refills
         </th>
-        <th data-th="Note">
+        <th>
             Note
         </th>
-        <th data-th="Action"></th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -109,27 +109,27 @@
         if (item.Accept == true && item.Fill == false)
         {
             <tr>
-                <td>
+                <td data-th="Name">
                     @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
                 </td>
-                <td>
+                <td data-th="Date">
                     @Html.DisplayFor(modelItem => item.DateOrdered)
                 </td>
-                <td>
+                <td data-th="Prescription">
                     @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
                 </td>
-                <td>
+                <td data-th="Brand">
                     @Html.DisplayFor(modelItem => item.Prescript.Sub)
                 </td>
 
 
-                <td>
+                <td data-th="Refills">
                     @Html.DisplayFor(modelItem => item.Prescript.Refill)
                 </td>
-                <td>
+                <td data-th="Note">
                     @Html.DisplayFor(modelItem => item.Note)
                 </td>
-                <td>
+                <td data-th="Action">
                     PENDING | @Html.ActionLink("Deny", "Edit", new { id = item.POrderId }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
@@ -140,22 +140,22 @@
 <h3>Filled</h3>
 <table id="filledTable"class="table">
     <tr>
-        <th onclick="sortTable(0,3)" data-th="Name">
+        <th onclick="sortTable(0,3)">
             Name
         </th>
-        <th onclick="sortTable(1,3)" data-th="Date">
+        <th onclick="sortTable(1,3)">
             Date
         </th>
-        <th onclick="sortTable(2,3)" data-th="Prescription">
+        <th onclick="sortTable(2,3)">
             Prescription
         </th>
-        <th onclick="sortTable(3,3)" data-th="Brand">
+        <th onclick="sortTable(3,3)">
             Brand
         </th>
-        <th onclick="sortTable(4,3)" data-th="Refills">
+        <th onclick="sortTable(4,3)">
             Refills
         </th>
-        <th data-th="Note">
+        <th>
             Note
         </th>
         <th data-th="Action"></th>
@@ -166,24 +166,24 @@
         if (item.Accept == true && item.Fill == true)
         {
             <tr>
-                <td>
+                <td data-th="Name">
                     @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
                 </td>
-                <td>
+                <td data-th="Date">
                     @Html.DisplayFor(modelItem => item.DateOrdered)
                 </td>
-                <td>
+                <td data-th="Prescription">
                     @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
                 </td>
-                <td>
+                <td data-th="Brand">
                     @Html.DisplayFor(modelItem => item.Prescript.Sub)
                 </td>
 
 
-                <td>
+                <td data-th="Refills">
                     @Html.DisplayFor(modelItem => item.Prescript.Refill)
                 </td>
-                <td>
+                <td data-th="Note">
                     @Html.DisplayFor(modelItem => item.Note)
                 </td>
                 <td>
@@ -197,22 +197,22 @@
 <h3>Denied</h3>
 <table id="deniedTable"class="table">
     <tr>
-        <th onclick="sortTable(0,4)" data-th="Name">
+        <th onclick="sortTable(0,4)">
             Name
         </th>
-        <th onclick="sortTable(1,4)" data-th="Date">
+        <th onclick="sortTable(1,4)">
             Date
         </th>
-        <th onclick="sortTable(2,4)" data-th="Prescription">
+        <th onclick="sortTable(2,4)">
             Prescription
         </th>
-        <th onclick="sortTable(3,4)" data-th="Brand">
+        <th onclick="sortTable(3,4)">
             Brand
         </th>
-        <th onclick="sortTable(4,4)" data-th="Refills">
+        <th onclick="sortTable(4,4)">
             Refills
         </th>
-        <th onclick="sortTable(5,4)" data-th="Note">
+        <th onclick="sortTable(5,4)">
             Note
         </th>
         <th data-th="Action"></th>
@@ -223,24 +223,24 @@
         if (item.Deny == true)
         {
             <tr>
-                <td>
+                <td data-th="Name">
                     @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
                 </td>
-                <td>
+                <td data-th="Date">
                     @Html.DisplayFor(modelItem => item.DateOrdered)
                 </td>
-                <td>
+                <td data-th="Prescription">
                     @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
                 </td>
-                <td>
+                <td data-th="Brand">
                     @Html.DisplayFor(modelItem => item.Prescript.Sub)
                 </td>
 
 
-                <td>
+                <td data-th="Refills">
                     @Html.DisplayFor(modelItem => item.Prescript.Refill)
                 </td>
-                <td>
+                <td data-th="Note">
                     @Html.DisplayFor(modelItem => item.Note)
                 </td>
                 <td>
