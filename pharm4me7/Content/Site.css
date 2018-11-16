@@ -1,5 +1,5 @@
 ﻿/* Anything Smaller than Large  */
-@media (max-width: 1199px) {
+@media (max-width: 600px) {
     h1 {
         background: #F0F8FF;
     }
