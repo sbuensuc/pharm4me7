@@ -99,9 +99,6 @@ div img {
             width: 25%;
             padding-right: 10px;
             white-space: nowrap;
-        }
-
-        td:before {
             content: attr(data-th);
         }
 }
