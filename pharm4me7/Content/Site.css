@@ -95,8 +95,8 @@ div img {
         td:before {
             position: absolute;
             top: 0;
-            left: 6px;
-            width: 45%;
+            left: 5px;
+            width: 25%;
             padding-right: 10px;
             white-space: nowrap;
         }
