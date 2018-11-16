@@ -16,35 +16,35 @@
 </p>
 <table id="patientTable"class="table">
     <tr>
-        <th onclick="sortTable(0)">
+        <th onclick="sortTable(0)" data-th="First Name">
             First Name
             @*@Html.ActionLink("First Name", "PharmacyIndex", new { sortOrder = ViewBag.FnameParm })*@
         </th>
-        <th onclick="sortTable(1)">
+        <th onclick="sortTable(1)" data-th="Last Name">
             Last Name
             @*@Html.ActionLink("Last Name", "PharmacyIndex", new { sortOrder = ViewBag.LnameParm })*@
         </th>
-        <th onclick="sortTable(2)">
+        <th onclick="sortTable(2)" data-th="Healthcard #">
             @Html.DisplayNameFor(model => model.Healthcard)
         </th>
-        <th onclick="sortTable(3)">
+        <th onclick="sortTable(3)" data-th="Address">
                 @Html.DisplayNameFor(model => model.Address)
             </th>
-            <th onclick="sortTable(4)">
+            <th onclick="sortTable(4)" data-th="City">
                 City
                 @*@Html.ActionLink("City", "PharmacyIndex", new { sortOrder = ViewBag.CityParm })*@
             </th>
-            <th onclick="sortTable(5)">
+            <th onclick="sortTable(5)" data-th="Phone #">
                 @Html.DisplayNameFor(model => model.Phone)
             </th>
-        <th onclick="sortTable(6)">
+        <th onclick="sortTable(6)" data-th="Gender">
             @Html.DisplayNameFor(model => model.Gender)
         </th>
-        <th onclick="sortTable(7)">
+        <th onclick="sortTable(7)" data-th="DOB">
             DOB
             @*@Html.ActionLink("DOB", "PharmacyIndex", new { sortOrder = ViewBag.DateSortParm })*@
         </th>
-        <th></th>
+        <th data-th="Action"></th>
     </tr>
 
     @foreach (var item in Model)

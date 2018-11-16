@@ -39,15 +39,16 @@ textarea {
 }*/
 
 div img {
-    width:100%;
+    width: 100%;
 }
 
 .navbar a {
     color: #fff !important;
 }
-        .navbar a:hover {
-            color: #85C33E !important;
-        }
+
+    .navbar a:hover {
+        color: #85C33E !important;
+    }
 
 
 /*Mobile layout using Media queries*/
@@ -56,16 +57,18 @@ div img {
     body {
         background: #F0F8FF;
     }
+
     .navbar {
         background-color: #008de3;
         border-bottom-color: #fff;
     }
 
     /*Important: Reformats the table so it looks cleaner on a smaller screen resolution*/
+    /*Based off: https://bootsnipp.com/snippets/featured/no-more-tables-respsonsive-table */
     table, thead, tbody, th, td, tr {
         display: block;
     }
-        /* Hide table headers (but not display: none;, for accessibility) */
+
         thead tr {
             position: absolute;
             top: -9999px;
@@ -77,7 +80,7 @@ div img {
     }
 
         tr:nth-child(odd) {
-            background: #ccc;
+            background: #85C33E;
         }
 
     td {
@@ -97,5 +100,9 @@ div img {
             width: 45%;
             padding-right: 10px;
             white-space: nowrap;
+        }
+
+        td:before {
+            content: attr(data-th);
         }
 }

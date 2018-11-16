@@ -11,34 +11,34 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th data-th="Order #">
             Order#
         </th>
-        <th>
+        <th data-th="Customer">
             Customer
         </th>
-        <th>
+        <th data-th="Prescription">
             Prescription
         </th>
-        <th>
+        <th data-th="Order ID">
             OrderID
         </th>
-        <th>
+        <th data-th="Date Filled">
             Date Filled
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.DatePicked)
         </th>*@
-        <th>
+        <th data-th="Note">
             @Html.DisplayNameFor(model => model.Note)
         </th>
-        <th>
+        <th data-th="Filled By">
             FilledBy
         </th>
         @*<th>
             @Html.DisplayNameFor(model => model.Ready)
         </th>*@
-        <th></th>
+        <th data-th="Action"></th>
     </tr>
 
 @foreach (var item in Model) {

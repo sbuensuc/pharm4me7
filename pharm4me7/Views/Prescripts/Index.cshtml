@@ -14,45 +14,45 @@
 </p>
 <table id="prescriptTable" class="table">
     <tr>
-        <th onclick="sortTable(0)">
+        <th onclick="sortTable(0)" data-th="Item">
             Item
             @*@Html.ActionLink("Item", "Index", new { sortOrder = ViewBag.ItemSortParm })*@
         </th>
-        <th onclick="sortTable(1)">
+        <th onclick="sortTable(1)" data-th="First Name">
             First Name
            @*@Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FnameParm })*@
         </th>
-        <th onclick="sortTable(2)">
+        <th onclick="sortTable(2)" data-th="Last Name">
             Last Name
             @*@Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LnameParm })*@
         </th>
-        <th onclick="sortTable(3)">
+        <th onclick="sortTable(3)" data-th="Date">
             Date
             @*@Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm })*@
         </th>
-        <th onclick="sortTable(4)">
+        <th onclick="sortTable(4)" data-th="Amount">
             Amount
             @*@Html.ActionLink("Amount", "Index", new { sortOrder = ViewBag.AmountSortParm })*@
         </th>
-        <th onclick="sortTable(5)">
+        <th onclick="sortTable(5)" data-th="Unit Type">
             Unit Type
             @*@Html.ActionLink("Unit Type", "Index", new { sortOrder = ViewBag.UnitSortParm })*@
         </th>
-        <th onclick="sortTable(6)">
+        <th onclick="sortTable(6)" data-th="Details">
             Details
         </th>
-        <th onclick="sortTable(7)">
+        <th onclick="sortTable(7)" data-th="Brand">
             Brand
            @*@Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })*@
         </th>
-        <th onclick="sortTable(8)">
+        <th onclick="sortTable(8)" data-th="Refill">
             @Html.DisplayNameFor(model => model.Refill)
         </th>
-        <th onclick="sortTable(9)">
+        <th onclick="sortTable(9)" data-th="Prescribed By">
             Prescribed By
            @*@Html.ActionLink("Prescribed By", "Index", new { sortOrder = ViewBag.DocSortParm })*@
         </th>
-        <th></th>
+        <th data-th="Action"></th>
     </tr>
 
 @foreach (var item in Model) {

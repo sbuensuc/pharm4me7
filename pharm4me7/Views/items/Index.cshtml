@@ -11,13 +11,13 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th data-th="Name">
             @Html.DisplayNameFor(model => model.Name)
         </th>
-        <th>
+        <th data-th="Description">
             @Html.DisplayNameFor(model => model.Description)
         </th>
-        <th></th>
+        <th data-th="Action"></th>
     </tr>
 
 @foreach (var item in Model) {

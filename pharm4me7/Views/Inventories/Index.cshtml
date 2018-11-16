@@ -11,23 +11,23 @@
 </p>
 <table id="inventoryTable"class="table">
     <tr>
-        <th onclick="sortTable(0)">
+        <th onclick="sortTable(0)" data-th="Item">
             Item
             @*@Html.ActionLink("Item", "Index", new { sortOrder = ViewBag.ItemSortParm })*@
         </th>
-        <th onclick="sortTable(1)">
+        <th onclick="sortTable(1)" data-th="Amount">
             Amount
             @*@Html.ActionLink("Amount", "Index", new { sortOrder = ViewBag.AmountSortParm })*@
         </th>
-        <th onclick="sortTable(2)">
+        <th onclick="sortTable(2)" data-th="Unit Type">
             Unit Type
             @*@Html.ActionLink("Unit Type", "Index", new { sortOrder = ViewBag.UnitSortParm })*@
         </th>
-        <th onclick="sortTable(3)">
+        <th onclick="sortTable(3)" data-th="Brand">
             Brand
             @*@Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })*@
         </th>
-        <th></th>
+        <th data-th="Action"></th>
     </tr>
 
 @foreach (var item in Model) {

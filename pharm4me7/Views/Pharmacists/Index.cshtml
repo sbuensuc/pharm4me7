@@ -11,19 +11,19 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th data-th="Pharmacist ID">
             @Html.DisplayNameFor(model => model.PharmacistId)
         </th>
-        <th>
+        <th data-th="First Name">
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
-        <th>
+        <th data-th="Last Name">
             @Html.DisplayNameFor(model => model.LastName)
         </th>
-        <th>
+        <th data-th="Email">
             @Html.DisplayNameFor(model => model.Email)
         </th>
-        <th></th>
+        <th data-th="Action"></th>
     </tr>
 
 @foreach (var item in Model) {

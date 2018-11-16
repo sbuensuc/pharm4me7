@@ -11,31 +11,31 @@
 <h2>Ready for Pickup</h2>
 <table id="ordersTable" class="table">
     <tr>
-        <th onclick="sortTable(0,1)">
+        <th onclick="sortTable(0,1)" data-th="ID">
             ID
         </th>
-        <th onclick="sortTable(1,1)">
+        <th onclick="sortTable(1,1)" data-th="Date Ordered">
             Date Ordered
         </th>
-        <th onclick="sortTable(2,1)">
+        <th onclick="sortTable(2,1)" data-th="Pharmacy">
             Pharmacy
         </th>
-        <th onclick="sortTable(3,1)">
+        <th onclick="sortTable(3,1)" data-th="Address">
             Address
         </th>
-        <th onclick="sortTable(4,1)">
+        <th onclick="sortTable(4,1)" data-th="Item">
             Item
         </th>
-        <th onclick="sortTable(5,1)">
+        <th onclick="sortTable(5,1)" data-th="Amount">
             Amount
         </th>
-        <th onclick="sortTable(6,1)">
+        <th onclick="sortTable(6,1)" data-th="Type">
             Type
         </th>
-        <th onclick="sortTable(7,1)">
+        <th onclick="sortTable(7,1)" data-th="Status">
             Status
         </th>
-        <th onclick="sortTable(8,1)">
+        <th onclick="sortTable(8,1)" data-th="Reason">
             Reason
         </th>
     </tr>
@@ -109,35 +109,35 @@
 
 <table id="prescriptsTable" class="table">
     <tr>
-        <th onclick="sortTable(0,2)">
+        <th onclick="sortTable(0,2)" data-th="Prescription ID">
             ID
         </th>
-        <th onclick="sortTable(1,2)">
+        <th onclick="sortTable(1,2)" data-th="Date">
             @Html.DisplayNameFor(model => model.Date)
         </th>
-        <th onclick="sortTable(2,2)">
+        <th onclick="sortTable(2,2)" data-th="Item Prescribed">
             Item
         </th>
-        <th onclick="sortTable(3,2)">
+        <th onclick="sortTable(3,2)" data-th="Brand">
             Brand
         </th>
-        <th onclick="sortTable(4, 2)">
+        <th onclick="sortTable(4, 2)" data-th="Amount Prescribed">
             Amount
         </th>
-        <th onclick="sortTable(5, 2)">
+        <th onclick="sortTable(5, 2)" data-th="Unit Type">
             Unit Type
         </th>
-        <th onclick="sortTable(6, 2)">
+        <th onclick="sortTable(6, 2)" data-th="Details">
             Details
         </th>
 
-        <th onclick="sortTable(7, 2)">
+        <th onclick="sortTable(7, 2)" data-th="Refill">
             @Html.DisplayNameFor(model => model.Refill)
         </th>
-        <th onclick="sortTable(8, 2)">
+        <th onclick="sortTable(8, 2)" data-th="Prescribed By">
             Prescribed By
         </th>
-        <th onclick="sortTable(9, 2)">Status</th>
+        <th onclick="sortTable(9, 2)" data-th="Status">Prescription Status</th>
     </tr>
 
     @foreach (var item in Model)

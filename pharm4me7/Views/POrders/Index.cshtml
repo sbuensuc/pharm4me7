@@ -1,4 +1,4 @@
-﻿@model IEnumerable<pharm4me7.Models.POrder>
+﻿ data-th="Name"@model IEnumerable<pharm4me7.Models.POrder>
 
 @{
     ViewBag.Title = "Index";
@@ -11,31 +11,31 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th data-th="Pharmacy Name">
             @Html.DisplayNameFor(model => model.Pharmacy.Name)
         </th>
-        <th>
+        <th data-th="Prescription Type">
             @Html.DisplayNameFor(model => model.Prescript.DispType)
         </th>
-        <th>
+        <th data-th="Date Ordered">
             @Html.DisplayNameFor(model => model.DateOrdered)
         </th>
-        <th>
+        <th data-th="Note">
             @Html.DisplayNameFor(model => model.Note)
         </th>
-        <th>
+        <th data-th="Fill">
             @Html.DisplayNameFor(model => model.Fill)
         </th>
-        <th>
+        <th data-th="Deny">
             @Html.DisplayNameFor(model => model.Deny)
         </th>
-        <th>
+        <th data-th="Accept">
             @Html.DisplayNameFor(model => model.Accept)
         </th>
-        <th></th>
+        <th data-th="Action"></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Pharmacy.Name)
