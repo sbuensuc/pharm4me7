@@ -6,8 +6,13 @@
 
 <h2>Prescription Requests</h2>
 
-
+<input type="text" id="searchName1" onkeyup="searchFunction(1)" placeholder="Name...">
+<input type="text" id="searchDate1" onkeyup="searchFunction(1)" placeholder="Date...">
+<input type="text" id="searchPres1" onkeyup="searchFunction(1)" placeholder="Prescription...">
+<input type="text" id="searchClinic" onkeyup="searchFunction(1)" placeholder="Clinic...">
+<input type="text" id="searchPhys" onkeyup="searchFunction(1)" placeholder="Physician...">
 <table id="requestTable"class="table">
+
     <tr>
         <th onclick="sortTable(0,1)">
             Name
@@ -80,6 +85,9 @@
 
 <h2>Archived Requests</h2>
 
+<input type="text" id="searchName2" onkeyup="searchFunction(2)" placeholder="Name...">
+<input type="text" id="searchDate2" onkeyup="searchFunction(2)" placeholder="Date...">
+<input type="text" id="searchPres2" onkeyup="searchFunction(2)" placeholder="Prescription...">
 <h3>Pending</h3>
 <table id="archiveTable"class="table">
     <tr>
@@ -138,6 +146,9 @@
 </table>
 
 <h3>Filled</h3>
+<input type="text" id="searchName3" onkeyup="searchFunction(3)" placeholder="Name...">
+<input type="text" id="searchDate3" onkeyup="searchFunction(3)" placeholder="Date...">
+<input type="text" id="searchPres3" onkeyup="searchFunction(3)" placeholder="Prescription...">
 <table id="filledTable"class="table">
     <tr>
         <th onclick="sortTable(0,3)">
@@ -195,6 +206,9 @@
 </table>
 
 <h3>Denied</h3>
+<input type="text" id="searchName4" onkeyup="searchFunction(4)" placeholder="Name...">
+<input type="text" id="searchDate4" onkeyup="searchFunction(4)" placeholder="Date...">
+<input type="text" id="searchPres4" onkeyup="searchFunction(4)" placeholder="Prescription...">
 <table id="deniedTable"class="table">
     <tr>
         <th onclick="sortTable(0,4)">
@@ -296,7 +310,74 @@ function sortTable(n,t) {
 	}
   }
 }
-</script>
+
+
+function searchFunction(n) {
+    var input1, filter1, filter2, filter3, filter4, filter5, table, tr, td, i, rows;
+        
+        
+    if (n == 1) {
+        //input = document.getElementById(t);
+        filter1 = document.querySelector('#searchName1').value.toUpperCase();
+        filter2 = document.querySelector('#searchDate1').value.toUpperCase();
+        filter3 = document.querySelector('#searchPres1').value.toUpperCase();
+        filter4 = document.querySelector('#searchClinic').value.toUpperCase();
+        filter5 = document.querySelector('#searchPhys').value.toUpperCase();
+            
+        rows = document.querySelector("#pendingTable tbody").rows;
+    } else if (n == 2) {
+        filter1 = document.querySelector('#searchName2').value.toUpperCase();
+        filter2 = document.querySelector('#searchDate2').value.toUpperCase();
+        filter3 = document.querySelector('#searchPres2').value.toUpperCase();
+
+        rows = document.querySelector("#archiveTable tbody").rows;
+    } else if (n == 3) {
+        filter1 = document.querySelector('#searchName3').value.toUpperCase();
+        filter2 = document.querySelector('#searchDate3').value.toUpperCase();
+        filter3 = document.querySelector('#searchPres3').value.toUpperCase();
+
+        rows = document.querySelector("#filledTable tbody").rows;
+    } else if (n == 4) {
+        filter1 = document.querySelector('#searchName4').value.toUpperCase();
+        filter2 = document.querySelector('#searchDate4').value.toUpperCase();
+        filter3 = document.querySelector('#searchPres4').value.toUpperCase();
+
+        rows = document.querySelector("#deniedTable tbody").rows;
+    }
+        
+    if (n == 1) {
+        for (i = 1; i < rows.length; i++) {
+            var nameCol = rows[i].cells[0].textContent.toUpperCase();
+            var dateCol = rows[i].cells[1].textContent.toUpperCase();
+            var prescCol = rows[i].cells[2].textContent.toUpperCase();
+            var clinicCol = rows[i].cells[6].textContent.toUpperCase();
+            var physCol = rows[i].cells[7].textContent.toUpperCase();
+                
+            if (nameCol.indexOf(filter1) > -1 && dateCol.indexOf(filter2) > -1 && prescCol.indexOf(filter3) > -1 && clinicCol.indexOf(filter3) > -1 && physCol.indexOf(filter3) > -1) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+                
+        }
+    }
+
+    if (n > 1) {
+        for (i = 1; i < rows.length; i++) {
+            var nameCol = rows[i].cells[0].textContent.toUpperCase();
+            var dateCol = rows[i].cells[1].textContent.toUpperCase();
+            var prescCol = rows[i].cells[2].textContent.toUpperCase();
+
+            if (nameCol.indexOf(filter1) > -1 && dateCol.indexOf(filter2) > -1 && prescCol.indexOf(filter3) > -1) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+
+        }
+    }
+}
+}</script>
 
 
 

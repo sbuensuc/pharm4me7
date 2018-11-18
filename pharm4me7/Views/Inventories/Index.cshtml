@@ -9,6 +9,8 @@
 <p>
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
+<input type="text" id="searchItem" onkeyup="searchFunction()" placeholder="Item...">
+<input type="text" id="searchBrand" onkeyup="searchFunction()" placeholder="Brand...">
 <table id="inventoryTable"class="table">
     <tr>
         <th onclick="sortTable(0)">
@@ -57,6 +59,25 @@
 </table>
 
 <script>
+    function searchFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("searchName");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("patientTable");
+        tr = table.getElementsByTagName("tr");
+
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                if (td.textContent.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("inventoryTable");
@@ -92,5 +113,33 @@ function sortTable(n) {
   	 }
 	}
   }
+}
+
+function searchFunction() {
+    var input1, filter1, filter2, td, i, rows;
+
+
+
+        filter1 = document.querySelector('#searchItem').value.toUpperCase();
+        filter2 = document.querySelector('#searchBrand').value.toUpperCase();
+
+        rows = document.querySelector("#inventoryTable tbody").rows;
+    
+ 
+        for (i = 1; i < rows.length; i++) {
+            var itemCol = rows[i].cells[0].textContent.toUpperCase();
+            var brandCol = rows[i].cells[3].textContent.toUpperCase();
+
+
+            if (itemCol.indexOf(filter1) > -1 && brandCol.indexOf(filter2) > -1) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+
+        }
+    
+
+  
 }
 </script>

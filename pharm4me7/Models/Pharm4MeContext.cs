@@ -22,6 +22,7 @@ namespace pharm4me7.Models
         public virtual DbSet<POrder> POrders { get; set; }
         public virtual DbSet<POrderFill> POrderFills { get; set; }
         public virtual DbSet<Prescript> Prescripts { get; set; }
+        //public virtual DbSet<ChangeLog> Changelog { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

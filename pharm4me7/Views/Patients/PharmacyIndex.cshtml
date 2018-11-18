@@ -4,7 +4,7 @@
     ViewBag.Title = "Patients";
 }
 
-<h2>Patients</h2>
+<h2>Customers</h2>
 
 @*test*@
 
@@ -14,6 +14,9 @@
         @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
     }
 </p>
+<input type="text" id="searchFName" onkeyup="searchFunction()" placeholder="First Name...">
+<input type="text" id="searchLName" onkeyup="searchFunction()" placeholder="Last Name...">
+<input type="text" id="searchHCard" onkeyup="searchFunction()" placeholder="Healthcard...">
 <table id="patientTable"class="table">
     <tr>
         <th onclick="sortTable(0)">
@@ -92,24 +95,31 @@
 </table>
 
 <script>
-function myFunction() {
-  var input, filter, table, tr, td, i;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
+    function searchFunction() {
+        var input1, filter1, filter2, filter3, td, i, rows;
 
-  for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[0];
-    if (td) {
-      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
+            filter1 = document.querySelector('#searchFName').value.toUpperCase();
+            filter2 = document.querySelector('#searchLName').value.toUpperCase();
+            filter3 = document.querySelector('#searchHCard').value.toUpperCase();
+
+            rows = document.querySelector("#patientTable tbody").rows;
+        
+
+            for (i = 1; i < rows.length; i++) {
+                var fNameCol = rows[i].cells[0].textContent.toUpperCase();
+                var lNameCol = rows[i].cells[1].textContent.toUpperCase();
+                var hCardCol = rows[i].cells[2].textContent.toUpperCase();
+
+
+                if (fNameCol.indexOf(filter1) > -1 && lNameCol.indexOf(filter2) > -1 && hCardCol.indexOf(filter3) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+
+            }
+        
     }
-  }
-}
 
 function sortTable(n) {
     var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;

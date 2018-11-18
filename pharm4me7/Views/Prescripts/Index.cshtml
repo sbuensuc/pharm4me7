@@ -12,6 +12,11 @@
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 }
 </p>
+<input type="text" id="searchItem" onkeyup="searchFunction()" placeholder="Item...">
+<input type="text" id="searchFName" onkeyup="searchFunction()" placeholder="First Name...">
+<input type="text" id="searchLName" onkeyup="searchFunction()" placeholder="Last Name...">
+<input type="text" id="searchDate" onkeyup="searchFunction()" placeholder="Date...">
+<input type="text" id="searchPresc" onkeyup="searchFunction()" placeholder="Prescribed By...">
 <table id="prescriptTable" class="table">
     <tr>
         <th onclick="sortTable(0)">
@@ -106,6 +111,37 @@
 </table>
 
 <script>
+    function searchFunction() {
+        var input1, filter1, filter2, filter3, filter4, filter5, td, i, rows;
+
+        filter1 = document.querySelector('#searchItem').value.toUpperCase();
+        filter2 = document.querySelector('#searchFName').value.toUpperCase();
+        filter3 = document.querySelector('#searchLName').value.toUpperCase();
+        filter4 = document.querySelector('#searchDate').value.toUpperCase();
+        filter4 = document.querySelector('#searchPresc').value.toUpperCase();
+
+        rows = document.querySelector("#prescriptTable tbody").rows;
+
+
+        for (i = 1; i < rows.length; i++) {
+            var itemCol = rows[i].cells[0].textContent.toUpperCase();
+            var fNameCol = rows[i].cells[1].textContent.toUpperCase();
+            var lNameCol = rows[i].cells[2].textContent.toUpperCase();
+            var dateCol = rows[i].cells[3].textContent.toUpperCase();
+            var prescCol = rows[i].cells[9].textContent.toUpperCase();
+
+
+            if (itemCol.indexOf(filter1) > -1 && fNameCol.indexOf(filter2) > -1 && lNameCol.indexOf(filter3) > -1 && dateCol.indexOf(filter4) > -1 && prescCol.indexOf(filter5) > -1) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+
+        }
+
+    }
+
+
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("prescriptTable");

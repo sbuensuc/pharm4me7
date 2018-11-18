@@ -1,4 +1,4 @@
-﻿ data-th="Name"@using pharm4me7.Models
+﻿@using pharm4me7.Models
 @model IEnumerable<pharm4me7.Models.POrderFill>
 
 @{
@@ -11,8 +11,9 @@
 }
 
 <h3>Pending Orders</h3>
-
-
+<input type="text" id="searchName1" onkeyup="searchFunction(1)" placeholder="Name...">
+<input type="text" id="searchDate1" onkeyup="searchFunction(1)" placeholder="Date...">
+<input type="text" id="searchPresc1" onkeyup="searchFunction(1)" placeholder="Prescription...">
 <table id="pendingTable" class="table">
     <tr>
         <th onclick="sortTable(0,1)">
@@ -77,7 +78,11 @@
 </table>
 
 <h3>Filled Orders</h3>
-
+<input type="text" id="searchOrder" onkeyup="searchFunction(2)" placeholder="Order #...">
+<input type="text" id="searchName2" onkeyup="searchFunction(2)" placeholder="Name...">
+<input type="text" id="searchItem" onkeyup="searchFunction(2)" placeholder="Item...">
+<input type="text" id="searchDate2" onkeyup="searchFunction(2)" placeholder="Date...">
+<input type="text" id="searchFilled" onkeyup="searchFunction(2)" placeholder="Pharmacist...">
 <table id="filledTable" class="table">
     <tr>
         <th onclick="sortTable(0,2)" data-th="Oder #">
@@ -86,13 +91,13 @@
         <th onclick="sortTable(1,2)" data-th="Customer">
             Customer
         </th>
-        <th onclick="sortTable(2,2)" data-th="Prescription">
+        @*<th onclick="sortTable(2,2)" data-th="Item">
             Prescription
-        </th>
-        <th onclick="sortTable(3,2)" data-th="Order ID">
+        </th>*@
+        <th onclick="sortTable(2,2)" data-th="Prescription">
             OrderID
         </th>
-        <th onclick="sortTable(4,2)" data-th="Date Filled">
+        <th onclick="sortTable(3,2)" data-th="Date Filled">
             Date Filled
         </th>
         @*<th>
@@ -119,9 +124,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.POrder.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.POrder.Prescript.Patient.FirstName)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.POrder.Prescript.item.Name)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.POrder.Prescript.item.Name) @Html.DisplayFor(modelItem => item.POrder.Prescript.Disp) @Html.DisplayFor(modelItem => item.POrder.Prescript.DispType)
         </td>
@@ -158,44 +163,101 @@
 </table>
 
 <script>
-function sortTable(n,t) {
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    if (t==1) {
-        table = document.getElementById("pendingTable");
-    } else if (t==2) {
-        table = document.getElementById("filledTable");
+    function sortTable(n, t) {
+        var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+        if (t == 1) {
+            table = document.getElementById("pendingTable");
+        } else if (t == 2) {
+            table = document.getElementById("filledTable");
+        }
+            switching = true;
+            dir = "asc";
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                for (i = 1; i < (rows.length - 1) ; i++) {
+                    shouldSwitch = false;
+                    x = rows[i].getElementsByTagName("TD")[n];
+                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
 
-  switching = true;
-  dir = "asc";
-  while (switching) {
-	switching = false;
-	rows = table.rows;
-	for (i = 1; i < (rows.length - 1); i++) {
-  	 shouldSwitch = false;
-  	x = rows[i].getElementsByTagName("TD")[n];
-  	 y = rows[i + 1].getElementsByTagName("TD")[n];
-  	if (dir == "asc") {
-    	if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-      	 shouldSwitch = true;
-      	 break;
-    	}
-  	 } else if (dir == "desc") {
-    	if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-      	 shouldSwitch = true;
-      	 break;
-    	}
-  	 }
-	}
-	if (shouldSwitch) {
-  	 rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-  	 switching = true;
-  	switchcount ++;
-	} else {
-  	 if (switchcount == 0 && dir == "asc") {
-    	 dir = "desc";
-    	switching = true;
-  	 }
-	}
-  }
-}
+    
+
+    function searchFunction(n) {
+        var input1, filter1, filter2, filter3, filter4, filter5, table, tr, td, i, rows;
+        
+        
+        if (n == 1) {
+            //input = document.getElementById(t);
+            filter1 = document.querySelector('#searchName1').value.toUpperCase();
+            filter2 = document.querySelector('#searchDate1').value.toUpperCase();
+            filter3 = document.querySelector('#searchPresc1').value.toUpperCase();
+            
+            rows = document.querySelector("#pendingTable tbody").rows;
+        } else if (n == 2) {
+            filter1 = document.querySelector('#searchOrder').value.toUpperCase();
+            filter2 = document.querySelector('#searchName2').value.toUpperCase();
+            filter3 = document.querySelector('#searchItem').value.toUpperCase();
+            filter4 = document.querySelector('#searchDate2').value.toUpperCase();
+            filter5 = document.querySelector('#searchFilled').value.toUpperCase();
+
+            rows = document.querySelector("#filledTable tbody").rows;
+        }
+        
+        if (n == 1) {
+            for (i = 1; i < rows.length; i++) {
+                var nameCol = rows[i].cells[0].textContent.toUpperCase();
+                var dateCol = rows[i].cells[1].textContent.toUpperCase();
+                var prescCol = rows[i].cells[2].textContent.toUpperCase();
+                
+                
+                if (nameCol.indexOf(filter1) > -1 && dateCol.indexOf(filter2) > -1 && prescCol.indexOf(filter3) > -1) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                
+            }
+        }
+
+        if (n == 2) {
+            for (i = 1; i < rows.length; i++) {
+                var orderCol = rows[i].cells[0].textContent.toUpperCase();
+                var nameCol = rows[i].cells[1].textContent.toUpperCase();
+                var itemCol = rows[i].cells[2].textContent.toUpperCase();
+                var dateCol = rows[i].cells[3].textContent.toUpperCase();
+                var filledCol = rows[i].cells[5].textContent.toUpperCase();
+
+                if (orderCol.indexOf(filter1) > -1 && nameCol.indexOf(filter2) > -1 && itemCol.indexOf(filter3) > -1 && dateCol.indexOf(filter4) > -1 && filledCol.indexOf(filter5) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+
+            }
+        }
+    }
 </script>
