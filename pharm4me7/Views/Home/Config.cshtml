@@ -19,6 +19,13 @@
     @Html.ActionLink("Create New Pharmacy User", "Index", "Pharmacists", null, new { @class = "btn btn-info" })
 </div>
 
-    }
+}
+else if (User.IsInRole("Admin"))
+{
+    <h4>@ViewBag.Message2</h4>
+    <div>
+        @Html.ActionLink("Create Administrator Account", "Register", "Account", routeValues: new { role = "Admin" }, htmlAttributes: new { @class = "btn btn-primary", id = "registerLink" })
+    </div>
 
+}
 

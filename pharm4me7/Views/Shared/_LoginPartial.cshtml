@@ -15,6 +15,7 @@
             <li>@Html.ActionLink("Pharmacies", "Index", "Pharmacies")</li>
             <li>@Html.ActionLink("Clinics", "Index", "Clinics")</li>
             <li>@Html.ActionLink("Accounts", "AdminIndex", "Patients")</li>
+            <li > @Html.ActionLink(" ", "Config", "Home", null, new { @class = "glyphicon glyphicon-cog" })</li>
 
         }
         @if (User.IsInRole("Manager"))

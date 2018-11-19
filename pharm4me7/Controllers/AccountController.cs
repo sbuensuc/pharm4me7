@@ -200,6 +200,22 @@ namespace pharm4me7.Controllers
                         return View(model);
                     }
                 }
+                else if (model.RoleName == "Admin")
+                {
+                    
+                        var user = new ApplicationUser { UserName = model.Email, Email = model.Email, RoleName = model.RoleName };
+                        var result = await UserManager.CreateAsync(user, model.Password);
+                        if (result.Succeeded)
+                        {
+                            result = UserManager.AddToRole(user.Id, "Admin");
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                            return RedirectToAction("Index", "Home");
+                        }
+                        AddErrors(result);
+                        return View(model);
+                    
+                }
                 else
                 {
                     Pharmacist check1 = context.Pharmacists.Find(userpin);
