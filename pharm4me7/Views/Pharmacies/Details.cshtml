@@ -41,7 +41,28 @@
         <dd>
             @Html.DisplayFor(model => model.Phone)
         </dd>
-
+        <dt>
+            Users
+        </dt>
+        <dd>
+            <table class="table">
+                @Html.ActionLink("Create New", "Create", "Pharmacists", routeValues: new { clinic = Model.PharmacyId }, htmlAttributes: new { @class = "btn btn-primary" })
+                @foreach (var item in Model.Pharmacists)
+                {
+                    <tr>
+                        <td data-th="Doctor ID">
+                            @Html.DisplayFor(modelItem => item.PharmacyId)
+                        </td>
+                        <td data-th="Name">
+                            @Html.DisplayFor(modelItem => item.LastName), @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td data-th="Address">
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <p>

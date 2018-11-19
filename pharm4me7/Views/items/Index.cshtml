@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<pharm4me7.Models.item>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Items";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 <table class="table">
     <tr>
         <th>

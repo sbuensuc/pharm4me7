@@ -117,6 +117,17 @@ namespace pharm4me7.Controllers
             return View(patients.Distinct().ToList());
         }
 
+        public ActionResult AdminIndex()
+        {
+            var pharmacists = db.Pharmacists.Include(p => p.Pharmacy);
+            var doctors = db.Doctors.Include(d => d.Clinic);
+
+            ViewData["Doctors"] = doctors.ToList();
+            ViewData["Pharmacists"] = pharmacists.ToList();
+            var patients = db.Patients.Include(p => p.Clinic);
+            return View(patients.ToList());
+        }
+
         // GET: Patients/Details/5
         public ActionResult Details(int? id)
         {

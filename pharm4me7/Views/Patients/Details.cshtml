@@ -91,9 +91,12 @@
 
 <h4>Prescriptions</h4>
 
+@if (User.IsInRole("Doctor"))
+{
 <p>
     @Html.ActionLink("Create New", "PrescriptCreate", new { id = Model.PatientId }, new { @class = "btn btn-primary" })
 </p>
+}
 <table id="prescriptTable" class="table">
     <tr>
         <th onclick="sortTable(0)">

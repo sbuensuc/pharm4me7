@@ -12,8 +12,12 @@
         @if (User.IsInRole("Admin"))
         {
             <li>@Html.ActionLink("Items", "Index", "items")</li>
+            <li>@Html.ActionLink("Pharmacies", "Index", "Pharmacies")</li>
+            <li>@Html.ActionLink("Clinics", "Index", "Clinics")</li>
+            <li>@Html.ActionLink("Accounts", "AdminIndex", "Patients")</li>
+
         }
-        @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+        @if (User.IsInRole("Manager"))
         {
             <li>@Html.ActionLink("Customers", "PharmacyIndex", "Patients")</li>
             <li>@Html.ActionLink("Inventory", "Index", "Inventories")</li>
@@ -21,7 +25,7 @@
             <li>@Html.ActionLink("Orders", "PharmacyIndex", "POrderFills")</li>
             <li>@Html.ActionLink(" ", "Config", "Home", null, new { @class = "glyphicon glyphicon-cog" })</li>
         }
-        @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
+        @if (User.IsInRole("Doctor"))
         {
             <li>@Html.ActionLink("Patients", "Index", "Patients")</li>
             <li>@Html.ActionLink("Prescriptions", "Index", "Prescripts")</li>

@@ -23,6 +23,7 @@ namespace pharm4me7.Controllers
         // GET: Pharmacies/Details/5
         public ActionResult Details(int? id)
         {
+            
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -32,6 +33,7 @@ namespace pharm4me7.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ItemId = new SelectList(pharmacy.Pharmacists, "Pharmacists", "Name");
             return View(pharmacy);
         }
 

@@ -1,0 +1,236 @@
+﻿@using pharm4me7.Models
+@model IEnumerable<pharm4me7.Models.Patient>
+
+@{
+    ViewBag.Title = "Patients";
+}
+
+<h2>Accounts</h2>
+
+@*test*@
+
+@{
+    var pharms = (IEnumerable<Pharmacist>)ViewData["Pharmacists"];
+    var docs = (IEnumerable<Doctor>)ViewData["Doctors"];
+}
+
+<p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
+    {
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    }
+</p>
+<input type="text" id="searchRole" onkeyup="searchFunction()" placeholder="Role...">
+<input type="text" id="searchFName" onkeyup="searchFunction()" placeholder="First Name...">
+<input type="text" id="searchLName" onkeyup="searchFunction()" placeholder="Last Name...">
+<input type="text" id="searchLocation" onkeyup="searchFunction()" placeholder="Clinic/Pharmacy...">
+<table id="accountTable"class="table">
+    <tr>
+        <th onclick="sortTable(0)">
+            Role
+            @*@Html.ActionLink("First Name", "PharmacyIndex", new { sortOrder = ViewBag.FnameParm })*@
+        </th>
+        <th onclick="sortTable(1)">
+            First Name
+            
+            @*@Html.ActionLink("Last Name", "PharmacyIndex", new { sortOrder = ViewBag.LnameParm })*@
+        </th>
+        <th onclick="sortTable(2)">
+            Last Name
+        </th>
+        <th onclick="sortTable(3)">
+               Clinic/Pharmacy
+            </th>
+        <th onclick="sortTable(4)">
+            ID
+        </th>
+            <th onclick="sortTable(5)">
+                User Name
+                @*@Html.ActionLink("City", "PharmacyIndex", new { sortOrder = ViewBag.CityParm })*@
+            </th>
+            
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td data-th="Role">
+                Patient
+            </td>
+            <td data-th="First Name">
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td data-th="Last Name">
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td @*data-th="Healthcard #"*@>
+                @Html.DisplayFor(modelItem => item.Clinic.Name)
+            </td>
+            <td @*data-th="Address"*@>
+                    @Html.DisplayFor(modelItem => item.PatientId)
+                </td>
+                <td @*data-th="City"*@>
+                    @*@Html.DisplayFor(modelItem => item.*@
+                </td>
+                
+            <td data-th="Action">
+                <div class="btn-group">
+                    @Html.ActionLink("Details", "Details", new { id = item.PatientId }, new { @class = "btn btn-info" })
+                    @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
+                {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PatientId }, new { @class = "btn btn-success" })}
+                    @if (User.IsInRole("Admin"))
+                {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PatientId }, new { @class = "btn btn-danger" })
+                    }
+                </div>
+            </td>
+        </tr>
+        
+    }
+
+    @foreach (var item in docs)
+    {
+        <tr>
+            <td data-th="Role">
+                Doctor
+            </td>
+            <td data-th="First Name">
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td data-th="Last Name">
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td @*data-th="Healthcard #"*@>
+                @Html.DisplayFor(modelItem => item.Clinic.Name)
+            </td>
+            <td @*data-th="Address"*@>
+                @Html.DisplayFor(modelItem => item.DoctorId)
+            </td>
+            <td @*data-th="City"*@>
+                @*@Html.DisplayFor(modelItem => item.*@
+            </td>
+
+            <td data-th="Action">
+                <div class="btn-group">
+                    @Html.ActionLink("Details", "Details", "Doctors", new { id = item.DoctorId }, new { @class = "btn btn-info" })
+                    @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
+                {
+                        @Html.ActionLink("Edit", "Edit", "Doctors", new { id = item.DoctorId }, new { @class = "btn btn-success" })}
+                    @if (User.IsInRole("Admin"))
+                {
+                        @Html.ActionLink("Delete", "Delete", "Doctors", new { id = item.DoctorId }, new { @class = "btn btn-danger" })
+                    }
+                </div>
+            </td>
+        </tr>
+
+    }
+
+    @foreach (var item in pharms)
+    {
+        <tr>
+            <td data-th="Role">
+                Pharmacist
+            </td>
+            <td data-th="First Name">
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td data-th="Last Name">
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td @*data-th="Healthcard #"*@>
+                @Html.DisplayFor(modelItem => item.Pharmacy.Name)
+            </td>
+            <td @*data-th="Address"*@>
+                @Html.DisplayFor(modelItem => item.PharmacistId)
+            </td>
+            <td @*data-th="City"*@>
+                @*@Html.DisplayFor(modelItem => item.*@
+            </td>
+
+            <td data-th="Action">
+                <div class="btn-group">
+                    @Html.ActionLink("Details", "Details", "Pharmacists", new { id = item.PharmacistId }, new { @class = "btn btn-info" })
+                    @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
+                {
+                        @Html.ActionLink("Edit", "Edit", "Pharmacists", new { id = item.PharmacistId }, new { @class = "btn btn-success" })}
+                    @if (User.IsInRole("Admin"))
+                {
+                        @Html.ActionLink("Delete", "Delete", "Pharmacists", new { id = item.PharmacistId }, new { @class = "btn btn-danger" })
+                    }
+                </div>
+            </td>
+        </tr>
+
+    }
+
+</table>
+
+<script>
+    function searchFunction() {
+        var input1, filter1, filter2, filter3, filter4, td, i, rows;
+
+            filter1 = document.querySelector('#searchRole').value.toUpperCase();
+            filter2 = document.querySelector('#searchFName').value.toUpperCase();
+            filter3 = document.querySelector('#searchLName').value.toUpperCase();
+            filter4 = document.querySelector('#searchLocation').value.toUpperCase();
+
+            rows = document.querySelector("#accountTable tbody").rows;
+        
+
+            for (i = 1; i < rows.length; i++) {
+                var roleCol = rows[i].cells[0].textContent.toUpperCase();
+                var fNameCol = rows[i].cells[1].textContent.toUpperCase();
+                var lNameCol = rows[i].cells[2].textContent.toUpperCase();
+                var locationCol = rows[i].cells[3].textContent.toUpperCase();
+
+
+                if (roleCol.indexOf(filter1) > -1 && fNameCol.indexOf(filter2) > -1 && lNameCol.indexOf(filter3) > -1 && locationCol.indexOf(filter4) > -1) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+
+            }
+        
+    }
+
+function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    table = document.getElementById("patientTable");
+    switching = true;
+    dir = "asc";
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1) ; i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            switchcount++;
+        } else {
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    }
+}
+</script>

@@ -40,8 +40,13 @@ namespace pharm4me7.Controllers
         }
 
         // GET: Doctors/Create
-        public ActionResult Create()
+        public ActionResult Create(/*int? c*/)
         {
+            //if (c != null)
+            //{
+            //    ViewData["Clinic"] = c;
+            //}
+            
             ViewBag.ClinicId = new SelectList(db.Clinics, "ClinicId", "Name");
             return View();
         }
@@ -55,9 +60,10 @@ namespace pharm4me7.Controllers
         {
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var currentUser = manager.FindById(User.Identity.GetUserId());
-
-            doctor.ClinicId = currentUser.Doctor.ClinicId;
-
+            if (doctor.ClinicId == null)
+            {
+                doctor.ClinicId = currentUser.Doctor.ClinicId;
+            }
             if (ModelState.IsValid)
             {
                 db.Doctors.Add(doctor);
