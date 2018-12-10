@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using pharm4me7.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Net.Mail;
+using System.Text;
 
 namespace pharm4me7.Controllers
 {
@@ -136,12 +138,42 @@ namespace pharm4me7.Controllers
             inventory.Amount = inventory.Amount - pOrder.Prescript.Disp;
             pOrderFill.Ready = true;
 
+            string orderNum = pOrderFill.POrderId.ToString();
+            string patientEmail = pOrderFill.POrder.Prescript.Patient.Email;
+
             if (ModelState.IsValid)
             {
                 db.Entry(inventory).State = EntityState.Modified;
                 db.Entry(pOrder).State = EntityState.Modified;
                 db.POrderFills.Add(pOrderFill);
                 db.SaveChanges();
+
+                string senderEmail = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"].ToString();
+                string senderPassword = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"].ToString();
+
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
+                client.Timeout = 100000;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+
+                client.Credentials = new NetworkCredential(senderEmail, senderPassword);
+
+
+
+                string toEmail = patientEmail;
+                string subject = "Your order is ready #" + orderNum;
+                string body = "Hello " + pOrderFill.POrder.Prescript.Patient.FirstName + ", \n\n Your prescription order is ready for pickup \n Order #" + orderNum + "\n \n " + pOrderFill.POrder.Pharmacy.Name;
+
+
+                MailMessage mailMessage = new MailMessage(senderEmail, toEmail, subject, body);
+                mailMessage.IsBodyHtml = true;
+                mailMessage.BodyEncoding = UTF8Encoding.UTF8;
+                client.Send(mailMessage);
+
+
+                
+
                 return RedirectToAction("PharmacyIndex");
             }
 

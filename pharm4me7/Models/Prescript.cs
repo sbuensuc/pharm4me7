@@ -41,6 +41,8 @@ namespace pharm4me7.Models
 
         public bool? Sent { get; set; }
 
+        public int? RefillsUsed { get; set; }
+
         public virtual Doctor Doctor { get; set; }
 
         public virtual item item { get; set; }

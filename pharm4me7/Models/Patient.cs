@@ -43,6 +43,9 @@ namespace pharm4me7.Models
         [DataType(DataType.Date)]
         public DateTime? Birth { get; set; }
 
+        [StringLength(50)]
+        public string Email { get; set; }
+
         public int? ClinicId { get; set; }
 
         public virtual Clinic Clinic { get; set; }

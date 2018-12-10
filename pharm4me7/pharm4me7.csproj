@@ -217,6 +217,14 @@
     <Compile Include="Migrations\201810291055580_EditPhoneDataType.Designer.cs">
       <DependentUpon>201810291055580_EditPhoneDataType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812101329463_patientaddemailcolumn.cs" />
+    <Compile Include="Migrations\201812101329463_patientaddemailcolumn.Designer.cs">
+      <DependentUpon>201812101329463_patientaddemailcolumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812101420029_prescriptaddcolumnRefillsUsed.cs" />
+    <Compile Include="Migrations\201812101420029_prescriptaddcolumnRefillsUsed.Designer.cs">
+      <DependentUpon>201812101420029_prescriptaddcolumnRefillsUsed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChangeLog.cs" />
@@ -457,6 +465,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810291055580_EditPhoneDataType.resx">
       <DependentUpon>201810291055580_EditPhoneDataType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812101329463_patientaddemailcolumn.resx">
+      <DependentUpon>201812101329463_patientaddemailcolumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812101420029_prescriptaddcolumnRefillsUsed.resx">
+      <DependentUpon>201812101420029_prescriptaddcolumnRefillsUsed.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
