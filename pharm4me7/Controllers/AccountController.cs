@@ -173,6 +173,7 @@ namespace pharm4me7.Controllers
                         {
                             result = UserManager.AddToRole(user.Id, "Patient");
                             await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                            
 
                             return RedirectToAction("Index", "Home");
                         }
