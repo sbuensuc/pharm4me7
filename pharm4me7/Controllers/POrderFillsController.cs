@@ -138,7 +138,7 @@ namespace pharm4me7.Controllers
             inventory.Amount = inventory.Amount - pOrder.Prescript.Disp;
             pOrderFill.Ready = true;
 
-            string orderNum = pOrderFill.POrderId.ToString();
+            string orderNum = pOrderFill.POrderFillId.ToString();
             string patientEmail = pOrder.Prescript.Patient.Email.ToString();
 
             if (ModelState.IsValid)
