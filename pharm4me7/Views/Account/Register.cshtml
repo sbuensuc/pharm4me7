@@ -53,7 +53,7 @@
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
     </div>
-    @if (User.IsInRole("Manager")|| User.IsInRole("Doctor")|| User.IsInRole("Patient"))
+    if (User.IsInRole("Manager")|| User.IsInRole("Doctor")|| User.IsInRole("Patient"))
     {
     <div class="form-group">
         @Html.LabelFor(m => m.pin, new { @class = "col-md-2 control-label" })
