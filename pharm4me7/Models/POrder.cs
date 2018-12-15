@@ -32,6 +32,8 @@ namespace pharm4me7.Models
 
         public bool? Accept { get; set; }
 
+        public bool? Refill { get; set; }
+
         public virtual Pharmacy Pharmacy { get; set; }
 
         public virtual Prescript Prescript { get; set; }

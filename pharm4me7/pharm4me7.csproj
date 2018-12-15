@@ -225,6 +225,10 @@
     <Compile Include="Migrations\201812101420029_prescriptaddcolumnRefillsUsed.Designer.cs">
       <DependentUpon>201812101420029_prescriptaddcolumnRefillsUsed.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812152234461_porderRefill.cs" />
+    <Compile Include="Migrations\201812152234461_porderRefill.Designer.cs">
+      <DependentUpon>201812152234461_porderRefill.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChangeLog.cs" />
@@ -471,6 +475,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812101420029_prescriptaddcolumnRefillsUsed.resx">
       <DependentUpon>201812101420029_prescriptaddcolumnRefillsUsed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812152234461_porderRefill.resx">
+      <DependentUpon>201812152234461_porderRefill.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -158,7 +158,7 @@ namespace pharm4me7.Controllers
 
                 string toEmail = patientEmail;
                 string subject = "Your order is ready - #" + orderNum;
-                string body = "<p> Hello " + pOrder.Prescript.Patient.FirstName + ",<br/> Your prescription order is ready for pickup <br />Order #" + orderNum + "<br /><br /> " + pOrder.Pharmacy.Name + "</p>";
+                string body = "<p> Hello " + pOrder.Prescript.Patient.FirstName + ",<br/> Your prescription order is ready for pickup <br />Order #" + orderNum + "<br /> <a href='http://pharm4metest.azurewebsites.net/'>Pharm4me</a><br /><br /> " + pOrder.Pharmacy.Name + "</p>";
 
 
                 MailMessage mailMessage = new MailMessage(senderEmail, toEmail, subject, body);
