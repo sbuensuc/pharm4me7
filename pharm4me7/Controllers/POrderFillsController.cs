@@ -139,31 +139,26 @@ namespace pharm4me7.Controllers
             pOrderFill.Ready = true;
 
             string orderNum = pOrderFill.POrderId.ToString();
-            string patientEmail = pOrderFill.POrder.Prescript.Patient.Email;
+            string patientEmail = pOrder.Prescript.Patient.Email.ToString();
 
             if (ModelState.IsValid)
             {
-                db.Entry(inventory).State = EntityState.Modified;
-                db.Entry(pOrder).State = EntityState.Modified;
-                db.POrderFills.Add(pOrderFill);
-                db.SaveChanges();
-
                 string senderEmail = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"].ToString();
-                string senderPassword = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"].ToString();
+                string senderPassword = System.Configuration.ConfigurationManager.AppSettings["SenderPassword"].ToString();
 
-                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                SmtpClient client = new SmtpClient("smtp-mail.outlook.com", 587);
                 client.EnableSsl = true;
                 client.Timeout = 100000;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
-
-                client.Credentials = new NetworkCredential(senderEmail, senderPassword);
+                NetworkCredential loginInfo = new NetworkCredential(senderEmail, senderPassword);
+                client.Credentials = loginInfo;
 
 
 
                 string toEmail = patientEmail;
-                string subject = "Your order is ready #" + orderNum;
-                string body = "Hello " + pOrderFill.POrder.Prescript.Patient.FirstName + ", \n\n Your prescription order is ready for pickup \n Order #" + orderNum + "\n \n " + pOrderFill.POrder.Pharmacy.Name;
+                string subject = "Your order is ready - #" + orderNum;
+                string body = "<p> Hello " + pOrder.Prescript.Patient.FirstName + ",<br/> Your prescription order is ready for pickup <br />Order #" + orderNum + "<br /><br /> " + pOrder.Pharmacy.Name + "</p>";
 
 
                 MailMessage mailMessage = new MailMessage(senderEmail, toEmail, subject, body);
@@ -171,6 +166,13 @@ namespace pharm4me7.Controllers
                 mailMessage.BodyEncoding = UTF8Encoding.UTF8;
                 client.Send(mailMessage);
 
+
+                db.Entry(inventory).State = EntityState.Modified;
+                db.Entry(pOrder).State = EntityState.Modified;
+                db.POrderFills.Add(pOrderFill);
+                db.SaveChanges();
+
+                
 
                 
 

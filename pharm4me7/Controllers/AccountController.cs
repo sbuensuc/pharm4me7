@@ -12,11 +12,12 @@ using pharm4me7.Models;
 
 namespace pharm4me7.Controllers
 {
-    //test
+    
 
     [Authorize]
     public class AccountController : Controller
     {
+        private Pharm4MeContext db = new Pharm4MeContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -169,11 +170,16 @@ namespace pharm4me7.Controllers
                     {
                         var user = new ApplicationUser { UserName = model.Email, Email = model.Email, RoleName = model.RoleName, PatientId = model.pin };
                         var result = await UserManager.CreateAsync(user, model.Password);
+                        
                         if (result.Succeeded)
                         {
                             result = UserManager.AddToRole(user.Id, "Patient");
                             await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                            
+
+                            Patient patient = db.Patients.Find(userpin);
+                            patient.Email = model.Email;
+                            db.SaveChanges();
+
 
                             return RedirectToAction("Index", "Home");
                         }
@@ -195,6 +201,8 @@ namespace pharm4me7.Controllers
                             result = UserManager.AddToRole(user.Id, "Doctor");
                             await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                            
+
                             return RedirectToAction("Index", "Home");
                         }
                         AddErrors(result);
@@ -210,6 +218,7 @@ namespace pharm4me7.Controllers
                         {
                             result = UserManager.AddToRole(user.Id, "Admin");
                             await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
 
                             return RedirectToAction("Index", "Home");
                         }
@@ -227,8 +236,12 @@ namespace pharm4me7.Controllers
                         var result = await UserManager.CreateAsync(user, model.Password);
                         if (result.Succeeded)
                         {
+
+                            
                             result = UserManager.AddToRole(user.Id, "Manager");
                             await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                            
 
                             return RedirectToAction("Index", "Home");
                         }
