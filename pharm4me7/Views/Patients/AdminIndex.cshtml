@@ -14,12 +14,6 @@
     var docs = (IEnumerable<Doctor>)ViewData["Doctors"];
 }
 
-<p>
-    @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
-    {
-        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-    }
-</p>
 <input type="text" id="searchRole" onkeyup="searchFunction()" placeholder="Role...">
 <input type="text" id="searchFName" onkeyup="searchFunction()" placeholder="First Name...">
 <input type="text" id="searchLName" onkeyup="searchFunction()" placeholder="Last Name...">
