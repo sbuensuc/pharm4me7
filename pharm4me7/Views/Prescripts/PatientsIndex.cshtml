@@ -144,7 +144,7 @@
         </th>
 
         <th onclick="sortTable(7, 2)">
-            Refills
+            Refills Rmng.
         </th>
         <th onclick="sortTable(8, 2)">
             Prescribed By
@@ -193,7 +193,7 @@
             }
             else if (item.Sent == true && refillsLeft > 0 && item.Ordered == true)
                 {
-                @: Ordered @Html.ActionLink("Order Refill", "PorderCreateRefill", new { id = item.PrescriptId }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Order Refill", "PorderCreateRefill", new { id = item.PrescriptId }, new { @class = "btn btn-primary" })
                 }
             else
                 {
