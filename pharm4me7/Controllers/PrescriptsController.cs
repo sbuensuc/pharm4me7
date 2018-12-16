@@ -102,8 +102,7 @@ namespace pharm4me7.Controllers
             return View(prescripts.ToList());
         }
 
-        [ActionName("PorderCreate")]
-        public ActionResult Create(int? id)
+        public ActionResult PorderCreate(int? id)
         {
             Prescript prescript = db.Prescripts.Find(id);
             POrder model = new POrder();
@@ -125,18 +124,41 @@ namespace pharm4me7.Controllers
             return View(model);
         }
 
+        public ActionResult PorderCreateRefill(int? id)
+        {
+            Prescript prescript = db.Prescripts.Find(id);
+            POrder model = new POrder();
+
+            var pharmacies = db.Pharmacies.ToList();
+
+            IEnumerable<SelectListItem> selectList = from p in pharmacies
+                                                     select new SelectListItem
+                                                     {
+                                                         Value = p.PharmacyId.ToString(),
+                                                         Text = string.Format("{0} - {1}, {2}", p.Name, p.Address, p.City)
+                                                     };
+
+
+
+            ViewBag.PharmacyId = new SelectList(selectList, "Value", "Text");
+            ViewData["Prescript"] = prescript;
+            model.PrescriptId = prescript.PrescriptId;
+            return View(model);
+        }
+
         // POST: POrders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [ActionName("PorderCreate")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "POrderId,PrescriptId,PharmacyId,DateOrdered,Note,Fill,Deny,Accept")] POrder pOrder)
+        public ActionResult PorderCreate([Bind(Include = "POrderId,PrescriptId,PharmacyId,DateOrdered,Note,Fill,Deny,Accept")] POrder pOrder)
         {
             pOrder.DateOrdered = System.DateTime.Now;
             pOrder.Deny = false;
             pOrder.Fill = false;
             pOrder.Accept = false;
+            pOrder.Refill = false;
+          
             if (ModelState.IsValid)
             {
                 var prectiptToUpdate = db.Prescripts.Find(pOrder.PrescriptId);
@@ -152,7 +174,39 @@ namespace pharm4me7.Controllers
             return View(pOrder);
         }
 
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PorderCreateRefill([Bind(Include = "POrderId,PrescriptId,PharmacyId,DateOrdered,Note,Fill,Deny,Accept")] POrder pOrder)
+        {
+            pOrder.DateOrdered = System.DateTime.Now;
+            pOrder.Deny = false;
+            pOrder.Fill = false;
+            pOrder.Accept = false;
+
+            POrderFill pOrderFillCheck = new POrderFill();
+            pOrderFillCheck = db.POrderFills.Where(p => p.POrder.PrescriptId == pOrder.PrescriptId).First();
+            pOrder.Refill = true;
+            int pharmacy = pOrderFillCheck.POrder.PharmacyId;
+
+
+            if (ModelState.IsValid)
+            {
+                var prectiptToUpdate = db.Prescripts.Find(pOrder.PrescriptId);
+                prectiptToUpdate.Sent = true;
+                db.Entry(prectiptToUpdate).State = EntityState.Modified;
+                db.POrders.Add(pOrder);
+                pOrder.Prescript.Ordered = false;
+                pOrder.PharmacyId = pharmacy;
+                db.SaveChanges();
+                return RedirectToAction("PatientsIndex");
+            }
+
+            ViewBag.PharmacyId = new SelectList(db.Pharmacies, "PharmacyId", "Name", pOrder.PharmacyId);
+            ViewBag.PrescriptId = new SelectList(db.Prescripts, "PrescriptId", "DispType", pOrder.PrescriptId);
+            return View(pOrder);
+        }
+
+
 
         // GET: Prescripts/Details/5
         public ActionResult Details(int? id)
@@ -196,7 +250,12 @@ namespace pharm4me7.Controllers
         public ActionResult Create([Bind(Include = "PrescriptId,PatientId,ItemId,Date,Disp,DispType,Sig,Sub,Refill")] Prescript prescript)
         {
             prescript.Date = System.DateTime.Now;
+            if (prescript.Refill == null)
+            {
+                prescript.Refill = 0;
+            }
             prescript.RefillsUsed = 0;
+            prescript.Ordered = false;
             if (ModelState.IsValid)
             {
                 db.Prescripts.Add(prescript);

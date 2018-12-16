@@ -26,15 +26,18 @@
             Prescription
         </th>
         <th onclick="sortTable(3,1)">
-            Brand
+            Type
         </th>
         <th onclick="sortTable(4,1)">
-            Refills
+            Brand
+        </th>
+        <th onclick="sortTable(5,1)">
+            Refills Rmng.
         </th>
         <th>
             Note
         </th>
-        <th onclick="sortTable(5,1)">
+        <th onclick="sortTable(6,1)">
             Status
         </th>
         <th></th>
@@ -42,6 +45,7 @@
 
     @foreach (var item in prod)
     {
+        int? refillsLeft = item.Prescript.Refill - item.Prescript.RefillsUsed;
         if (item.Accept == true && item.Fill == false)
         {
     <tr>
@@ -54,13 +58,23 @@
         <td data-th="Prescription">
             @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
         </td>
+        <td data-th="Type">
+            @if (item.Refill == true)
+                    {
+                @: REFILL
+                    }
+                    else
+                    {
+                @: REQUEST
+                    }
+        </td>
         <td data-th="Brand">
             @Html.DisplayFor(modelItem => item.Prescript.Sub)
         </td>
 
 
         <td data-th="Refills">
-            @Html.DisplayFor(modelItem => item.Prescript.Refill)
+            @refillsLeft.ToString()
         </td>
         <td data-th="Note">
             @Html.DisplayFor(modelItem => item.Note)

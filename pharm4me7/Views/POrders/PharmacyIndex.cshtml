@@ -27,7 +27,7 @@
             Brand
         </th>
         <th onclick="sortTable(4,1)">
-            Refills
+            Refills Rmng.
         </th>
         <th>
             Note
@@ -38,11 +38,15 @@
         <th onclick="sortTable(6,1)" data-th="Physician">
             Physician
         </th>
+        <th onclick="sortTable(6,1)" data-th="Type">
+            Type
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
+        int? refillsLeft = item.Prescript.Refill - item.Prescript.RefillsUsed;
         if (item.Accept == false && item.Deny == false)
         {
             <tr>
@@ -61,7 +65,7 @@
 
 
                 <td data-th="Refills">
-                    @Html.DisplayFor(modelItem => item.Prescript.Refill)
+                    @refillsLeft.ToString()
                 </td>
                 <td data-th="Note">
                     @Html.DisplayFor(modelItem => item.Note)
@@ -69,13 +73,36 @@
                 <td data-th="Clinic">
                     @Html.DisplayFor(modelItem => item.Prescript.Doctor.Clinic.Name)
                 </td>
+                <td data-th="Physician">
+                    @Html.DisplayFor(modelItem => item.Prescript.Doctor.LastName), @Html.DisplayFor(modelItem => item.Prescript.Doctor.FirstName)
+                </td>
+                <td data-th="Type">
+                    @if (item.Refill == true)
+                    {
+                        @: REFILL
+                    }
+                    else
+                    {
+                        @: REQUEST
+                    }
 
+                </td>
                 <td data-th="Action">
+                     @if (item.Refill == true)
+                     {
+                        <div class="btn-group">
+                            @Html.ActionLink("Info", "Details", "Prescripts", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
+                            @Html.ActionLink("Accept", "PharmacyIndex", new { id = item.POrderId }, new { @class = "btn btn-primary" })
+                        </div>
+                     }
+                     else
+                     {
                     <div class="btn-group">
                         @Html.ActionLink("Info", "Details", "Prescripts", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
                         @Html.ActionLink("Accept", "PharmacyIndex", new { id = item.POrderId }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("Deny", "Edit", new { id = item.POrderId }, new { @class = "btn btn-danger" })
                     </div>
+                     }
                 </td>
             </tr>
         }
@@ -114,7 +141,7 @@
 
     @foreach (var item in Model)
     {
-        if (item.Accept == true && item.Fill == false)
+        if (item.Accept == true && item.Fill == false && item.Refill == false)
         {
             <tr>
                 <td data-th="Name">
@@ -174,6 +201,7 @@
 
     @foreach (var item in Model)
     {
+        int? refillsLeft = item.Prescript.Refill - item.Prescript.RefillsUsed;
         if (item.Accept == true && item.Fill == true)
         {
             <tr>
@@ -192,7 +220,7 @@
 
 
                 <td data-th="Refills">
-                    @Html.DisplayFor(modelItem => item.Prescript.Refill)
+                    @refillsLeft.ToString()
                 </td>
                 <td data-th="Note">
                     @Html.DisplayFor(modelItem => item.Note)

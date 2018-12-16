@@ -229,6 +229,10 @@
     <Compile Include="Migrations\201812152234461_porderRefill.Designer.cs">
       <DependentUpon>201812152234461_porderRefill.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812160347369_patientOrderedColumnAdd.cs" />
+    <Compile Include="Migrations\201812160347369_patientOrderedColumnAdd.Designer.cs">
+      <DependentUpon>201812160347369_patientOrderedColumnAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ChangeLog.cs" />
@@ -446,6 +450,7 @@
     <Content Include="Views\Doctors\Edit.cshtml" />
     <Content Include="Views\Pharmacists\Edit.cshtml" />
     <Content Include="Views\Pharmacists\Delete.cshtml" />
+    <Content Include="Views\Prescripts\PorderCreateRefill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -478,6 +483,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812152234461_porderRefill.resx">
       <DependentUpon>201812152234461_porderRefill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812160347369_patientOrderedColumnAdd.resx">
+      <DependentUpon>201812160347369_patientOrderedColumnAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

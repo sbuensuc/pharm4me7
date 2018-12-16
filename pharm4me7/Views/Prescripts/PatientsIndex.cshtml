@@ -36,6 +36,9 @@
             Status
         </th>
         <th onclick="sortTable(8,1)">
+            Order Type
+        </th>
+        <th>
             Reason
         </th>
     </tr>
@@ -47,7 +50,6 @@
         {
             <tr>
                 <td data-th="ID">
->
                     @Html.DisplayFor(modelItem => i.PrescriptId)
                 </td>
                 <td data-th="Date">
@@ -94,6 +96,17 @@
                     }
 
                 </td>
+                <td data-th="OrderType">
+                    @if (i.Refill == false)
+                    {
+                        @:Initial Order
+                        }
+                    else
+                    {
+                        @:Refill
+                        }
+                </td>
+
                 <td data-th="Reason">
                     @Html.DisplayFor(modelItem => i.Note)
                 </td>
@@ -131,7 +144,7 @@
         </th>
 
         <th onclick="sortTable(7, 2)">
-            @Html.DisplayNameFor(model => model.Refill)
+            Refills
         </th>
         <th onclick="sortTable(8, 2)">
             Prescribed By
@@ -141,52 +154,53 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td data-th="Prescription ID">
-                @Html.DisplayFor(modelItem => item.PrescriptId)
-            </td>
-            <td data-th="Date">
-                @if (item.Date.HasValue)
+        int? refillsLeft = item.Refill - item.RefillsUsed;
+    <tr>
+        <td data-th="Prescription ID">
+            @Html.DisplayFor(modelItem => item.PrescriptId)
+        </td>
+        <td data-th="Date">
+            @if (item.Date.HasValue)
                 {
-                    @item.Date.Value.ToString("MMM-dd-yyyy")
-                }
-            </td>
-            <td data-th="Item Prescribed">
-                @Html.DisplayFor(modelItem => item.item.Name)
-            </td>
-            <td data-th="Brand">
-                @Html.DisplayFor(modelItem => item.Sub)
-            </td>
-            <td data-th="Amount Prescribed">
-                @Html.DisplayFor(modelItem => item.Disp)
-            </td>
-            <td data-th="Unit Type">
-                @Html.DisplayFor(modelItem => item.DispType)
-            </td>
-            <td data-th="Details">
-                @Html.DisplayFor(modelItem => item.Sig)
-            </td>
-            <td data-th="Refill">
-                @Html.DisplayFor(modelItem => item.Refill)
-            </td>
-            <td data-th="Prescribed By">
-                @Html.DisplayFor(modelItem => item.Doctor.LastName), @Html.DisplayFor(modelItem => item.Doctor.FirstName)
-            </td>
-            <td data-th="Status">
-                @if (item.Sent == false || item.Sent == null)
+                @item.Date.Value.ToString("MMM-dd-yyyy")
+            }
+        </td>
+        <td data-th="Item Prescribed">
+            @Html.DisplayFor(modelItem => item.item.Name)
+        </td>
+        <td data-th="Brand">
+            @Html.DisplayFor(modelItem => item.Sub)
+        </td>
+        <td data-th="Amount Prescribed">
+            @Html.DisplayFor(modelItem => item.Disp)
+        </td>
+        <td data-th="Unit Type">
+            @Html.DisplayFor(modelItem => item.DispType)
+        </td>
+        <td data-th="Details">
+            @Html.DisplayFor(modelItem => item.Sig)
+        </td>
+        <td data-th="Refill">
+                @refillsLeft.ToString()
+        </td>
+        <td data-th="Prescribed By">
+            @Html.DisplayFor(modelItem => item.Doctor.LastName), @Html.DisplayFor(modelItem => item.Doctor.FirstName)
+        </td>
+        <td data-th="Status">
+            @if (item.Sent == false || item.Sent == null)
                 {
-                    <text>@Html.ActionLink("Order", "PorderCreate", new { id = item.PrescriptId }, new { @class = "btn btn-primary" })</text>
-                }
-                @if (item.Sent == true)
+                <text>@Html.ActionLink("Order", "PorderCreate", new { id = item.PrescriptId }, new { @class = "btn btn-primary" })</text>
+            }
+            else if (item.Sent == true && refillsLeft > 0 && item.Ordered == true)
                 {
-                    @: Ordered
+                @: Ordered @Html.ActionLink("Order Refill", "PorderCreateRefill", new { id = item.PrescriptId }, new { @class = "btn btn-primary" })
                 }
-                @if (item.Sent == true)
+            else
                 {
-                    @: Ordered
+                @: Ordered
                 }
-            </td>
-        </tr>
+        </td>
+    </tr>
     }
 
 </table>

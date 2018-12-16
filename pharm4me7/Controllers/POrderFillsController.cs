@@ -133,6 +133,7 @@ namespace pharm4me7.Controllers
 
             POrder pOrder = db.POrders.Find(pOrderFill.POrderId);
             pOrder.Fill = true;
+            pOrder.Prescript.RefillsUsed += 1;
 
             Inventory inventory = db.Inventories.Find(pOrderFill.InventoryId);
             inventory.Amount = inventory.Amount - pOrder.Prescript.Disp;
@@ -215,6 +216,7 @@ namespace pharm4me7.Controllers
 
             POrder pOrder = db.POrders.Find(pOrderFill.POrderId);
             pOrder.Deny = true;
+            pOrder.Prescript.Ordered = true;
 
             if (ModelState.IsValid)
             {

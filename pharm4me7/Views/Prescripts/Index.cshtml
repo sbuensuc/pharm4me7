@@ -54,6 +54,9 @@
             @Html.DisplayNameFor(model => model.Refill)
         </th>
         <th onclick="sortTable(9)">
+            Refills Used
+        </th>
+        <th onclick="sortTable(10)">
             Prescribed By
            @*@Html.ActionLink("Prescribed By", "Index", new { sortOrder = ViewBag.DocSortParm })*@
         </th>
@@ -88,6 +91,9 @@
         </td>
         <td data-th="Refill" data-th="Refill">
             @Html.DisplayFor(modelItem => item.Refill)
+        </td>
+        <td data-th="Refill" data-th="Refill">
+            @Html.DisplayFor(modelItem => item.RefillsUsed)
         </td>
         <td data-th="Prescribed By" data-th="Prescribed By">
             @Html.DisplayFor(modelItem => item.Doctor.LastName), @Html.DisplayFor(modelItem => item.Doctor.FirstName)
@@ -128,7 +134,7 @@
             var fNameCol = rows[i].cells[1].textContent.toUpperCase();
             var lNameCol = rows[i].cells[2].textContent.toUpperCase();
             var dateCol = rows[i].cells[3].textContent.toUpperCase();
-            var prescCol = rows[i].cells[9].textContent.toUpperCase();
+            var prescCol = rows[i].cells[10].textContent.toUpperCase();
 
 
             if (itemCol.indexOf(filter1) > -1 && fNameCol.indexOf(filter2) > -1 && lNameCol.indexOf(filter3) > -1 && dateCol.indexOf(filter4) > -1 && prescCol.indexOf(filter5) > -1) {

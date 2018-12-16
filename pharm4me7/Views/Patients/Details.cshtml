@@ -126,9 +126,12 @@
             Brand
         </th>
         <th onclick="sortTable(6)">
-            Refill
+            Refills
         </th>
         <th onclick="sortTable(7)">
+            Refills Used
+        </th>
+        <th onclick="sortTable(8)">
             Prescribed By
         </th>
         <th></th>
@@ -157,6 +160,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Refill)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RefillsUsed)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Doctor.LastName), @Html.DisplayFor(modelItem => item.Doctor.FirstName)
