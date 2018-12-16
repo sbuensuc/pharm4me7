@@ -11,7 +11,7 @@
 <input type="text" id="searchPres1" onkeyup="searchFunction(1)" placeholder="Prescription...">
 <input type="text" id="searchClinic" onkeyup="searchFunction(1)" placeholder="Clinic...">
 <input type="text" id="searchPhys" onkeyup="searchFunction(1)" placeholder="Physician...">
-<table id="requestTable"class="table">
+<table id="requestTable" class="table">
 
     <tr>
         <th onclick="sortTable(0,1)">
@@ -47,6 +47,9 @@
     @foreach (var item in Model)
     {
         int? refillsLeft = item.Prescript.Refill - item.Prescript.RefillsUsed;
+
+        string date = item.DateOrdered.Value.ToString("dd/MM/yyyy");
+
         if (item.Accept == false && item.Deny == false)
         {
             <tr>
@@ -54,7 +57,7 @@
                     @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
                 </td>
                 <td data-th="Date">
-                    @Html.DisplayFor(modelItem => item.DateOrdered)
+                    @date
                 </td>
                 <td data-th="Prescription">
                     @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
@@ -88,27 +91,29 @@
 
                 </td>
                 <td data-th="Action">
-                     @if (item.Refill == true)
-                     {
+                    @if (item.Refill == true)
+                    {
                         <div class="btn-group">
                             @Html.ActionLink("Info", "Details", "Prescripts", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
                             @Html.ActionLink("Accept", "PharmacyIndex", new { id = item.POrderId }, new { @class = "btn btn-primary" })
                         </div>
-                     }
-                     else
-                     {
-                    <div class="btn-group">
-                        @Html.ActionLink("Info", "Details", "Prescripts", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
-                        @Html.ActionLink("Accept", "PharmacyIndex", new { id = item.POrderId }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Deny", "Edit", new { id = item.POrderId }, new { @class = "btn btn-danger" })
-                    </div>
-                     }
+                    }
+                    else
+                    {
+                        <div class="btn-group">
+                            @Html.ActionLink("Info", "Details", "Prescripts", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
+                            @Html.ActionLink("Accept", "PharmacyIndex", new { id = item.POrderId }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Deny", "Edit", new { id = item.POrderId }, new { @class = "btn btn-danger" })
+                        </div>
+                    }
                 </td>
             </tr>
         }
     }
 
 </table>
+
+
 
 <h2>Archived Requests</h2>
 
