@@ -29,36 +29,11 @@ namespace pharm4me7.Controllers
 
 
             var patients = db.Patients.Include(p => p.Clinic).Where(p => p.ClinicId == currentUser.Doctor.ClinicId);
-            //switch (sortOrder)
-            //{
-            //    case "patientid_desc":
-            //        patients = patients.OrderByDescending(p => p.PatientId);
-            //        break;
-            //    case "fName_desc":
-            //        patients = patients.OrderByDescending(p => p.FirstName).ThenByDescending(p => p.LastName);
-            //        break;
-            //    case "FirstName":
-            //        patients = patients.OrderBy(p => p.FirstName).ThenBy(p => p.LastName);
-            //        break;
-            //    case "lName_desc":
-            //        patients = patients.OrderByDescending(p => p.LastName).ThenByDescending(p => p.FirstName);
-            //        break;
-            //    case "LastName":
-            //        patients = patients.OrderBy(p => p.LastName).ThenBy(p => p.FirstName);
-            //        break;
-            //    case "DOB_desc":
-            //        patients = patients.OrderByDescending(p => p.Birth).ThenByDescending(p => p.LastName);
-            //        break;
-            //    case "DOB":
-            //        patients = patients.OrderBy(p => p.Birth).ThenBy(p => p.LastName);
-            //        break;
-            //    default:
-            //        patients = patients.OrderBy(p => p.PatientId);
-            //        break;
-            //}
+            
             return View(patients.ToList());
         }
 
+        // GET: Patients/PharmacyIndex
         public ActionResult PharmacyIndex(string sortOrder)
         {
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
@@ -112,11 +87,11 @@ namespace pharm4me7.Controllers
                     break;
             }
 
-            //var patients = db.Patients.Include(p => p.Clinic).Where(p => p.Prescripts.Where(pr => pr.POrders.Where(po => po.PharmacyId == currentLocation) ) );
-            //return View(finalpatients);
+            
             return View(patients.Distinct().ToList());
         }
 
+        // GET: Patients/AdminIndex
         public ActionResult AdminIndex()
         {
             var pharmacists = db.Pharmacists.Include(p => p.Pharmacy);
@@ -131,7 +106,6 @@ namespace pharm4me7.Controllers
         // GET: Patients/Details/5
         public ActionResult Details(int? id)
         {
-            //var prescripts = db.Prescripts.Include(p => p.item).Include(p => p.Patient);
 
 
             if (id == null)
@@ -197,13 +171,6 @@ namespace pharm4me7.Controllers
                 return HttpNotFound();
             }
 
-
-
-            //var viewModel = new PatientPrescriptModel();
-            //viewModel.Prescripts = prescripts;
-            //viewModel.Patient = patient;
-
-            //return View(viewModel);
             return View(patient);
 
         }

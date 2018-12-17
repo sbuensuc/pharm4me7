@@ -111,18 +111,14 @@
         <th>
             Date Filled
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.DatePicked)
-            </th>*@
+        
         <th>
             Note
         </th>
         <th>
             FilledBy
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.Ready)
-            </th>*@
+
         <th></th>
     </tr>
 
@@ -153,9 +149,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Pharmacist1.LastName), @Html.DisplayFor(modelItem => item.Pharmacist1.FirstName)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Ready)
-                </td>*@
+
             @if (item.Ready == true)
             {
                 <td>
@@ -241,76 +235,3 @@
 
 
 
-@*<h2>Prescription Requests</h2>
-
-
-<table class="table">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            Date
-        </th>
-        <th>
-            Prescription
-        </th>
-        <th>
-            Brand
-        </th>
-        <th>
-            Refills
-        </th>
-        <th>
-            Note
-        </th>
-        <th>
-            Clinic
-        </th>
-        <th>
-            Physician
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in po)
-    {
-        if (item.Accept == false && item.Deny == false)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.Prescript.Patient.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateOrdered)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prescript.item.Name) : @Html.DisplayFor(modelItem => item.Prescript.Disp) @Html.DisplayFor(modelItem => item.Prescript.DispType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prescript.Sub)
-                </td>
-
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prescript.Refill)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Note)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prescript.Doctor.Clinic.Name)
-                </td>
-
-                <td>
-                    <div class="btn-group">
-                        @Html.ActionLink("Info", "Details", "Prescripts", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
-                        @Html.ActionLink("Accept", "PharmacyDetails", new { id = Model.PatientId , requestid = item.POrderId }, new { @class = "btn btn-primary" })
-                        @Html.ActionLink("Deny", "Edit", new { id = item.POrderId }, new { @class = "btn btn-danger" })
-                    </div>
-                </td>
-            </tr>
-        }
-    }
-
-</table>*@

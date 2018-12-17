@@ -26,18 +26,14 @@
         <th>
             Date Filled
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.DatePicked)
-        </th>*@
+
         <th>
             @Html.DisplayNameFor(model => model.Note)
         </th>
         <th>
             FilledBy
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Ready)
-        </th>*@
+
         <th></th>
     </tr>
 
@@ -58,18 +54,14 @@
         <td data-th="Date Filled">
             @Html.DisplayFor(modelItem => item.DateFilled)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.DatePicked)
-        </td>*@
+
         <td data-th="Note">
             @Html.DisplayFor(modelItem => item.Note)
         </td>
         <td data-th="Filled By">
             @Html.DisplayFor(modelItem => item.Pharmacist.LastName), @Html.DisplayFor(modelItem => item.Pharmacist.FirstName)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Ready)
-        </td>*@
+
         <td data-th="Action">
             @Html.ActionLink("Edit", "Edit", new { id=item.POrderFillId }) |
             @Html.ActionLink("Details", "Details", new { id=item.POrderFillId }) |

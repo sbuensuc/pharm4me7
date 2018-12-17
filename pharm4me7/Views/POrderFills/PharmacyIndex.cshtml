@@ -105,27 +105,21 @@
         <th onclick="sortTable(1,2)" data-th="Customer">
             Customer
         </th>
-        @*<th onclick="sortTable(2,2)" data-th="Item">
-            Prescription
-        </th>*@
+
         <th onclick="sortTable(2,2)" data-th="Prescription">
             OrderID
         </th>
         <th onclick="sortTable(3,2)" data-th="Date Filled">
             Date Filled
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.DatePicked)
-            </th>*@
+
         <th data-th="Note">
             @Html.DisplayNameFor(model => model.Note)
         </th>
         <th onclick="sortTable(5,2)" data-th="Filled By">
             FilledBy
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.Ready)
-            </th>*@
+
         <th data-th="Action"></th>
     </tr>
 
@@ -138,27 +132,21 @@
         <td>
             @Html.DisplayFor(modelItem => item.POrder.Prescript.Patient.LastName), @Html.DisplayFor(modelItem => item.POrder.Prescript.Patient.FirstName)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.POrder.Prescript.item.Name)
-        </td>*@
+
         <td>
             @Html.DisplayFor(modelItem => item.POrder.Prescript.item.Name) @Html.DisplayFor(modelItem => item.POrder.Prescript.Disp) @Html.DisplayFor(modelItem => item.POrder.Prescript.DispType)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateFilled)
         </td>
-        @*<td>
-                @Html.DisplayFor(modelItem => item.DatePicked)
-            </td>*@
+
         <td>
             @Html.DisplayFor(modelItem => item.Note)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Pharmacist1.LastName), @Html.DisplayFor(modelItem => item.Pharmacist1.FirstName)
         </td>
-        @*<td>
-                @Html.DisplayFor(modelItem => item.Ready)
-            </td>*@
+
         @if (item.Ready == true)
                     {
         <td>

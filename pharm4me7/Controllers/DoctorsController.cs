@@ -42,10 +42,6 @@ namespace pharm4me7.Controllers
         // GET: Doctors/Create
         public ActionResult Create(/*int? c*/)
         {
-            //if (c != null)
-            //{
-            //    ViewData["Clinic"] = c;
-            //}
             
             ViewBag.ClinicId = new SelectList(db.Clinics, "ClinicId", "Name");
             return View();

@@ -13,9 +13,9 @@ namespace pharm4me7.Controllers
     public class HomeController : Controller
     {
         public ActionResult Index()
-        {
+        { 
             
-
+            //Displays welcomee banner according to current user role
             if (User.Identity.IsAuthenticated)
             {
                 var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));

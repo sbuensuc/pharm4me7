@@ -20,69 +20,10 @@ namespace pharm4me7.Controllers
         // GET: Prescripts
         public ActionResult Index(string sortOrder)
         {
-            ViewBag.DateSortParm = String.IsNullOrEmpty(sortOrder) ? "date" : "";
-            ViewBag.FnameParm = sortOrder == "FirstName" ? "fName_desc" : "FirstName";
-            ViewBag.LnameParm = sortOrder == "LastName" ? "lName_desc" : "LastName";
-            ViewBag.ItemParm = sortOrder == "Item" ? "item_desc" : "Item";
-            ViewBag.AmountParm = sortOrder == "Amount" ? "amount_desc" : "Amount";
-            ViewBag.UnitParm = sortOrder == "Unit" ? "unit_desc" : "Unit";
-            ViewBag.Brand = sortOrder == "Brand" ? "brand_desc" : "Brand";
-            ViewBag.DocParm = sortOrder == "Doctor" ? "doctor_desc" : "Doctor";
 
             var prescripts = db.Prescripts.Include(p => p.item).Include(p => p.Patient);
 
-            //switch (sortOrder)
-            //{
-            //    case "date":
-            //        prescripts = prescripts.OrderBy(p => p.Date);
-            //        break;
-            //    case "fName_desc":
-            //        prescripts = prescripts.OrderByDescending(p => p.Patient.FirstName).ThenByDescending(p => p.Patient.LastName);
-            //        break;
-            //    case "FirstName":
-            //        prescripts = prescripts.OrderBy(p => p.Patient.FirstName).ThenBy(p => p.Patient.LastName);
-            //        break;
-            //    case "lName_desc":
-            //        prescripts = prescripts.OrderByDescending(p => p.Patient.LastName).ThenByDescending(p => p.Patient.FirstName);
-            //        break;
-            //    case "LastName":
-            //        prescripts = prescripts.OrderBy(p => p.Patient.LastName).ThenBy(p => p.Patient.FirstName);
-            //        break;
-            //    case "item_desc":
-            //        prescripts = prescripts.OrderByDescending(p => p.item).ThenByDescending(p => p.Date);
-            //        break;
-            //    case "Item":
-            //        prescripts = prescripts.OrderBy(p => p.item).ThenBy(p => p.Date);
-            //        break;
-            //    case "amount_desc":
-            //        prescripts = prescripts.OrderByDescending(p => p.Disp).ThenByDescending(p => p.Date);
-            //        break;
-            //    case "Amount":
-            //        prescripts = prescripts.OrderBy(p => p.Disp).ThenBy(p => p.Date);
-            //        break;
-            //    case "unit_desc":
-            //        prescripts = prescripts.OrderByDescending(p => p.DispType).ThenByDescending(p => p.Date);
-            //        break;
-            //    case "Unit":
-            //        prescripts = prescripts.OrderBy(p => p.DispType).ThenBy(p => p.Date);
-            //        break;
-            //    case "brand_desc":
-            //        prescripts = prescripts.OrderByDescending(p => p.item).ThenByDescending(p => p.Date);
-            //        break;
-            //    case "Brand":
-            //        prescripts = prescripts.OrderBy(p => p.item).ThenBy(p => p.Date);
-            //        break;
-            //    case "doctor_desc":
-            //        prescripts = prescripts.OrderByDescending(p => p.Doctor.LastName).ThenByDescending(p => p.Date);
-            //        break;
-            //    case "Doctor":
-            //        prescripts = prescripts.OrderBy(p => p.item).ThenBy(p => p.Date);
-            //        break;
-
-            //    default:
-            //        prescripts = prescripts.OrderByDescending(p => p.Date);
-            //        break;
-            //}
+            
             return View(prescripts.ToList());
         }
 
@@ -102,6 +43,7 @@ namespace pharm4me7.Controllers
             return View(prescripts.ToList());
         }
 
+        // GET: POrders/PorderCreateRefill
         public ActionResult PorderCreate(int? id)
         {
             Prescript prescript = db.Prescripts.Find(id);
@@ -124,6 +66,7 @@ namespace pharm4me7.Controllers
             return View(model);
         }
 
+        // GET: POrders/PorderCreateRefill
         public ActionResult PorderCreateRefill(int? id)
         {
             Prescript prescript = db.Prescripts.Find(id);
@@ -146,7 +89,7 @@ namespace pharm4me7.Controllers
             return View(model);
         }
 
-        // POST: POrders/Create
+        // POST: POrders/PorderCreate
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -174,6 +117,7 @@ namespace pharm4me7.Controllers
             return View(pOrder);
         }
 
+        // POST: POrders/PorderCreateRefill
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult PorderCreateRefill([Bind(Include = "POrderId,PrescriptId,PharmacyId,DateOrdered,Note,Fill,Deny,Accept")] POrder pOrder)

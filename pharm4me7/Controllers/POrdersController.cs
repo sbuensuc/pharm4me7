@@ -22,18 +22,6 @@ namespace pharm4me7.Controllers
             var pOrders = db.POrders.Include(p => p.Pharmacy).Include(p => p.Prescript);
             return View(pOrders.ToList());
         }
-
-        //public ActionResult PharmacyIndex()
-        //{
-        //    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-        //    var currentUser = manager.FindById(User.Identity.GetUserId());
-        //    int? value = currentUser.Pharmacist.PharmacyId;
-        //    int currentLocation = value.Value;
-
-        //    var pOrders = db.POrders.Include(p => p.Pharmacy).Include(p => p.Prescript).Where(p => p.PharmacyId == currentLocation);
-        //    return View(pOrders.ToList());
-        //}
-
         
         public ActionResult PharmacyIndex(int? id)
         {

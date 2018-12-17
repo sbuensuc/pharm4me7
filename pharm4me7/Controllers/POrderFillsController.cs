@@ -27,14 +27,6 @@ namespace pharm4me7.Controllers
 
         public ActionResult PharmacyIndex(int? id)
         {
-            //if (id != null)
-            //{
-            //    POrder pOrder = db.POrders.Find(id);
-            //    pOrder.Accept = true;
-            //    db.Entry(pOrder).State = EntityState.Modified;
-
-            //    db.SaveChanges();
-            //}
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             var currentUser = manager.FindById(User.Identity.GetUserId());
             int? value = currentUser.Pharmacist.PharmacyId;
@@ -90,6 +82,7 @@ namespace pharm4me7.Controllers
             return View(pOrderFill);
         }
 
+        // GET: POrderFills/PharmacyCreate
         public ActionResult PharmacyCreate(int? id)
         {
             var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
@@ -144,6 +137,7 @@ namespace pharm4me7.Controllers
 
             if (ModelState.IsValid)
             {
+                //Email Notification
                 string senderEmail = System.Configuration.ConfigurationManager.AppSettings["SenderEmail"].ToString();
                 string senderPassword = System.Configuration.ConfigurationManager.AppSettings["SenderPassword"].ToString();
 
@@ -186,7 +180,7 @@ namespace pharm4me7.Controllers
         }
 
         [ActionName("PharmacyPickup")]
-        // GET: POrderFills/Edit/5
+        // GET: POrderFills/PharmacyPickup/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -203,7 +197,7 @@ namespace pharm4me7.Controllers
             return View(pOrderFill);
         }
 
-        // POST: POrderFills/Edit/5
+        // POST: POrderFills/PharmacyPickup/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [ActionName("PharmacyPickup")]

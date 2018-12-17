@@ -25,6 +25,7 @@ namespace pharm4me7.Controllers
             var currentUser = manager.FindById(User.Identity.GetUserId());
             int currentLocation = currentUser.Pharmacist.PharmacyId ?? default(int);
 
+            //Sort table
             ViewBag.ItemSortParm = String.IsNullOrEmpty(sortOrder) ? "item" : "";
             ViewBag.AmountParm = sortOrder == "Amount" ? "amount_desc" : "Amount";
             ViewBag.UnitParm = sortOrder == "Unit" ? "unit_desc" : "Unit";

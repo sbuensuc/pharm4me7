@@ -22,34 +22,26 @@
     <tr>
         <th onclick="sortTable(0)">
             Patient ID
-            @*@Html.ActionLink("Patient ID", "Index", new { sortOrder = ViewBag.PatientIdSortParm })*@
+
         </th>
         <th onclick="sortTable(1)">
             First Name
-            @*@Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FnameParm })*@
+      
         </th>
         <th onclick="sortTable(2)">
             Last Name
-            @*@Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LnameParm })*@
+       
         </th>
         <th onclick="sortTable(3)">
             @Html.DisplayNameFor(model => model.Healthcard)
         </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>*@
+           
         <th onclick="sortTable(4)">
             @Html.DisplayNameFor(model => model.Gender)
         </th>
         <th onclick="sortTable(5)">
             DOB
-            @*@Html.ActionLink("DOB", "Index", new { sortOrder = ViewBag.DateSortParm })*@
+     
         </th>
         <th></th>
     </tr>
@@ -69,15 +61,7 @@
             <td data-th="Health Card #">
                 @Html.DisplayFor(modelItem => item.Healthcard)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>*@
+           
             <td data-th="Gender">
                 @Html.DisplayFor(modelItem => item.Gender)
             </td>

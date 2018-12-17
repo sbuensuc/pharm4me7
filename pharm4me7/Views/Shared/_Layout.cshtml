@@ -20,15 +20,14 @@
                 <a href="@Url.Action("Index","Home")" class="navbar-brand">
                     <img src="~/Assets/images/logo.png" title="title" alt="additional title" style="width:125px; height:auto;" />
                 </a>
-                @*@Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+                
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @*<li>@Html.ActionLink("Patients", "Index", "Patients")</li>
-                    <li>@Html.ActionLink("Prescriptions", "Index", "Prescripts")</li>*@
+                    
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

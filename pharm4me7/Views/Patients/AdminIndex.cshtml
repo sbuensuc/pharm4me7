@@ -22,12 +22,12 @@
     <tr>
         <th onclick="sortTable(0)">
             Role
-            @*@Html.ActionLink("First Name", "PharmacyIndex", new { sortOrder = ViewBag.FnameParm })*@
+            
         </th>
         <th onclick="sortTable(1)">
             First Name
             
-            @*@Html.ActionLink("Last Name", "PharmacyIndex", new { sortOrder = ViewBag.LnameParm })*@
+           
         </th>
         <th onclick="sortTable(2)">
             Last Name
@@ -40,7 +40,7 @@
         </th>
             <th onclick="sortTable(5)">
                 User Name
-                @*@Html.ActionLink("City", "PharmacyIndex", new { sortOrder = ViewBag.CityParm })*@
+             
             </th>
             
         <th></th>
@@ -65,7 +65,7 @@
                     @Html.DisplayFor(modelItem => item.PatientId)
                 </td>
                 <td @*data-th="City"*@>
-                    @*@Html.DisplayFor(modelItem => item.*@
+                   
                 </td>
                 
             <td data-th="Action">
@@ -103,7 +103,7 @@
                 @Html.DisplayFor(modelItem => item.DoctorId)
             </td>
             <td @*data-th="City"*@>
-                @*@Html.DisplayFor(modelItem => item.*@
+                
             </td>
 
             <td data-th="Action">

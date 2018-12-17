@@ -21,34 +21,34 @@
     <tr>
         <th onclick="sortTable(0)">
             Item
-            @*@Html.ActionLink("Item", "Index", new { sortOrder = ViewBag.ItemSortParm })*@
+
         </th>
         <th onclick="sortTable(1)">
             First Name
-           @*@Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FnameParm })*@
+ 
         </th>
         <th onclick="sortTable(2)">
             Last Name
-            @*@Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LnameParm })*@
+
         </th>
         <th onclick="sortTable(3)">
             Date
-            @*@Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm })*@
+
         </th>
         <th onclick="sortTable(4)">
             Amount
-            @*@Html.ActionLink("Amount", "Index", new { sortOrder = ViewBag.AmountSortParm })*@
+
         </th>
         <th onclick="sortTable(5)">
             Unit Type
-            @*@Html.ActionLink("Unit Type", "Index", new { sortOrder = ViewBag.UnitSortParm })*@
+
         </th>
         <th onclick="sortTable(6)">
             Details
         </th>
         <th onclick="sortTable(7)">
             Brand
-           @*@Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })*@
+
         </th>
         <th onclick="sortTable(8)">
             @Html.DisplayNameFor(model => model.Refill)
@@ -58,7 +58,7 @@
         </th>
         <th onclick="sortTable(10)">
             Prescribed By
-           @*@Html.ActionLink("Prescribed By", "Index", new { sortOrder = ViewBag.DocSortParm })*@
+ 
         </th>
         <th></th>
     </tr>
@@ -101,13 +101,7 @@
         <td data-th="Action" data-th="Action">
             <div class="btn-group">
                 @Html.ActionLink("Details", "Details", new { id = item.PrescriptId }, new { @class = "btn btn-info" })
-                @*@if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.PrescriptId }, new { @class = "btn btn-success" })}
-                @if (User.IsInRole("Admin") || User.IsInRole("Doctor"))
-                {
-                    @Html.ActionLink("Delete", "Delete", new { id = item.PrescriptId }, new { @class = "btn btn-danger" })
-                }*@
+            
             </div>
 
 </td>

@@ -15,19 +15,19 @@
     <tr>
         <th onclick="sortTable(0)">
             Item
-            @*@Html.ActionLink("Item", "Index", new { sortOrder = ViewBag.ItemSortParm })*@
+            
         </th>
         <th onclick="sortTable(1)">
             Amount
-            @*@Html.ActionLink("Amount", "Index", new { sortOrder = ViewBag.AmountSortParm })*@
+           
         </th>
         <th onclick="sortTable(2)">
             Unit Type
-            @*@Html.ActionLink("Unit Type", "Index", new { sortOrder = ViewBag.UnitSortParm })*@
+         
         </th>
         <th onclick="sortTable(3)">
             Brand
-            @*@Html.ActionLink("Brand", "Index", new { sortOrder = ViewBag.BrandSortParm })*@
+  
         </th>
         <th></th>
     </tr>
@@ -59,25 +59,7 @@
 </table>
 
 <script>
-    function searchFunction() {
-        var input, filter, table, tr, td, i;
-        input = document.getElementById("searchName");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("patientTable");
-        tr = table.getElementsByTagName("tr");
-
-        for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[0];
-            if (td) {
-                if (td.textContent.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                } else {
-                    tr[i].style.display = "none";
-                }
-            }
-        }
-    }
-
+   
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("inventoryTable");
